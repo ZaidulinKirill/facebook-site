@@ -1,0 +1,27 @@
+name: Deploy
+
+on: [push]
+
+jobs:
+  build-and-publish-latest:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_HUB_USER }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+        repository: zaidulinkirill96/radio-at-work-site
+        tags: latest
+
+    - uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        port: ${{ secrets.SSH_PORT }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        script: |
+          cd radio-at-work
+          docker stack deploy -c docker-compose.yml radio-at-work --with-registry-auth

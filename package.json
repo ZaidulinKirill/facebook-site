@@ -1,0 +1,72 @@
+{
+  "name": "facebook-site",
+  "version": "5.0.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "prod": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "compose": "docker-compose -f docker-compose.dev.yml up -d --build"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.1.0",
+    "@mui/material": "^5.2.4",
+    "axios": "^0.25.0",
+    "dangerously-set-html-content": "^1.0.9",
+    "email-validator": "^2.0.4",
+    "embla-carousel": "^6.0.1",
+    "embla-carousel-react": "^6.0.1",
+    "font-color-contrast": "^11.0.0",
+    "fslightbox-react": "*",
+    "is-mobile": "^3.0.0",
+    "lightgallery": "^2.3.0",
+    "lodash.throttle": "^4.1.1",
+    "map-values-deep": "^1.0.2",
+    "mobile-detect": "^1.4.5",
+    "react": "^17.0.2",
+    "react-app-polyfill": "^2.0.0",
+    "react-beautiful-dnd": "^13.1.0",
+    "react-color": "^2.19.3",
+    "react-countdown": "^2.3.2",
+    "react-dom": "^17.0.2",
+    "react-h5-audio-player": "^3.8.1",
+    "react-helmet": "^6.1.0",
+    "react-hls-player": "^3.0.7",
+    "react-lazy-load-image-component": "^1.5.1",
+    "react-lottie": "^1.2.3",
+    "react-material-ui-form-validator": "^3.0.0",
+    "react-media-recorder": "^1.6.2",
+    "react-player": "^2.9.0",
+    "react-router-dom": "^6.0.0",
+    "react-scripts": "^5.0.0",
+    "serve": "^13.0.2",
+    "uuid": "^8.3.2",
+    "wavesurfer.js": "^5.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/traverse": "^7.12.12",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0"
+  },
+  "browserslist": {
+    "production": [
+      "ie 11",
+      ">0.0%"
+    ],
+    "development": [
+      "ie 11",
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

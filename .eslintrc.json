@@ -1,0 +1,108 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true,
+    "codeFrame": false
+  },
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "__DEV__": true,
+    "MockData": true,
+    "fetch": false,
+    "document": false,
+    "HTMLAnchorElement": false,
+    "navigator": false
+  },
+  "extends": ["airbnb"],
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "react/jsx-no-bind": 0,
+    "import/no-unresolved": 0,
+    "import/no-cycle": 0,
+    "no-mixed-operators": 0,
+    "no-return-assign": 0,
+    "consistent-return": 0,
+    "no-restricted-syntax": 0,
+
+    "import/no-extraneous-dependencies": "error",
+    "import/first": "error",
+    "import/extensions": 0,
+    "import/no-named-as-default": 0,
+    "import/prefer-default-export": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "react/jsx-filename-extension": 0,
+    "react/destructuring-assignment": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-indent": ["error", 2],
+    "react/jsx-indent-props": ["error", 2],
+    "react/prop-types": 0,
+    "react/style-prop-object": 0,
+    "react/no-multi-comp": 0,
+    "react/require-default-props": 0,
+    "react/no-array-index-key": 0,
+    "react/sort-comp": [1, {
+      "order": [
+        "static-variables",
+        "static-methods",
+        "instance-variables",
+        "lifecycle",
+        "/^on.+$/",
+        "everything-else",
+        "render"
+      ]
+    }],
+
+    "no-async-promise-executor": "error",
+    "no-bitwise": "error",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-continue": "warn",
+    "no-empty": "warn",
+    "no-plusplus": ["warn", { "allowForLoopAfterthoughts": true }],
+    "no-multi-assign": "warn",
+    "no-nested-ternary": "warn",
+    "no-return-await": "warn",
+    "no-unused-expressions": "warn",
+    "no-unused-vars": "warn",
+    "no-underscore-dangle": "warn",
+    "no-useless-concat": "error",
+    "no-throw-literal": "error",
+    "no-param-reassign": ["error", { "props": false }],
+    // "no-use-before-define": ["error", { "variables": false }],
+    "no-use-before-define": "off",
+
+    "class-methods-use-this": 0,
+    "global-require": 0,
+    "indent": ["error", 2, { "SwitchCase": 1, "ignoredNodes": [ "TemplateLiteral" ] }],
+    "template-curly-spacing": [
+      "off"
+    ],
+    "radix": ["error", "as-needed"],
+    "sort-imports": ["error", { "ignoreDeclarationSort": true }],
+    "object-curly-newline": ["error", {
+      "ImportDeclaration": { "minProperties": 4 }
+    }],
+    "max-len": ["warn", {
+      "code": 150,
+      "tabWidth": 2,
+      "ignoreComments": true,
+      "ignoreTrailingComments": true,
+      "ignoreUrls": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreRegExpLiterals": true
+    }],
+    "camelcase": ["error", { "ignoreDestructuring": true, "properties": "never" }],
+    "func-names": ["error", "as-needed"],
+    "implicit-arrow-linebreak": "warn",
+    "operator-linebreak": "error",
+    "prefer-destructuring": ["warn", {
+      "object": true,
+      "array": true
+    }]
+  }
+}

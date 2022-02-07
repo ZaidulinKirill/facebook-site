@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  app:
+    build: 
+      dockerfile: dev.Dockerfile
+      context: .
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+    environment:
+      - PORT=80
+      - REACT_APP_API_URL=/api
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.site.rule: HostRegexp(`{subdomain:[a-z]+}.localhost`)
+      traefik.http.routers.site.entrypoints: web
+      traefik.http.routers.site.priority: 2
+      traefik.http.services.site.loadbalancer.server.port: 80
+    networks:
+      - local
+
+networks:
+  local:
+    external: true
+    name: local
