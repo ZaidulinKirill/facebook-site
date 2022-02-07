@@ -13,7 +13,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_HUB_USER }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-        repository: zaidulinkirill96/radio-at-work-site
+        repository: zaidulinkirill96/facebook-site
         tags: latest
 
     - uses: appleboy/ssh-action@master
@@ -23,5 +23,5 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
-          cd radio-at-work
-          docker stack deploy -c docker-compose.yml radio-at-work --with-registry-auth
+          cd facebook
+          docker stack deploy -c docker-compose.yml facebook --with-registry-auth
