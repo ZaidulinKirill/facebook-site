@@ -97,7 +97,7 @@ export default function FacebookChallenge() {
   const pageRenderer = selectedButton && new PageRenderer({ modules: selectedButton.modules, inline: true });
 
   return (
-    <Box>
+    <Box sx={{ backgroundColor: 'rgba(250, 213, 73, 0.025)' }}>
       {banner && new PageRenderer({ modules: [banner], inline: true }).render()}
       <Container maxWidth="md">
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 7, mb: 4 }}>
@@ -150,8 +150,8 @@ export default function FacebookChallenge() {
         </Grid>
         {selectedMode === 'list' ? (
           posts ? (
-            <Box sx={{ my: 8 }}>
-              {posts.map((post) => <ChallengePost key={post.id} post={post} sx={{ mb: 10 }} />)}
+            <Box sx={{ my: 5 }}>
+              {posts.map((post) => <ChallengePost key={post.id} post={post} sx={{ mb: 2 }} />)}
             </Box>
           ) : (
             <Box sx={{ pt: 8, display: 'flex', justifyContent: 'center' }}>

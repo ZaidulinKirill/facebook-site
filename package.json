@@ -27,6 +27,7 @@
     "lodash.throttle": "^4.1.1",
     "map-values-deep": "^1.0.2",
     "mobile-detect": "^1.4.5",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
     "react-beautiful-dnd": "^13.1.0",
