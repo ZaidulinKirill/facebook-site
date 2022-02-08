@@ -8,10 +8,14 @@ import {
 } from '@mui/material';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PageContext, SiteContext, UserContext } from '../../../contexts';
 import LanguageSelector from '../languageSelector';
 import getLocalizedPath from '../../../utils/getLocalizedPath';
+import { ThemeProvider } from '../themeProvider';
+import UserAvatar from '../../../components/UserAvatar';
+
+const StyledImage = styled('img')({});
 
 export default function FacebookNavbar({ title }) {
   const page = useContext(PageContext);
@@ -36,22 +40,42 @@ export default function FacebookNavbar({ title }) {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 7, px: 10 }}>
-      <Box sx={{ width: '250px', display: { xs: 'none', lg: 'block' } }} />
-      <Box sx={{ flex: 1, textAlign: 'center' }}>
-        <Typography sx={{ fontSize: { xs: 30, md: 40 }, fontWeight: '500' }}>{title}</Typography>
-      </Box>
-      <Box sx={{ width: { xs: '100%' }, mt: { xs: 2, md: 0 }, justifyContent: { xs: 'center', md: 'center' }, display: 'flex', alignItems: 'center' }}>
-        <LanguageSelector sx={{ mr: 2 }} />
-
-        <Button sx={{ display: 'flex', lineHeight: 1.2 }} onClick={openMenu}>
-          <Avatar src="https://mui.com/static/images/avatar/1.jpg" sx={{ mr: 1 }} />
-          {`${user.lastName} ${user.name}`.trim()}
-        </Button>
+    <Box sx={{ px: 3, py: 1, backgroundColor: 'rgb(13, 30, 52)' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', height: '100%' }}>
+        <Link to="/" style={{ display: 'inline' }}>
+          <StyledImage src="/logo.png" sx={{ width: '50px', justifySelf: 'flex-start' }} />
+        </Link>
+        <ThemeProvider primaryColor="#ffffff" sx={{ ml: 'auto', display: 'flex', alignItems: 'center' }}>
+          <LanguageSelector sx={{ ml: 'auto', mr: { xs: 0, sm: 2 } }} />
+          <Button
+            id="account-button"
+            sx={{ display: 'flex', lineHeight: 1.2 }}
+            onClick={openMenu}
+          >
+            <Box sx={{
+              maxWidth: { xs: '100px', sm: '200px' },
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              '-webkit-line-clamp': '2',
+              '-webkit-box-orient': 'vertical',
+            }}
+            >
+              {`${user.name} ${user.lastName}`.trim()}
+            </Box>
+            <UserAvatar user={user} sx={{ ml: { xs: 1, sm: 1.5 } }} />
+          </Button>
+        </ThemeProvider>
         <Menu
+          PaperProps={{
+            style: {
+              width: '140px',
+            },
+          }}
           anchorEl={anchorEl}
           open={open}
           disableScrollLock
+          aria-labelledby="account-button"
           onClose={handleClose}
         >
           <MenuItem onClick={() => navigate(getLocalizedPath(language, '/account'))}>

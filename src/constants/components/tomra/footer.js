@@ -1,17 +1,10 @@
 import { Box, styled } from '@mui/material';
 import React from 'react';
-import { useCurrentBreakpoint } from '../../../hooks';
-import { getBreakpointValue } from '../../../utils/getBreakpointValue';
 
 const StyledImage = styled('img')({});
-const StyledSpan = styled('span')({});
 
-export const TomraFooter = ({
-
-}) => {
-  const breakpoint = useCurrentBreakpoint();
-
-  return (
+export const TomraFooter = () => (
+  <>
     <Box
       id={1}
       sx={{
@@ -19,9 +12,10 @@ export const TomraFooter = ({
         display: 'flex',
         alignItems: 'center',
         backgroundColor: 'rgb(13, 30, 52)',
-        position: 'relative',
         overflow: 'hidden',
         flexDirection: 'column',
+        position: 'relative',
+        width: '100%',
       }}
     >
       <Box sx={{ height: '7px', background: 'rgb(250, 213, 73)', width: '100%' }} />
@@ -31,5 +25,5 @@ export const TomraFooter = ({
         <StyledImage src="/tomra_logo_white.png" alt="bg" sx={{ width: { xs: '150px', sm: '200px' } }} />
       </Box>
     </Box>
-  );
-};
+  </>
+);

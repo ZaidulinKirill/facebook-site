@@ -5,7 +5,7 @@ import {
 import Head from 'react-helmet';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import {
-  AudioRecorder, BackButton, CheckboxField, ColorField, Form, FormBlockOfText, NumberField, RadioField,
+  AudioRecorder, CheckboxField, ColorField, Form, BackButton as FormBackButton, FormBlockOfText, NumberField, RadioField,
   SelectField,
   SongSelectField,
   SongsTopField,
@@ -36,6 +36,7 @@ import FacebookMain from './facebook/Main';
 import FacebookNavbar from './facebook/Navbar';
 import { TomraBanner } from './tomra/banner';
 import { TomraFooter } from './tomra/footer';
+import { BackButton } from './backButton';
 
 const SpanBase = styled('span')({});
 const Image = styled('img')({});
@@ -78,6 +79,7 @@ export const Components = {
   icon: { Component: Icon },
   drawer: { Component: Drawer },
   media: { Component: Media },
+  'back-button': { Component: BackButton },
   'facebook-main': { Component: FacebookMain },
   'facebook-navbar': { Component: FacebookNavbar },
   'tomra-banner': { Component: TomraBanner },
@@ -100,6 +102,6 @@ export const Components = {
   'form-color': { Component: withFormValue(ColorField) },
   'form-block-of-text': { Component: FormBlockOfText },
   'form-submit-button': { Component: SubmitButton },
-  'form-back-button': { Component: BackButton },
+  'form-back-button': { Component: FormBackButton },
   'form-spacing': { Component: 'void' },
 };

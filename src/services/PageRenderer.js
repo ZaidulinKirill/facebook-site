@@ -73,6 +73,11 @@ export class PageRenderer {
 
       html { 
         scroll-behavior: smooth;
+        height: 100%;
+      }
+
+      html, body, body #root, body #root > .root-container, body #root > .root-container > .page-container {
+        height: 100%;
       }
 
       body #root { 
