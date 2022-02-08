@@ -150,8 +150,8 @@ export default function FacebookChallenge() {
         </Grid>
         {selectedMode === 'list' ? (
           posts ? (
-            <Box>
-              {posts.map((post) => <ChallengePost key={post.id} post={post} />)}
+            <Box sx={{ my: 8 }}>
+              {posts.map((post) => <ChallengePost key={post.id} post={post} sx={{ mb: 10 }} />)}
             </Box>
           ) : (
             <Box sx={{ pt: 8, display: 'flex', justifyContent: 'center' }}>
