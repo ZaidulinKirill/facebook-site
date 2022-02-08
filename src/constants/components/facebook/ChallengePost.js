@@ -15,7 +15,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import { FormHandlerContext, PageContext, SiteContext } from '../../../contexts';
 import getLocalizedPath from '../../../utils/getLocalizedPath';
-import FacebookNavbar from './Navbar';
 import { TextareaField } from '../form/textareaField';
 import { PageRenderer } from '../../../services';
 

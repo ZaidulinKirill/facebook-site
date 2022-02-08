@@ -18,8 +18,6 @@ import UserAvatar from '../../../components/UserAvatar';
 const StyledImage = styled('img')({});
 
 export default function FacebookNavbar({ title }) {
-  const page = useContext(PageContext);
-  const challengesStore = page.modules.find((x) => x.moduleType === 'facebook-challenges');
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();

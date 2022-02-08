@@ -5,7 +5,6 @@ import {
   FormHandlerContext, PageContext, SiteContext, UserContext,
 } from '../../../contexts';
 import { PageRenderer } from '../../../services';
-import FacebookNavbar from './Navbar';
 import getLocalizedPath from '../../../utils/getLocalizedPath';
 
 export default function FacebookAccount() {
@@ -40,7 +39,6 @@ export default function FacebookAccount() {
 
   return (
     <Box sx={{ }}>
-      <FacebookNavbar />
       <FormHandlerContext.Provider value={{ submit: onSubmit, defaultItem: user }}>
         {pageRenderer.render()}
       </FormHandlerContext.Provider>

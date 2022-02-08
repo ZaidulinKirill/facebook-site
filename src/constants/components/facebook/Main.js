@@ -44,45 +44,43 @@ export default function FacebookMain() {
   }
 
   return (
-    <UserContext.Provider value={userState}>
-      <SignupContext.Provider value={signupState}>
-        <Box>
-          <div className="page-container">
-            <Routes>
-              <Route
-                caseSensitive={false}
-                path="login"
-                element={<FacebookLogin />}
-              />
-              <Route
-                caseSensitive={false}
-                path="signup"
-                element={<FacebookSignup />}
-              />
-              <Route
-                caseSensitive={false}
-                path="password"
-                element={<FacebookPassword />}
-              />
-              <Route
-                caseSensitive={false}
-                path="account"
-                element={<FacebookAccount />}
-              />
-              <Route
-                caseSensitive={false}
-                path="/"
-                element={<FacebookChallenges />}
-              />
-              <Route
-                caseSensitive={false}
-                path=":id"
-                element={<FacebookChallenge />}
-              />
-            </Routes>
-          </div>
-        </Box>
-      </SignupContext.Provider>
-    </UserContext.Provider>
+    <SignupContext.Provider value={signupState}>
+      <Box>
+        <div className="page-container">
+          <Routes>
+            <Route
+              caseSensitive={false}
+              path="login"
+              element={<FacebookLogin />}
+            />
+            <Route
+              caseSensitive={false}
+              path="signup"
+              element={<FacebookSignup />}
+            />
+            <Route
+              caseSensitive={false}
+              path="password"
+              element={<FacebookPassword />}
+            />
+            <Route
+              caseSensitive={false}
+              path="account"
+              element={<FacebookAccount />}
+            />
+            <Route
+              caseSensitive={false}
+              path="/"
+              element={<FacebookChallenges />}
+            />
+            <Route
+              caseSensitive={false}
+              path=":id"
+              element={<FacebookChallenge />}
+            />
+          </Routes>
+        </div>
+      </Box>
+    </SignupContext.Provider>
   );
 }

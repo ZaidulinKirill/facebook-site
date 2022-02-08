@@ -15,7 +15,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import axios from 'axios';
 import { FormHandlerContext, PageContext, SiteContext } from '../../../contexts';
 import getLocalizedPath from '../../../utils/getLocalizedPath';
-import FacebookNavbar from './Navbar';
 import { TextareaField } from '../form/textareaField';
 import { PageRenderer } from '../../../services';
 import ChallengePost from './ChallengePost';
@@ -97,7 +96,6 @@ export default function FacebookChallenge() {
 
   return (
     <Box sx={{ }}>
-      <FacebookNavbar title={challenge.name} />
       <Container maxWidth="md">
         <Box sx={{ display: 'flex', mt: 2 }}>
           {prevChallenge && (

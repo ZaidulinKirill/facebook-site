@@ -9,7 +9,6 @@ import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { useNavigate } from 'react-router-dom';
 import { PageContext, SiteContext } from '../../../contexts';
 import getLocalizedPath from '../../../utils/getLocalizedPath';
-import FacebookNavbar from './Navbar';
 
 const Avatar = styled('img')(() => ({
   width: '100px',
@@ -68,7 +67,6 @@ export default function FacebookChallenges() {
 
   return (
     <Box>
-      <FacebookNavbar />
       <Box sx={{ py: 7, backgroundColor: '#ecb1be' }}>
         <Container maxWidth="md">
           {sections.map((section) => (
