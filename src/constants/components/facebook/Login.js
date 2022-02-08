@@ -16,7 +16,6 @@ export default function FacebookLogin() {
   const form = page.modules.find((x) => x.moduleType === 'facebook-login-form');
   const { site: { language } } = useContext(SiteContext);
 
-  console.log(form);
   const navigate = useNavigate();
 
   if (!banner) {

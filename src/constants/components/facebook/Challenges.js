@@ -9,6 +9,7 @@ import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { useNavigate } from 'react-router-dom';
 import { PageContext, SiteContext } from '../../../contexts';
 import getLocalizedPath from '../../../utils/getLocalizedPath';
+import { PageRenderer } from '../../../services';
 
 const Avatar = styled('img')(() => ({
   width: '100px',
@@ -54,6 +55,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 export default function FacebookChallenges() {
   const page = useContext(PageContext);
   const challengesStore = page.modules.find((x) => x.moduleType === 'facebook-challenges');
+  const challengesText = page.modules.find((x) => x.moduleType === 'facebook-challenges-text');
   const [selectedSection, setSelectedSection] = useState(challengesStore.moduleVariables.sections[0].id);
   const navigate = useNavigate();
   const { site: { language } } = useContext(SiteContext);
@@ -62,12 +64,33 @@ export default function FacebookChallenges() {
   const sections = challengesStore.moduleVariables.sections.map((section) => ({
     ...section,
     challenges: challenges.filter((x) => x.section === section.key),
-    // [...new Array(3).keys()].map(() => challenges).flat().map((x, idx) => ({ ...x, id: `${x.id }-${ idx}` }))
   }));
+
+  const modules = [
+    challengesText,
+  ].filter((x) => !!x);
+
+  const pageRenderer = new PageRenderer({ modules, inline: true });
 
   return (
     <Box>
-      <Box sx={{ py: 7, backgroundColor: '#ecb1be' }}>
+      {pageRenderer.render()}
+      <Box sx={{ py: 7 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+          <Box
+            component="span"
+            sx={{
+              fontSize: 28,
+              fontWeight: '500',
+              color: 'white',
+              paddingX: 2,
+              background: 'var(--primary-color)',
+              mixBlendMode: 'multiply',
+            }}
+          >
+            Challenges
+          </Box>
+        </Box>
         <Container maxWidth="md">
           {sections.map((section) => (
             <Accordion
@@ -80,7 +103,7 @@ export default function FacebookChallenges() {
                 <Typography sx={{ flexGrow: 1 }}>
                   {section.name}
                 </Typography>
-                <Typography sx={{ color: 'text.secondary' }}># Entries</Typography>
+                {section.id === selectedSection && (<Typography sx={{ color: 'text.secondary' }}># Entries</Typography>)}
               </AccordionSummary>
               <AccordionDetails sx={{ py: 0, px: 0 }}>
                 <List sx={{ py: 0 }}>
