@@ -92,11 +92,29 @@ export default function FacebookChallenge() {
     setSelectedMode('list');
   };
 
+  const banner = page.modules.find((x) => x.moduleType === `banner-${challenge.id.toString()}`);
+
   const pageRenderer = selectedButton && new PageRenderer({ modules: selectedButton.modules, inline: true });
 
   return (
-    <Box sx={{ }}>
+    <Box>
+      {banner && new PageRenderer({ modules: [banner], inline: true }).render()}
       <Container maxWidth="md">
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 7, mb: 4 }}>
+          <Box
+            component="span"
+            sx={{
+              fontSize: 28,
+              fontWeight: '500',
+              color: 'white',
+              paddingX: 2,
+              background: 'var(--primary-color)',
+              mixBlendMode: 'multiply',
+            }}
+          >
+            {challenge.name}
+          </Box>
+        </Box>
         <Box sx={{ display: 'flex', mt: 2 }}>
           {prevChallenge && (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>

@@ -75,7 +75,7 @@ export default function FacebookChallenges() {
   return (
     <Box>
       {pageRenderer.render()}
-      <Box sx={{ py: 7 }}>
+      <Box sx={{ mt: 7 }}>
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
           <Box
             component="span"
