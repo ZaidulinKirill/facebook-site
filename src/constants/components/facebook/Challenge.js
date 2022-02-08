@@ -134,6 +134,11 @@ export default function FacebookChallenge() {
             </Box>
           )}
         </Box>
+        {challenge.description && (
+          <Box>
+            <div dangerouslySetInnerHTML={{ __html: challenge.description }} />
+          </Box>
+        )}
         <Grid container sx={{ mt: 2 }} rowSpacing={2}>
           {buttons.map((button) => (
             <Grid item key={button.text} xs={6} sm={3} sx={{ display: 'flex', justifyContent: 'center' }}>
