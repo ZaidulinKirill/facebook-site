@@ -152,7 +152,7 @@ export default function FacebookChallenges() {
                               fontWeight: '500',
                             }}
                             >
-                              {challenge.entries}
+                              {challenge.entries || 0}
                             </Box>
                           </Box>
                         </ListItemText>

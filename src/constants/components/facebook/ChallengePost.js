@@ -177,9 +177,9 @@ function ChallengePostMessage({ message, sx, onReply }) {
                 component="span"
                 sx={{ color: 'blue' }}
               >
-                {message.text.match(/^@.*, /)[0]}
+                {message.text.match(/^@[^,]*, /)[0]}
               </Box>
-              {message.text.replace(/^@.*, /, '')}
+              {message.text.replace(/^@[^,]*, /, '')}
             </Box>
           )}
           <Box sx={{ display: 'flex', paddingBottom: '3px', borderBottom: 'thin solid rgb(220, 225, 230)' }}>
