@@ -6,11 +6,14 @@ import {
 } from '@mui/material';
 import fontColorContrast from 'font-color-contrast';
 import SendIcon from '@mui/icons-material/Send';
+import ClearIcon from '@mui/icons-material/Clear';
 import axios from 'axios';
 import moment from 'moment';
 import UserAvatar from '../../../components/UserAvatar';
 import { LikeButton } from './LikeButton';
 import { LikesArea } from './LikesArea';
+
+const getUserName = (user) => `${user.name || ''} ${user.lastName || ''}`.trim();
 
 function PostContent({ post, sx }) {
   if (post.type === 'video') {
@@ -94,7 +97,7 @@ function PostContent({ post, sx }) {
   );
 }
 
-function SendMessageSection({ post, onSent }) {
+function SendMessageSection({ replyTo, onClear, post, onSent }) {
   const [message, setMessage] = useState('');
 
   async function sendMessage(e) {
@@ -102,11 +105,13 @@ function SendMessageSection({ post, onSent }) {
     e.stopPropagation();
 
     await axios.post('/api/posts/message', {
-      text: message,
+      text: `${replyTo ? `@${getUserName(replyTo.user)}, ` : ''}${message}`,
       postId: post.id,
+      ...replyTo && { replyMessageId: replyTo.id },
     });
 
     setMessage('');
+    onClear();
 
     if (onSent) {
       onSent();
@@ -115,8 +120,26 @@ function SendMessageSection({ post, onSent }) {
 
   return (
     <form onSubmit={sendMessage}>
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <TextField sx={{ flexGrow: 1 }} label="Post comment" value={message} onChange={(e) => setMessage(e.target.value)} />
+      <Box sx={{ display: 'flex', alignItems: 'center' }} id={`message-field-${post.id}`}>
+        <TextField
+          sx={{ flexGrow: 1 }}
+          label="Post comment"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          InputProps={{
+            startAdornment: replyTo && (
+              <Box component="span" sx={{ display: { xs: 'none', md: 'inline' }, mr: 1, whiteSpace: 'pre' }}>
+                @
+                {getUserName(replyTo.user)}
+              </Box>
+            ),
+            endAdornment: message.length > 0 && (
+              <IconButton onClick={() => { setMessage(''); onClear(); }}>
+                <ClearIcon />
+              </IconButton>
+            ),
+          }}
+        />
         <IconButton sx={{ flexShrink: 0, ml: 1 }} color="primary" size="large" disabled={!message?.length} type="submit">
           <SendIcon />
         </IconButton>
@@ -125,35 +148,52 @@ function SendMessageSection({ post, onSent }) {
   );
 }
 
-function ChallengePostMessage({ message, sx }) {
+function ChallengePostMessage({ message, sx, onReply }) {
   const [refreshLikesTrigger, setRefreshLikesTrigger] = useState(false);
 
-  const userName = `${message.user.name || ''} ${message.user.lastName || ''}`.trim();
+  const userName = getUserName(message.user);
   const time = moment(message.created_at).fromNow();
-  // `${new Date(message.created_at).toLocaleDateString()} ${new Date(message.created_at).toLocaleTimeString()}`;
 
   return (
     <Box sx={{ maxWidth: '600px', ...sx }}>
       <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
         <UserAvatar user={message.user} sx={{ mr: 2, width: 48, height: 48 }} />
         <Box sx={{ fontSize: '14px', flexGrow: 1 }}>
-          <Box component="span" sx={{ fontWeight: '500' }}>
-            {userName}
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box component="span" sx={{ fontWeight: '500' }}>
+              {userName}
+            </Box>
+            <Box component="span" sx={{ ml: 'auto', fontSize: 'smaller', display: { xs: 'none', sm: 'inline' } }}>
+              {time}
+            </Box>
           </Box>
-          <Box component="span" sx={{ ml: 2, fontSize: 'smaller', display: { xs: 'none', sm: 'inline' } }}>
-            {time}
-          </Box>
-          <Box sx={{ }}>
-            {message.text}
-          </Box>
+          {!message.replyMessageId ? (
+            <Box>
+              {message.text}
+            </Box>
+          ) : (
+            <Box>
+              <Box
+                component="span"
+                sx={{ color: 'blue' }}
+              >
+                {message.text.match(/^@.*, /)[0]}
+              </Box>
+              {message.text.replace(/^@.*, /, '')}
+            </Box>
+          )}
           <Box sx={{ display: 'flex', paddingBottom: '3px', borderBottom: 'thin solid rgb(220, 225, 230)' }}>
-            <LikeButton likeProps={{ messageId: message.id }} onCreated={() => setRefreshLikesTrigger(true)} />
-            <Box component="a" size="small" sx={{ cursor: 'pointer', color: 'rgb(42, 88, 133)', '&:hover': { textDecoration: 'underline' }, ml: 1.4 }}>
+            <Box
+              component="a"
+              size="small"
+              sx={{ cursor: 'pointer', color: 'rgb(42, 88, 133)', '&:hover': { textDecoration: 'underline' } }}
+              onClick={onReply}
+            >
               Reply
             </Box>
             <LikesArea sx={{ ml: 'auto' }} where={{ messageId: message.id }} refresh={refreshLikesTrigger} onRefreshed={() => setRefreshLikesTrigger(false)} />
+            <LikeButton sx={{ ml: 2 }} likeProps={{ messageId: message.id }} onCreated={() => setRefreshLikesTrigger(true)} />
           </Box>
-
         </Box>
       </Box>
     </Box>
@@ -166,9 +206,10 @@ const MESSAGES_PER_PAGE = 5;
 export default function ChallengePost({ post, sx }) {
   const [messages, setMessages] = useState(null);
   const [messagesPage, setMessagesPage] = useState(0);
+  const [replyTo, setReplyTo] = useState(null);
   const [totalMessages, setTotalMessages] = useState(0);
 
-  const userName = `${post.user.name || ''} ${post.user.lastName || ''}`.trim();
+  const userName = getUserName(post.user);
   const time = `${new Date(post.created_at).toLocaleDateString()} ${new Date(post.created_at).toLocaleTimeString()}`;
 
   useEffect(() => {
@@ -196,6 +237,11 @@ export default function ChallengePost({ post, sx }) {
     setMessagesPage(-1);
   }
 
+  function onReply(message) {
+    setReplyTo(message);
+    document.querySelector(`#message-field-${post.id}`).scrollIntoView({ block: 'nearest' });
+  }
+
   return (
     <Box sx={{
       ...sx,
@@ -221,7 +267,7 @@ export default function ChallengePost({ post, sx }) {
       <Box sx={{ mt: 3, pl: { xs: 0, sm: 3 } }}>
         {messages ? (
           <Box sx={{ my: 0 }}>
-            {messages.map((message) => <ChallengePostMessage key={message.id} message={message} sx={{ mb: 3 }} />)}
+            {messages.map((message) => <ChallengePostMessage key={message.id} message={message} sx={{ mb: 3 }} onReply={() => onReply(message)} />)}
           </Box>
         ) : (
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -235,7 +281,7 @@ export default function ChallengePost({ post, sx }) {
         </Box>
       )}
       <Box sx={{ mt: 3 }}>
-        <SendMessageSection post={post} onSent={refetchMessages} />
+        <SendMessageSection post={post} onSent={refetchMessages} replyTo={replyTo} onClear={() => { setReplyTo(null); }} />
       </Box>
     </Box>
   );

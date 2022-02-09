@@ -3,7 +3,7 @@ import { Box, Menu, MenuItem } from '@mui/material';
 import axios from 'axios';
 import { Likes, LikesContent } from '../../likes';
 
-export function LikeButton({ likeProps = {}, onCreated }) {
+export function LikeButton({ sx, likeProps = {}, onCreated }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const likes = Object.values(Likes).map((id) => ({
@@ -37,11 +37,11 @@ export function LikeButton({ likeProps = {}, onCreated }) {
       <Box
         component="a"
         size="small"
-        sx={{
+        sx={[{
           cursor: 'pointer',
           color: 'rgb(42, 88, 133)',
           '&:hover': { textDecoration: 'underline' },
-        }}
+        }, sx]}
         onClick={openMenu}
       >
         Like
