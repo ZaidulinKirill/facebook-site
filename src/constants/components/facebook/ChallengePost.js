@@ -1,29 +1,16 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-danger */
-import React, {
-  memo, useContext, useEffect, useState,
-} from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import {
-  Box, Button, CircularProgress, Container,
-  Divider, Form, Grid, IconButton,
-  List, ListItemAvatar, ListItemButton, ListItemText,
-  Accordion as MuiAccordion, AccordionDetails as MuiAccordionDetails, AccordionSummary as MuiAccordionSummary,
-  TextField, Typography, styled,
+  Box, Button, CircularProgress, IconButton, TextField,
 } from '@mui/material';
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { ValidatorForm } from 'react-material-ui-form-validator';
 import fontColorContrast from 'font-color-contrast';
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 import moment from 'moment';
-import { FormHandlerContext, PageContext, SiteContext } from '../../../contexts';
-import getLocalizedPath from '../../../utils/getLocalizedPath';
-import { TextareaField } from '../form/textareaField';
-import { PageRenderer } from '../../../services';
 import UserAvatar from '../../../components/UserAvatar';
+import { LikeButton } from './LikeButton';
+import { LikesArea } from './LikesArea';
 
 function PostContent({ post, sx }) {
   if (post.type === 'video') {
@@ -139,24 +126,34 @@ function SendMessageSection({ post, onSent }) {
 }
 
 function ChallengePostMessage({ message, sx }) {
+  const [refreshLikesTrigger, setRefreshLikesTrigger] = useState(false);
+
   const userName = `${message.user.name || ''} ${message.user.lastName || ''}`.trim();
   const time = moment(message.created_at).fromNow();
   // `${new Date(message.created_at).toLocaleDateString()} ${new Date(message.created_at).toLocaleTimeString()}`;
 
   return (
-    <Box sx={{ ...sx }}>
+    <Box sx={{ maxWidth: '600px', ...sx }}>
       <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
         <UserAvatar user={message.user} sx={{ mr: 2, width: 48, height: 48 }} />
-        <Box>
+        <Box sx={{ fontSize: '14px', flexGrow: 1 }}>
           <Box component="span" sx={{ fontWeight: '500' }}>
             {userName}
           </Box>
           <Box component="span" sx={{ ml: 2, fontSize: 'smaller', display: { xs: 'none', sm: 'inline' } }}>
             {time}
           </Box>
-          <Box>
+          <Box sx={{ }}>
             {message.text}
           </Box>
+          <Box sx={{ display: 'flex', paddingBottom: '3px', borderBottom: 'thin solid rgb(220, 225, 230)' }}>
+            <LikeButton likeProps={{ messageId: message.id }} onCreated={() => setRefreshLikesTrigger(true)} />
+            <Box component="a" size="small" sx={{ cursor: 'pointer', color: 'rgb(42, 88, 133)', '&:hover': { textDecoration: 'underline' }, ml: 1.4 }}>
+              Reply
+            </Box>
+            <LikesArea sx={{ ml: 'auto' }} where={{ messageId: message.id }} refresh={refreshLikesTrigger} onRefreshed={() => setRefreshLikesTrigger(false)} />
+          </Box>
+
         </Box>
       </Box>
     </Box>
@@ -224,7 +221,7 @@ export default function ChallengePost({ post, sx }) {
       <Box sx={{ mt: 3, pl: { xs: 0, sm: 3 } }}>
         {messages ? (
           <Box sx={{ my: 0 }}>
-            {messages.map((message) => <ChallengePostMessage key={message.id} message={message} sx={{ mb: 2 }} />)}
+            {messages.map((message) => <ChallengePostMessage key={message.id} message={message} sx={{ mb: 3 }} />)}
           </Box>
         ) : (
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>

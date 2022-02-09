@@ -3,23 +3,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
   Box, Button, CircularProgress, Container,
-  Divider, Form, Grid, IconButton,
-  List, ListItemAvatar, ListItemButton, ListItemText,
-  Accordion as MuiAccordion, AccordionDetails as MuiAccordionDetails, AccordionSummary as MuiAccordionSummary,
-  Typography, styled,
+  Grid, IconButton,
+  Typography,
 } from '@mui/material';
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FormHandlerContext, PageContext, SiteContext } from '../../../contexts';
 import getLocalizedPath from '../../../utils/getLocalizedPath';
-import { TextareaField } from '../form/textareaField';
 import { PageRenderer } from '../../../services';
 import ChallengePost from './ChallengePost';
 
-const POSTS_PER_PAGE = 10;
+const POSTS_PER_PAGE = 3;
 
 export default function FacebookChallenge() {
   const page = useContext(PageContext);
@@ -31,6 +27,8 @@ export default function FacebookChallenge() {
   const [selectedMode, setSelectedMode] = useState('list');
   const [posts, setPosts] = useState(null);
   const [postsPage, setPostsPage] = useState(0);
+  const [totalPosts, setTotalPosts] = useState(0);
+
   const navigate = useNavigate();
   const { id: challengeId } = useParams();
   const { site: { language } } = useContext(SiteContext);
@@ -59,7 +57,7 @@ export default function FacebookChallenge() {
         return;
       }
 
-      const { data: items } = await axios.get('/api/posts', {
+      const { data: { items, total } } = await axios.get('/api/posts', {
         params: {
           challengeId: challenge.id.toString(),
           offset: postsPage * POSTS_PER_PAGE,
@@ -67,6 +65,7 @@ export default function FacebookChallenge() {
         },
       });
 
+      setTotalPosts(total);
       setPosts([...posts || [], ...items]);
     })();
   }, [postsPage]);
@@ -165,6 +164,11 @@ export default function FacebookChallenge() {
             </FormHandlerContext.Provider>
           </Box>
         ) }
+        { posts && posts.length < totalPosts && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+            <Button onClick={() => setPostsPage(postsPage + 1)}>Load more</Button>
+          </Box>
+        )}
       </Container>
     </Box>
   );

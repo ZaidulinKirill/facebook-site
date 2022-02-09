@@ -63,7 +63,8 @@ export const ColorField = ({ fullWidth = true, label, key, value, onChange }) =>
           sx={{
             ...value && { backgroundColor: value },
             mt: 1,
-            border: 'thin solid gray',
+            border: 'thin solid #80808055',
+            borderRadius: 2,
             height: '48px',
             width: '100px',
             cursor: 'pointer',

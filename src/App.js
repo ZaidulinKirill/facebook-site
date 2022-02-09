@@ -4,6 +4,7 @@ import {
   ContentPage, ErrorPage, NotFoundPage, PageLoading,
 } from './components';
 import { SiteContext } from './contexts';
+import 'intersection-observer';
 
 export default function App() {
   const { site, isSiteLoading, siteLoadingError } = useContext(SiteContext);
