@@ -15,7 +15,7 @@ export function LikesArea({ refresh, onRefreshed, sx, where = {} }) {
   });
 
   useEffect(() => {
-    if (isInited && !refresh) {
+    if ((isInited && !refresh) || !inView) {
       return;
     }
 
