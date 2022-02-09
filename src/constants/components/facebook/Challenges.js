@@ -1,12 +1,14 @@
 /* eslint-disable react/no-danger */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
-  Box, Container, Divider, List,
-  ListItemAvatar, ListItemButton, ListItemText, Accordion as MuiAccordion,
-  AccordionDetails as MuiAccordionDetails, AccordionSummary as MuiAccordionSummary, Typography, styled,
+  Box, CircularProgress, Container, Divider,
+  List, ListItemAvatar, ListItemButton, ListItemText,
+  Accordion as MuiAccordion, AccordionDetails as MuiAccordionDetails, AccordionSummary as MuiAccordionSummary, Typography,
+  styled,
 } from '@mui/material';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { PageContext, SiteContext } from '../../../contexts';
 import getLocalizedPath from '../../../utils/getLocalizedPath';
 import { PageRenderer } from '../../../services';
@@ -57,13 +59,33 @@ export default function FacebookChallenges() {
   const challengesStore = page.modules.find((x) => x.moduleType === 'facebook-challenges');
   const challengesText = page.modules.find((x) => x.moduleType === 'facebook-challenges-text');
   const [selectedSection, setSelectedSection] = useState(challengesStore.moduleVariables.sections[0].id);
+  const [additionalInfo, setAdditionalInfo] = useState(null);
   const navigate = useNavigate();
   const { site: { language } } = useContext(SiteContext);
 
   const { challenges } = challengesStore.moduleVariables;
+
+  useEffect(() => {
+    (async () => {
+      const { data: { items } } = await axios.post('/api/posts/challenges', {
+        ids: challenges.map((x) => x.id.toString()),
+      });
+
+      setAdditionalInfo(items);
+    })();
+  }, []);
+
+  if (!additionalInfo) {
+    return (
+      <Box sx={{ pt: 8, display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   const sections = challengesStore.moduleVariables.sections.map((section) => ({
     ...section,
-    challenges: challenges.filter((x) => x.section === section.key),
+    challenges: challenges.filter((x) => x.section === section.key).map((x) => ({ ...x, entries: additionalInfo[x.id.toString()]?.count })),
   }));
 
   const modules = [
@@ -119,7 +141,7 @@ export default function FacebookChallenges() {
                         <ListItemText sx={{ ml: 1 }}>
                           <Box sx={{ display: 'flex' }}>
                             <Box sx={{ mt: '-1em', mb: '-1em' }}>
-                              <div dangerouslySetInnerHTML={{ __html: challenge.description }} />
+                              {challenge.description}
                             </Box>
                             <Box sx={{
                               width: '75px',
@@ -130,7 +152,7 @@ export default function FacebookChallenges() {
                               fontWeight: '500',
                             }}
                             >
-                              12
+                              {challenge.entries}
                             </Box>
                           </Box>
                         </ListItemText>

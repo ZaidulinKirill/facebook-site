@@ -135,7 +135,7 @@ export default function FacebookChallenge() {
         </Box>
         {challenge.description && (
           <Box>
-            <div dangerouslySetInnerHTML={{ __html: challenge.description }} />
+            <div dangerouslySetInnerHTML={{ __html: challenge.content }} />
           </Box>
         )}
         <Grid container sx={{ mt: 2 }} rowSpacing={2}>
