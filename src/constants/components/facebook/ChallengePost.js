@@ -20,7 +20,7 @@ function PostContent({ post, sx }) {
     return (
       <Box sx={{ display: 'flex', flexDirection: 'column', ...sx }}>
         {post.data.description}
-        <Box component="video" src={`/api/uploads/${post.data.video}#t=1`} sx={{ mt: 1 }} controls />
+        <Box component="video" src={`/api/uploads/${post.data.video}#t=1`} sx={{ mt: 1 }} controls preload />
       </Box>
     );
   }
