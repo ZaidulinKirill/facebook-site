@@ -25,7 +25,7 @@ function PostContent({ post, sx }) {
           sx={{ mt: 1 }}
         >
           <ReactPlayer
-            url={`/api/uploads/${post.data.video}#t=0.5?range=true`}
+            url={`/api/uploads/${post.data.video}?range=true#t=0.5`}
             controls
             width="100%"
             height="auto"
