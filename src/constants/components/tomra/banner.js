@@ -95,6 +95,26 @@ export const TomraBanner = ({
         ...backgroundImageStyle,
       }}
     >
+      <Box sx={{
+        position: 'absolute',
+        right: 0,
+        bottom: 0,
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      >
+        <StyledImage
+          src="/tomra_banner_background.svg"
+          alt="bg"
+          sx={{
+            height: '250%',
+            transform: 'rotate(-219deg) translate(-28%,0)',
+          }}
+        />
+      </Box>
       <Box sx={{ position: 'absolute', right: 0, bottom: 0, m: { xs: 0, sm: 2 } }}>
         <StyledImage src="/tomra_logo_white.png" alt="bg" sx={{ width: { xs: '150px', sm: '200px' } }} />
       </Box>
