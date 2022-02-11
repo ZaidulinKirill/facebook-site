@@ -218,6 +218,7 @@ export default function ChallengePost({ post, sx }) {
   const [messagesPage, setMessagesPage] = useState(0);
   const [replyTo, setReplyTo] = useState(null);
   const [totalMessages, setTotalMessages] = useState(0);
+  const [refreshLikesTrigger, setRefreshLikesTrigger] = useState(false);
 
   const userName = getUserName(post.user);
   const time = `${new Date(post.created_at).toLocaleDateString()} ${new Date(post.created_at).toLocaleTimeString()}`;
@@ -273,7 +274,10 @@ export default function ChallengePost({ post, sx }) {
         </Box>
       </Box>
       <MemoizedPostContent sx={{ mt: 1 }} post={post} />
-      {/* {!!messages?.length && <Box sx={{ borderTop: 'thin solid #80808055' }} />} */}
+      <Box sx={{ display: 'flex', mt: 0.5 }}>
+        <LikesArea sx={{ mr: 1 }} where={{ postId: post.id }} refresh={refreshLikesTrigger} onRefreshed={() => setRefreshLikesTrigger(false)} />
+        <LikeButton sx={{ ml: 0 }} likeProps={{ postId: post.id }} onCreated={() => setRefreshLikesTrigger(true)} />
+      </Box>
       <Box sx={{ mt: 3, pl: { xs: 0, sm: 3 } }}>
         {messages ? (
           <Box sx={{ my: 0 }}>

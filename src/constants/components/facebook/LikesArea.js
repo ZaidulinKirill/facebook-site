@@ -43,6 +43,10 @@ export function LikesArea({ refresh, onRefreshed, sx, where = {} }) {
     })();
   }, [inView, isInited, refresh]);
 
+  if (!likes.length) {
+    return <Box ref={ref} />;
+  }
+
   return (
     <Box ref={ref} sx={[{ display: 'flex', mr: -1 }, sx]}>
       {likes.map((like) => (
