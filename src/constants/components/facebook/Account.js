@@ -12,7 +12,7 @@ export default function FacebookAccount() {
   const { site: { language } } = useContext(SiteContext);
   const [user] = useContext(UserContext);
 
-  const form = page.modules.find((x) => x.moduleType === 'facebook-account-form');
+  const form = page.modules.find((x) => x.moduleType === 'facebook-signup-form');
 
   const onSubmit = async ({ siteId, ...item }) => {
     await axios.post('/api/auth/account', {
@@ -32,7 +32,20 @@ export default function FacebookAccount() {
   };
 
   const modules = [
-    form,
+    {
+      ...form,
+      moduleVariables: {
+        ...form.moduleVariables,
+        backgroundColor: null,
+        'Main form': form.moduleVariables['Main form']
+          .filter((x) => x.type !== 'form-checkbox-field')
+          .map((x) => (x.name === 'password' ? {
+            ...x,
+            required: false,
+            autoComplete: 'new-password',
+          } : x)),
+      },
+    },
   ];
 
   const pageRenderer = new PageRenderer({ modules, inline: true });

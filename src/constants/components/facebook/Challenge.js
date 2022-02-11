@@ -149,9 +149,16 @@ export default function FacebookChallenge() {
         </Grid>
         {selectedMode === 'list' ? (
           posts ? (
-            <Box sx={{ my: 5 }}>
-              {posts.map((post) => <ChallengePost key={post.id} post={post} sx={{ mb: 2 }} />)}
-            </Box>
+            <>
+              <Box sx={{ my: 5 }}>
+                {posts.map((post) => <ChallengePost key={post.id} post={post} sx={{ mb: 2 }} />)}
+              </Box>
+              { posts && posts.length < totalPosts && (
+                <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+                  <Button onClick={() => setPostsPage(postsPage + 1)}>Load more</Button>
+                </Box>
+              )}
+            </>
           ) : (
             <Box sx={{ pt: 8, display: 'flex', justifyContent: 'center' }}>
               <CircularProgress />
@@ -164,11 +171,6 @@ export default function FacebookChallenge() {
             </FormHandlerContext.Provider>
           </Box>
         ) }
-        { posts && posts.length < totalPosts && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
-            <Button onClick={() => setPostsPage(postsPage + 1)}>Load more</Button>
-          </Box>
-        )}
       </Container>
     </Box>
   );

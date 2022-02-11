@@ -9,6 +9,7 @@ import SendIcon from '@mui/icons-material/Send';
 import ClearIcon from '@mui/icons-material/Clear';
 import axios from 'axios';
 import moment from 'moment';
+import ReactPlayer from 'react-player';
 import UserAvatar from '../../../components/UserAvatar';
 import { LikeButton } from './LikeButton';
 import { LikesArea } from './LikesArea';
@@ -20,7 +21,16 @@ function PostContent({ post, sx }) {
     return (
       <Box sx={{ display: 'flex', flexDirection: 'column', ...sx }}>
         {post.data.description}
-        <Box component="video" src={`/api/uploads/${post.data.video}#t=1`} sx={{ mt: 1 }} controls preload />
+        <Box
+          sx={{ mt: 1 }}
+        >
+          <ReactPlayer
+            url={`/api/uploads/${post.data.video}#t=0.5?range=true`}
+            controls
+            width="100%"
+            height="auto"
+          />
+        </Box>
       </Box>
     );
   }
