@@ -40,8 +40,9 @@ export default function FacebookNavbar({ title }) {
   return (
     <Box sx={{ px: 3, py: 1, backgroundColor: 'rgb(13, 30, 52)' }}>
       <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', height: '100%' }}>
-        <Link to="/" style={{ display: 'inline' }}>
-          <StyledImage src="/logo.png" sx={{ width: '50px', justifySelf: 'flex-start' }} />
+        <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
+          <StyledImage src="/tomra_logo_white.png" sx={{ width: { xs: '100px', sm: '130px' }, justifySelf: 'flex-start', mr: 1 }} />
+          <StyledImage src="/logo.png" sx={{ display: { xs: 'none', sm: 'inline' }, width: '50px', justifySelf: 'flex-start' }} />
         </Link>
         <ThemeProvider primaryColor="#ffffff" sx={{ ml: 'auto', display: 'flex', alignItems: 'center' }}>
           <LanguageSelector sx={{ ml: 'auto', mr: { xs: 0, sm: 2 } }} />
