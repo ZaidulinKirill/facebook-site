@@ -274,7 +274,7 @@ export default function ChallengePost({ post, sx }) {
         </Box>
       </Box>
       <MemoizedPostContent sx={{ mt: 1 }} post={post} />
-      <Box sx={{ display: 'flex', mt: 0.5 }}>
+      <Box sx={{ display: 'flex', mt: 1 }}>
         <LikesArea sx={{ mr: 1 }} where={{ postId: post.id }} refresh={refreshLikesTrigger} onRefreshed={() => setRefreshLikesTrigger(false)} />
         <LikeButton sx={{ ml: 0 }} likeProps={{ postId: post.id }} onCreated={() => setRefreshLikesTrigger(true)} />
       </Box>
