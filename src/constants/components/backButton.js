@@ -43,15 +43,24 @@ export const BackButton = ({ color, label, alignment, marginTop, isVisible = tru
 
   return (
     <ThemeProvider theme={newTheme}>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: alignment, pt: marginTop, mr: { xs: 2, sm: 5 } }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: alignment, pt: marginTop, mr: { xs: 1, sm: 5 } }}>
         <Button
           label={label}
-          sx={{ ...sx }}
+          sx={{ display: { xs: 'none', sm: 'block' }, ...sx }}
           type="button"
           onClick={() => navigate(-1)}
           startIcon={<ArrowBackIcon />}
           {...props}
         />
+
+        <IconButton
+          sx={{ display: { xs: 'block', sm: 'none' }, width: 'auto' }}
+          type="button"
+          onClick={() => navigate(-1)}
+          {...props}
+        >
+          <ArrowBackIcon />
+        </IconButton>
       </Box>
     </ThemeProvider>
   );

@@ -56,7 +56,7 @@ export const TomraText = ({
             width: '100%',
           }}
         >
-          <Box sx={{ width: '100%', display: 'flex' }}>
+          <Box sx={{ width: '100%', display: 'flex', flexWrap: 'wrap' }}>
             <BackButton
               isVisible={isBackButtonVisible}
               label={backButtonLabel}
