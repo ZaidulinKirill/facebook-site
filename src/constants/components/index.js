@@ -37,6 +37,7 @@ import FacebookNavbar from './facebook/Navbar';
 import { TomraBanner } from './tomra/banner';
 import { TomraFooter } from './tomra/footer';
 import { BackButton } from './backButton';
+import { TomraText } from './tomra/text';
 
 const SpanBase = styled('span')({});
 const Image = styled('img')({});
@@ -84,6 +85,7 @@ export const Components = {
   'facebook-navbar': { Component: FacebookNavbar },
   'tomra-banner': { Component: TomraBanner },
   'tomra-footer': { Component: TomraFooter },
+  'tomra-text': { Component: TomraText },
   'audio-player': { Component: AudioPlayer },
   'cookie-consent': { Component: CookieConsent },
   'password-protection': { Component: PasswordProtection },
