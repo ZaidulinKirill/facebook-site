@@ -42,7 +42,7 @@ export const TomraText = ({
         alt="bg"
         sx={{
           height: '600px',
-          transform: 'rotate(0deg) translate(-40%,0)',
+          transform: 'rotate(0deg) translate(-50%,0)',
         }}
       />
     </Box>

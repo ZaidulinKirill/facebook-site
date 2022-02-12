@@ -7,17 +7,17 @@
       </clipPath>
     </defs>
 
-    <circle cx="200" cy="200" r="50" fill="none" stroke="rgb(250 217 94)" stroke-width="15" clip-path="url(#cut-off)" />
-    <circle cx="200" cy="200" r="80" fill="none" stroke="rgb(250 217 94)" stroke-width="15" clip-path="url(#cut-off)" />
-    <circle cx="200" cy="200" r="110" fill="none" stroke="rgb(250 217 94)" stroke-width="15" clip-path="url(#cut-off)" />
+    <circle cx="200" cy="200" r="50" fill="none" stroke="rgb(250, 223, 89)" stroke-width="15" clip-path="url(#cut-off)" />
+    <circle cx="200" cy="200" r="80" fill="none" stroke="rgb(250, 223, 89)" stroke-width="15" clip-path="url(#cut-off)" />
+    <circle cx="200" cy="200" r="110" fill="none" stroke="rgb(250, 223, 89)" stroke-width="15" clip-path="url(#cut-off)" />
 
-    <line x1="-1200" x2="200" y1="150" y2="150" stroke="rgb(250 217 94)" stroke-width="15" />
-    <line x1="-1200" x2="200" y1="250" y2="250" stroke="rgb(250 217 94)" stroke-width="15" />
+    <line x1="-1200" x2="200" y1="150" y2="150" stroke="rgb(250, 223, 89)" stroke-width="15" />
+    <line x1="-1200" x2="200" y1="250" y2="250" stroke="rgb(250, 223, 89)" stroke-width="15" />
 
-    <line x1="-1200" x2="200" y1="120" y2="120" stroke="rgb(250 217 94)" stroke-width="15" />
-    <line x1="-1200" x2="200" y1="280" y2="280" stroke="rgb(250 217 94)" stroke-width="15" />
+    <line x1="-1200" x2="200" y1="120" y2="120" stroke="rgb(250, 223, 89)" stroke-width="15" />
+    <line x1="-1200" x2="200" y1="280" y2="280" stroke="rgb(250, 223, 89)" stroke-width="15" />
 
-    <line x1="-1200" x2="200" y1="90" y2="90" stroke="rgb(250 217 94)" stroke-width="15" />
-    <line x1="-1200" x2="200" y1="310" y2="310" stroke="rgb(250 217 94)" stroke-width="15" />
+    <line x1="-1200" x2="200" y1="90" y2="90" stroke="rgb(250, 223, 89)" stroke-width="15" />
+    <line x1="-1200" x2="200" y1="310" y2="310" stroke="rgb(250, 223, 89)" stroke-width="15" />
   </g>
 </svg>
