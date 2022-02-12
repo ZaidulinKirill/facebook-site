@@ -53,6 +53,7 @@ export const TomraText = ({
             display: 'flex',
             alignItems: 'flex-start',
             flexDirection: 'column',
+            width: '100%',
           }}
         >
           <Box sx={{ width: '100%', display: 'flex' }}>

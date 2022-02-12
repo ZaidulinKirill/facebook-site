@@ -114,17 +114,20 @@ function SendMessageSection({ replyTo, onClear, post, onSent }) {
     e.preventDefault();
     e.stopPropagation();
 
-    await axios.post('/api/posts/message', {
+    const { data: newMessage } = await axios.post('/api/posts/message', {
       text: `${replyTo ? `@${getUserName(replyTo.user)}, ` : ''}${message}`,
       postId: post.id,
-      ...replyTo && { replyMessageId: replyTo.id },
+      ...replyTo && {
+        replyMessageId: replyTo.id,
+        sort: (replyTo.sort || 0),
+      },
     });
 
     setMessage('');
     onClear();
 
     if (onSent) {
-      onSent();
+      onSent(newMessage);
     }
   }
 
@@ -165,7 +168,12 @@ function ChallengePostMessage({ message, sx, onReply }) {
   const time = moment(message.created_at).fromNow();
 
   return (
-    <Box sx={{ maxWidth: '600px', ...sx }}>
+    <Box sx={{
+      maxWidth: '600px',
+      ...message.replyMessageId && { paddingLeft: 3 },
+      ...sx,
+    }}
+    >
       <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
         <UserAvatar user={message.user} sx={{ mr: 2, width: 48, height: 48 }} />
         <Box sx={{ fontSize: '14px', flexGrow: 1 }}>
@@ -201,8 +209,8 @@ function ChallengePostMessage({ message, sx, onReply }) {
             >
               Reply
             </Box>
-            <LikesArea sx={{ ml: 'auto' }} where={{ messageId: message.id }} refresh={refreshLikesTrigger} onRefreshed={() => setRefreshLikesTrigger(false)} />
             <LikeButton sx={{ ml: 2 }} likeProps={{ messageId: message.id }} onCreated={() => setRefreshLikesTrigger(true)} />
+            <LikesArea sx={{ ml: 'auto' }} where={{ messageId: message.id }} refresh={refreshLikesTrigger} onRefreshed={() => setRefreshLikesTrigger(false)} />
           </Box>
         </Box>
       </Box>
@@ -253,6 +261,8 @@ export default function ChallengePost({ post, sx }) {
     document.querySelector(`#message-field-${post.id}`).scrollIntoView({ block: 'nearest' });
   }
 
+  const sortedMessages = messages && [...messages].sort((a, b) => (b.sort - a.sort));
+
   return (
     <Box sx={{
       ...sx,
@@ -281,7 +291,9 @@ export default function ChallengePost({ post, sx }) {
       <Box sx={{ mt: 3, pl: { xs: 0, sm: 3 } }}>
         {messages ? (
           <Box sx={{ my: 0 }}>
-            {messages.map((message) => <ChallengePostMessage key={message.id} message={message} sx={{ mb: 3 }} onReply={() => onReply(message)} />)}
+            {sortedMessages.map(
+              (message) => <ChallengePostMessage key={message.id} message={message} sx={{ mb: 3 }} onReply={() => onReply(message)} />,
+            )}
           </Box>
         ) : (
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -295,7 +307,12 @@ export default function ChallengePost({ post, sx }) {
         </Box>
       )}
       <Box sx={{ mt: 3 }}>
-        <SendMessageSection post={post} onSent={refetchMessages} replyTo={replyTo} onClear={() => { setReplyTo(null); }} />
+        <SendMessageSection
+          post={post}
+          onSent={(x) => setMessages([...messages, x])}
+          replyTo={replyTo}
+          onClear={() => { setReplyTo(null); }}
+        />
       </Box>
     </Box>
   );
