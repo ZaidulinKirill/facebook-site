@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -15,6 +15,8 @@ export default function FacebookSignup({ type }) {
   const text = page.modules.find((x) => x.moduleType === 'facebook-signup-text');
   const successText = page.modules.find((x) => x.moduleType === 'facebook-signup-success');
   const form = page.modules.find((x) => x.moduleType === 'facebook-signup-form');
+
+  const submittedUser = useRef();
 
   if (!banner) {
     return;
@@ -35,13 +37,17 @@ export default function FacebookSignup({ type }) {
     });
 
     setIsSubmitted(true);
+    submittedUser.current = item;
   };
 
   const withVariables = (item) => (item ? ({
     ...item,
     moduleVariables: {
       ...item.moduleVariables,
-      text: item.moduleVariables.text.replace('[EMAIL]', user?.email),
+      text: item.moduleVariables.text
+        .replace('[FIRSTNAME]', submittedUser.current?.name || '')
+        .replace('[LASTNAME]', submittedUser.current?.lastName || '')
+        .replace('[EMAIL]', user?.email),
     },
   }) : null);
 
