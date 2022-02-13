@@ -46,7 +46,7 @@ export const BackButton = ({ color, label, alignment, marginTop, isVisible = tru
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: alignment, pt: marginTop, mr: { xs: 1, sm: 5 } }}>
         <Button
           label={label}
-          sx={{ display: { xs: 'none', sm: 'block' }, ...sx }}
+          sx={{ display: { xs: 'none', sm: 'flex' }, ...sx }}
           type="button"
           onClick={() => navigate(-1)}
           startIcon={<ArrowBackIcon />}
@@ -54,7 +54,7 @@ export const BackButton = ({ color, label, alignment, marginTop, isVisible = tru
         />
 
         <IconButton
-          sx={{ display: { xs: 'block', sm: 'none' }, width: 'auto' }}
+          sx={{ display: { xs: 'flex', sm: 'none' }, width: 'auto' }}
           type="button"
           onClick={() => navigate(-1)}
           {...props}
