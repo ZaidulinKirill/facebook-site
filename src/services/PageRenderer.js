@@ -82,7 +82,7 @@ export class PageRenderer {
 
       body #root { 
         scroll-behavior: smooth; 
-        font-family: '.';
+        font-family: '${this.fontId}'; 
       }
 
       .es-widget {
