@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { SiteContext } from '../../contexts';
 
 export default function LanguageSelector({ disableScrollLock = true, ...props }) {
@@ -36,6 +37,7 @@ export default function LanguageSelector({ disableScrollLock = true, ...props })
         onClick={openMenu}
       >
         {language.code}
+        <KeyboardArrowDownIcon sx={{ fontSize: '22px', ml: '2px' }} />
       </Button>
       <Menu
         anchorEl={anchorEl}
