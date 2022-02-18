@@ -1,25 +1,21 @@
 /* eslint-disable react/no-danger */
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import {
-  Avatar, Box, Button, Container,
-  Divider, List, ListItemAvatar, ListItemButton,
-  ListItemText, Menu, MenuItem, Accordion as MuiAccordion,
-  AccordionDetails as MuiAccordionDetails, AccordionSummary as MuiAccordionSummary, Typography, styled,
+  Box, Button, Container,
+  Menu, MenuItem, styled,
 } from '@mui/material';
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
-import { PageContext, SiteContext, UserContext } from '../../../contexts';
+import KeyboardArrowDownIcon from '@mui/icons-material/ArrowDownward';
+import { SiteContext, UserContext } from '../../../contexts';
 import LanguageSelector from '../languageSelector';
 import getLocalizedPath from '../../../utils/getLocalizedPath';
 import { ThemeProvider } from '../themeProvider';
-import UserAvatar from '../../../components/UserAvatar';
 
 const StyledImage = styled('img')({});
-const StyledLink = styled(Link)({});
 
-export default function FacebookNavbar({ title, large }) {
+export default function FacebookNavbar({ large }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -39,72 +35,161 @@ export default function FacebookNavbar({ title, large }) {
     window.location.reload();
   };
 
-  return (
-    <Box sx={{ px: 3, py: 3, backgroundColor: 'rgb(13, 30, 52)' }}>
-      <Container maxWidth="xl" sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Link to="/" style={{ alignItems: 'center' }}>
-          {/* <StyledImage src="/tomra_logo_white.png" sx={{ width: { xs: '100px', sm: '130px' }, justifySelf: 'flex-start', mr: 1 }} /> */}
-          <StyledImage src="/logo.png" sx={{ display: { xs: 'none', sm: 'flex' }, width: { xs: '50px', sm: '80px' }, height: 'auto', justifySelf: 'flex-start' }} width={400} height={301} />
-        </Link>
+  const handleClick = () => {
+    console.log('here');
+  };
 
-        <ThemeProvider primaryColor="rgb(217, 0, 58)" sx={{ ml: { xs: 0, sm: 'auto' }, display: 'flex', alignItems: 'center' }}>
-          <Button
-            id="account-button"
+  return (
+    <Box sx={{ position: 'relative' }}>
+      <Box sx={{
+        px: 3,
+        py: 3,
+        backgroundColor: 'rgb(13, 30, 52)',
+        position: 'relative',
+        ...large && {
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',
+          overflow: 'hidden',
+        },
+      }}
+      >
+        <Box sx={{
+          position: 'absolute',
+          right: 0,
+          bottom: 0,
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        >
+          <StyledImage
+            src="/tomra_banner_background_3.svg"
+            alt="bg"
             sx={{
-              display: 'flex',
-              mr: 3,
-              lineHeight: 1.2,
-              color: 'white',
-              boxShadow: 'none',
-              borderRadius: '50px',
-              padding: '13px 20px',
-              textTransform: 'capitalize',
-              fontSize: '16px',
+              height: '300%',
+              transform: 'translate(28%,-19%)',
             }}
-            onClick={openMenu}
-            variant="contained"
+          />
+        </Box>
+        <Container maxWidth="xl" sx={{ display: 'flex', justifyContent: 'center', zIndex: 1 }}>
+          <Link to="/" style={{ alignItems: 'center' }}>
+            {/* <StyledImage src="/tomra_logo_white.png" sx={{ width: { xs: '100px', sm: '130px' }, justifySelf: 'flex-start', mr: 1 }} /> */}
+            <StyledImage src="/logo.png" sx={{ display: { xs: 'none', sm: 'flex' }, width: { xs: '50px', sm: '80px' }, height: 'auto', justifySelf: 'flex-start' }} width={400} height={301} />
+          </Link>
+          <ThemeProvider primaryColor="rgb(217, 0, 58)" sx={{ ml: { xs: 0, sm: 'auto' }, display: 'flex', alignItems: 'center' }}>
+            <Button
+              id="account-button"
+              sx={{
+                display: 'flex',
+                mr: 3,
+                lineHeight: 1.2,
+                color: 'white',
+                boxShadow: 'none',
+                borderRadius: '50px',
+                padding: '13px 20px',
+                textTransform: 'capitalize',
+                fontSize: '16px',
+              }}
+              onClick={openMenu}
+              variant="contained"
+            >
+              <PersonIcon sx={{ mr: 1 }} />
+              <Box sx={{
+                maxWidth: { xs: '100px', sm: '200px' },
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                '-webkit-line-clamp': '2',
+                '-webkit-box-orient': 'vertical',
+              }}
+              >
+                {`${user.name} ${user.lastName}`.trim()}
+              </Box>
+              {/* <UserAvatar user={user} sx={{ ml: { xs: 1, sm: 1.5 } }} /> */}
+            </Button>
+          </ThemeProvider>
+          <ThemeProvider primaryColor="#ffffff" sx={{ display: 'flex', alignItems: 'center' }}>
+            <LanguageSelector sx={{ mr: { xs: 0, sm: 2 }, fontSize: 18 }} />
+          </ThemeProvider>
+          <Menu
+            PaperProps={{
+              style: {
+                width: '140px',
+              },
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            disableScrollLock
+            aria-labelledby="account-button"
+            onClos
+            e={handleClose}
           >
-            <PersonIcon sx={{ mr: 1 }} />
+            <MenuItem onClick={() => navigate(getLocalizedPath(language, '/account'))}>
+              Account
+            </MenuItem>
+            <MenuItem onClick={logout}>
+              Log out
+            </MenuItem>
+          </Menu>
+        </Container>
+        <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 }}>
+          <Box sx={{
+            width: { xs: '70%', md: '50%', xl: '40%' },
+            position: 'relative',
+          }}
+          >
             <Box sx={{
-              maxWidth: { xs: '100px', sm: '200px' },
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              display: '-webkit-box',
-              '-webkit-line-clamp': '2',
-              '-webkit-box-orient': 'vertical',
+              display: { xs: 'none', md: 'block' },
+              color: 'white',
+              fontSize: { xs: '0px', sm: '32px', md: '60px', xl: '70px' },
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              fontWeight: '500',
+              textAlign: 'right',
+              lineHeight: 1.1,
+              transform: 'translateX(-100%)',
             }}
             >
-              {`${user.name} ${user.lastName}`.trim()}
+              Let&apos;s
+              <br />
+              celebrate!
             </Box>
-            {/* <UserAvatar user={user} sx={{ ml: { xs: 1, sm: 1.5 } }} /> */}
-          </Button>
-        </ThemeProvider>
-        <ThemeProvider primaryColor="#ffffff" sx={{ display: 'flex', alignItems: 'center' }}>
-          <LanguageSelector sx={{ mr: { xs: 0, sm: 2 }, fontSize: 18 }} />
-        </ThemeProvider>
-        <Menu
-          PaperProps={{
-            style: {
-              width: '140px',
-            },
+            <StyledImage
+              src="/logo_large.png"
+              sx={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+              }}
+              width={400}
+              height={301}
+            />
+          </Box>
+        </Box>
+      </Box>
+      <Box sx={{ position: 'absolute', zIndex: 1, width: '100%', bottom: 0, display: 'flex', justifyContent: 'center' }}>
+        <Box
+          onClick={handleClick}
+          sx={{
+            width: '64px',
+            height: '64px',
+            background: 'white',
+            transform: 'translateY(50%)',
+            borderRadius: '100%',
+            position: 'relative',
+            cursor: 'pointer',
           }}
-          anchorEl={anchorEl}
-          open={open}
-          disableScrollLock
-          aria-labelledby="account-button"
-          onClose={handleClose}
         >
-          <MenuItem onClick={() => navigate(getLocalizedPath(language, '/account'))}>
-            Account
-          </MenuItem>
-          <MenuItem onClick={logout}>
-            Log out
-          </MenuItem>
-        </Menu>
-      </Container>
-      {/* <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', height: '100%' }}>
-
-      </Box> */}
+          <Box sx={{ position: 'absolute', width: '100%', height: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
+            <KeyboardArrowDownIcon sx={{ fontSize: '24px', mt: '20%' }} className="bounce" />
+          </Box>
+        </Box>
+      </Box>
     </Box>
   );
 }
