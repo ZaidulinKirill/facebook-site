@@ -12,7 +12,8 @@ import axios from 'axios';
 import { PageContext, SiteContext, UserContext } from '../contexts';
 import getLocalizedPath from '../utils/getLocalizedPath';
 import { PageRenderer } from '../services';
-import Navbar from './components/Navbar';
+
+const StyledImage = styled('img')({});
 
 const Avatar = styled('img')(() => ({
   width: '100px',
@@ -58,8 +59,9 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 export default function MainPage() {
   const page = useContext(PageContext);
   const userState = useContext(UserContext);
-  const challengesStore = page.modules.find((x) => x.moduleType === 'facebook-challenges');
-  const challengesText = page.modules.find((x) => x.moduleType === 'facebook-challenges-text');
+  const challengesStore = page.modules.find((x) => x.moduleType === 'challenges');
+  const leftText = page.modules.find((x) => x.moduleType === 'main-left-text');
+  const rightText = page.modules.find((x) => x.moduleType === 'main-right-text');
   const [selectedSection, setSelectedSection] = useState(challengesStore.moduleVariables.sections[0].id);
   const [additionalInfo, setAdditionalInfo] = useState(null);
   const navigate = useNavigate();
@@ -90,15 +92,49 @@ export default function MainPage() {
     challenges: challenges.filter((x) => x.section === section.key).map((x) => ({ ...x, entries: additionalInfo[x.id.toString()]?.count })),
   }));
 
-  const modules = [
-    challengesText,
-  ].filter((x) => !!x);
-
-  const pageRenderer = new PageRenderer({ modules, inline: true });
-
   return (
     <Box>
-      {pageRenderer.render()}
+      <Box
+        sx={{
+          display: 'flex',
+          background: 'rgb(254, 196, 9)',
+          paddingBottom: 6,
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <Box sx={{
+          position: 'absolute',
+          right: 0,
+          bottom: 0,
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        >
+          <StyledImage
+            src="/tomra_banner_background_2.svg"
+            alt="bg"
+            sx={{
+              height: '600px',
+              transform: 'rotate(0deg) translate(-50%,0)',
+            }}
+          />
+        </Box>
+        <Container maxWidth="xl" sx={{ zIndex: 1, display: 'flex', py: 10 }}>
+          <Box sx={{ width: '30%' }}>
+            <Box sx={{ fontSize: '48px', lineHeight: 1.2 }}>
+              Ready to get this party started?
+            </Box>
+          </Box>
+          <Box sx={{ flex: 1 }}>
+            {rightText && new PageRenderer({ modules: [rightText], inline: true }).render()}
+          </Box>
+        </Container>
+      </Box>
+      {/* {pageRenderer.render()} */}
       <Box sx={{ mt: 7 }}>
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
           <Box

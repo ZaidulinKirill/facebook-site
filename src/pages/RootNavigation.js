@@ -100,7 +100,7 @@ export default function RootNavigation({ page }) {
           <Box sx={{ height: '100%', flex: '1 1 0', display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ flexGrow: 1 }}>
               {userState && userState[0] && <Navbar large />}
-              <Box id="main-content">
+              <Box id="main-content" sx={{ display: 'flex', flexDirection: 'column' }}>
                 {pageRenderer.render(Navigation)}
               </Box>
             </Box>
