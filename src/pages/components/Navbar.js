@@ -8,14 +8,14 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
 import KeyboardArrowDownIcon from '@mui/icons-material/ArrowDownward';
-import { SiteContext, UserContext } from '../../../contexts';
-import LanguageSelector from '../languageSelector';
-import getLocalizedPath from '../../../utils/getLocalizedPath';
-import { ThemeProvider } from '../themeProvider';
+import { SiteContext, UserContext } from '../../contexts';
+import LanguageSelector from '../../constants/components/languageSelector';
+import { ThemeProvider } from '../../constants/components/themeProvider';
+import getLocalizedPath from '../../utils/getLocalizedPath';
 
 const StyledImage = styled('img')({});
 
-export default function FacebookNavbar({ large }) {
+export default function Navbar({ large }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function FacebookNavbar({ large }) {
   };
 
   const handleClick = () => {
-    console.log('here');
+    document.querySelector('#main-content').scrollIntoView({ block: 'start' });
   };
 
   return (

@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import axios from 'axios';
 import { useInView } from 'react-intersection-observer';
-import { LikesContent } from '../../likes';
-import { UserContext } from '../../../contexts';
+import { LikesContent } from '../../constants/likes';
+import { UserContext } from '../../contexts';
 
 export function LikesArea({ refresh, onRefreshed, sx, where = {} }) {
   const [isInited, setIsInited] = useState(false);

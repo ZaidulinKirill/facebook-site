@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Menu, MenuItem } from '@mui/material';
 import axios from 'axios';
-import { Likes, LikesContent } from '../../likes';
+import { Likes, LikesContent } from '../../constants/likes';
 
 export function LikeButton({ sx, likeProps = {}, onCreated }) {
   const [anchorEl, setAnchorEl] = useState(null);

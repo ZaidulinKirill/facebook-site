@@ -9,10 +9,10 @@ import {
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { PageContext, SiteContext, UserContext } from '../../../contexts';
-import getLocalizedPath from '../../../utils/getLocalizedPath';
-import { PageRenderer } from '../../../services';
-import FacebookNavbar from './Navbar';
+import { PageContext, SiteContext, UserContext } from '../contexts';
+import getLocalizedPath from '../utils/getLocalizedPath';
+import { PageRenderer } from '../services';
+import Navbar from './components/Navbar';
 
 const Avatar = styled('img')(() => ({
   width: '100px',
@@ -55,7 +55,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function FacebookChallenges() {
+export default function MainPage() {
   const page = useContext(PageContext);
   const userState = useContext(UserContext);
   const challengesStore = page.modules.find((x) => x.moduleType === 'facebook-challenges');
@@ -98,7 +98,6 @@ export default function FacebookChallenges() {
 
   return (
     <Box>
-      {userState && userState[0] && <FacebookNavbar large />}
       {pageRenderer.render()}
       <Box sx={{ mt: 7 }}>
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
@@ -170,6 +169,5 @@ export default function FacebookChallenges() {
         </Container>
       </Box>
     </Box>
-
   );
 }

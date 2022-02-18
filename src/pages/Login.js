@@ -4,11 +4,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {
   FormHandlerContext, PageContext, SignupContext, SiteContext,
-} from '../../../contexts';
-import { PageRenderer } from '../../../services';
-import getLocalizedPath from '../../../utils/getLocalizedPath';
+} from '../contexts';
+import { PageRenderer } from '../services';
+import getLocalizedPath from '../utils/getLocalizedPath';
 
-export default function FacebookLogin() {
+export default function LoginPage() {
   const page = useContext(PageContext);
   const [, setUser] = useContext(SignupContext);
   const banner = page.modules.find((x) => x.moduleType === 'facebook-registration-banner');

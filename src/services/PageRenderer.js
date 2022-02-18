@@ -64,7 +64,7 @@ export class PageRenderer {
     };
   }
 
-  render() {
+  render(children) {
     const fixedNavbar = this.modules.find((x) => x.systemType === 'fixed-navbar');
     const fixedNavbarHeight = fixedNavbar && fixedNavbar.templateComponents[0]?.content[0]?.style?.marginTop;
 
@@ -128,7 +128,7 @@ export class PageRenderer {
       ` : ''}
     `;
 
-    return this.inline ? this.renderComponents(this.templateComponents) : (
+    return this.inline && !children ? this.renderComponents(this.templateComponents) : (
       <>
         <Head>
           <style>
@@ -136,7 +136,7 @@ export class PageRenderer {
           </style>
         </Head>
         <ThemeProvider primaryColor={this.primaryColor} secondaryColor="#ffc400" themeProps={{ typography: { fontFamily: this.fontId } }}>
-          {this.renderComponents(this.templateComponents)}
+          {children || this.renderComponents(this.templateComponents)}
         </ThemeProvider>
       </>
     );

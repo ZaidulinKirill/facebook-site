@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import axios from 'axios';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import {
   ContentPage, ErrorPage, NotFoundPage, PageLoading,
 } from './components';
 import { SiteContext } from './contexts';
 import 'intersection-observer';
+import { RootNavigation } from './pages';
 
 export default function App() {
   const { site, isSiteLoading, siteLoadingError } = useContext(SiteContext);
@@ -22,14 +24,12 @@ export default function App() {
       <Router>
         <div className="page-container">
           <Routes>
-            {!!site.pages.length && (
-              <Route
-                caseSensitive={false}
-                path={`${site.language.implicit ? '' : `/${site.language.code}`}/*`}
-                key={site.pages[0].id}
-                element={<ContentPage page={site.pages[0]} />}
-              />
-            )}
+            <Route
+              caseSensitive={false}
+              path={`${site.language.implicit ? '' : `/${site.language.code}`}/*`}
+              key={site.pages[0].id}
+              element={<RootNavigation page={site.pages[0]} />}
+            />
             <Route
               path="*"
               element={<NotFoundPage />}

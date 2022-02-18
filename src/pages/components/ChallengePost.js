@@ -10,7 +10,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import axios from 'axios';
 import moment from 'moment';
 import ReactPlayer from 'react-player';
-import UserAvatar from '../../../components/UserAvatar';
+import UserAvatar from '../../components/UserAvatar';
 import { LikeButton } from './LikeButton';
 import { LikesArea } from './LikesArea';
 

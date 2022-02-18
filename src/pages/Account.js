@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import { Box } from '@mui/material';
 import {
   FormHandlerContext, PageContext, SiteContext, UserContext,
-} from '../../../contexts';
-import { PageRenderer } from '../../../services';
-import getLocalizedPath from '../../../utils/getLocalizedPath';
+} from '../contexts';
+import { PageRenderer } from '../services';
+import getLocalizedPath from '../utils/getLocalizedPath';
 
-export default function FacebookAccount() {
+export default function AccountPage() {
   const page = useContext(PageContext);
   const { site: { language } } = useContext(SiteContext);
   const [user] = useContext(UserContext);

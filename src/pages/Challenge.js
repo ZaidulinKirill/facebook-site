@@ -10,14 +10,14 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FormHandlerContext, PageContext, SiteContext } from '../../../contexts';
-import getLocalizedPath from '../../../utils/getLocalizedPath';
-import { PageRenderer } from '../../../services';
-import ChallengePost from './ChallengePost';
+import { FormHandlerContext, PageContext, SiteContext } from '../contexts';
+import getLocalizedPath from '../utils/getLocalizedPath';
+import { PageRenderer } from '../services';
+import ChallengePost from './components/ChallengePost';
 
 const POSTS_PER_PAGE = 3;
 
-export default function FacebookChallenge() {
+export default function ChallengePage() {
   const page = useContext(PageContext);
   const challengesStore = page.modules.find((x) => x.moduleType === 'facebook-challenges');
   const postTextForm = page.modules.find((x) => x.moduleType === 'facebook-post-text-form');

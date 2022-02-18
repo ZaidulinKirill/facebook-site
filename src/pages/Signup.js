@@ -1,12 +1,11 @@
 import React, { useContext, useRef, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import {
   FormHandlerContext, PageContext, SignupContext, SiteContext,
-} from '../../../contexts';
-import { PageRenderer } from '../../../services';
+} from '../contexts';
+import { PageRenderer } from '../services';
 
-export default function FacebookSignup({ type }) {
+export default function SignupPage() {
   const page = useContext(PageContext);
   const { site: { language } } = useContext(SiteContext);
   const [user] = useContext(SignupContext);

@@ -1,10 +1,11 @@
+/* eslint-disable react/no-danger */
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Dialog, DialogContent, DialogContentText } from '@mui/material';
-import { FormHandlerContext, PageContext, SignupContext } from '../../../contexts';
-import { PageRenderer } from '../../../services';
+import { FormHandlerContext, PageContext, SignupContext } from '../contexts';
+import { PageRenderer } from '../services';
 
-export default function FacebookPassword() {
+export default function PasswordPage() {
   const page = useContext(PageContext);
   const [user] = useContext(SignupContext);
   const [isWrongPassword, setIsWrongPassword] = useState(false);
