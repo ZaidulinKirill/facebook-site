@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import {
   Box, Button, CircularProgress, Container,
   Grid, IconButton,
-  Typography,
+  Typography, styled,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -16,6 +16,32 @@ import { PageRenderer } from '../services';
 import ChallengePost from './components/ChallengePost';
 
 const POSTS_PER_PAGE = 3;
+const StyledImage = styled('img')({});
+
+function NavigationButton({ label, forward, challenge }) {
+  const navigate = useNavigate();
+  const { site: { language } } = useContext(SiteContext);
+
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Button
+        sx={{
+          fontSize: { xs: '1.5rem' },
+          fontWeight: '400',
+          lineHeight: 1.6,
+          textTransform: 'none',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: forward ? 'flex-end' : 'flex-start',
+        }}
+        onClick={() => navigate(getLocalizedPath(language, `/${challenge.id}`))}
+      >
+        {label}
+        <Box component="span" sx={{ fontSize: { xs: '1rem' } }}>{challenge.name}</Box>
+      </Button>
+    </Box>
+  );
+}
 
 export default function ChallengePage() {
   const page = useContext(PageContext);
@@ -29,7 +55,6 @@ export default function ChallengePage() {
   const [postsPage, setPostsPage] = useState(0);
   const [totalPosts, setTotalPosts] = useState(0);
 
-  const navigate = useNavigate();
   const { id: challengeId } = useParams();
   const { site: { language } } = useContext(SiteContext);
 
@@ -94,81 +119,125 @@ export default function ChallengePage() {
   const pageRenderer = selectedButton && new PageRenderer({ modules: selectedButton.modules, inline: true });
 
   return (
-    <Box sx={{ backgroundColor: 'rgba(250, 213, 73, 0.025)' }}>
-      <Container maxWidth="md">
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 7, mb: 4 }}>
-          <Box
-            component="span"
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          background: 'rgb(254, 196, 9)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <Box sx={{
+          position: 'absolute',
+          right: 0,
+          bottom: 0,
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        >
+          <StyledImage
+            src="/tomra_background_5_yellow.svg"
+            alt="bg"
             sx={{
-              fontSize: 28,
-              fontWeight: '500',
-              color: 'white',
-              paddingX: 2,
-              background: 'var(--primary-color)',
-              mixBlendMode: 'multiply',
+              height: '200%',
+              transform: { xs: 'translate(0%,30%)', md: 'translate(-40%,30%)', lg: 'translate(-80%,30%)' },
             }}
-          >
-            {challenge.name}
-          </Box>
+          />
         </Box>
-        <Box sx={{ display: 'flex', mt: 2 }}>
-          {prevChallenge && (
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <IconButton onClick={() => navigate(getLocalizedPath(language, `/${prevChallenge.id}`))} sx={{ mr: { xs: 0, sm: 1 } }}>
-                <ArrowBackIcon sx={{ fontSize: { xs: 20, md: 34 } }} />
-              </IconButton>
-              <Typography sx={{ fontSize: { xs: 19, md: 24 } }}>{prevChallenge.name}</Typography>
-            </Box>
-          )}
-          <Box sx={{ flexGrow: 1 }} />
-          {nextChallenge && (
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Typography sx={{ fontSize: { xs: 19, md: 24 } }}>{nextChallenge.name}</Typography>
-              <IconButton onClick={() => navigate(getLocalizedPath(language, `/${nextChallenge.id}`))} sx={{ ml: { xs: 0, sm: 1 } }}>
-                <ArrowForwardIcon sx={{ fontSize: { xs: 20, md: 34 } }} />
-              </IconButton>
-            </Box>
-          )}
-        </Box>
-        {challenge.description && (
-          <Box>
-            <div dangerouslySetInnerHTML={{ __html: challenge.content }} />
-          </Box>
-        )}
-        <Grid container sx={{ mt: 2 }} rowSpacing={2}>
-          {buttons.map((button) => (
-            <Grid item key={button.text} xs={6} sm={3} sx={{ display: 'flex', justifyContent: 'center' }}>
-              <Button variant="contained" sx={{ width: '150px' }} onClick={() => setSelectedMode(button.key)}>
-                {button.text}
-              </Button>
-            </Grid>
-          ))}
-        </Grid>
-        {selectedMode === 'list' ? (
-          posts ? (
-            <>
-              <Box sx={{ my: 5 }}>
-                {posts.map((post) => <ChallengePost key={post.id} post={post} sx={{ mb: 2 }} />)}
+        <Container maxWidth="lg" sx={{ zIndex: 1, display: 'flex', flexWrap: 'wrap', py: 8 }}>
+          <Grid container>
+            <Grid item xs={12} md={6} sx={{ pr: { xs: 0, md: 3 } }}>
+              {challenge.category && <Box sx={{ fontSize: '1.4rem', fontWeight: '500' }}>{challenge.category}</Box>}
+              <Box sx={{ display: 'flex', alignItems: 'flex-end', flexWrap: 'wrap' }}>
+                <Box sx={{ fontSize: '2.2rem', fontWeight: '500', width: { xs: '100%', md: 'auto' } }}>{challenge.name}</Box>
+                <Box sx={{ fontSize: '0.8rem', ml: { xs: 0, md: 6 }, mb: { xs: 0, md: 1.32 } }}>
+                  {totalPosts}
+                  {' '}
+                  participants
+                </Box>
               </Box>
-              { posts && posts.length < totalPosts && (
-                <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
-                  <Button onClick={() => setPostsPage(postsPage + 1)}>Load more</Button>
+              {challenge.content && (
+                <Box sx={{ mt: 1 }}>
+                  <div dangerouslySetInnerHTML={{ __html: challenge.content }} />
                 </Box>
               )}
-            </>
-          ) : (
-            <Box sx={{ pt: 8, display: 'flex', justifyContent: 'center' }}>
-              <CircularProgress />
-            </Box>
-          )
-        ) : (
-          <Box>
-            <FormHandlerContext.Provider value={{ submit: onSubmitMessage }}>
-              {pageRenderer.render()}
-            </FormHandlerContext.Provider>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              {challenge.instruction && (
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', mt: { xs: 4, md: 0 } }}>
+                  <Box sx={{
+                    borderRadius: 1,
+                    backgroundColor: 'rgb(217, 0, 57)',
+                    height: '100%',
+                    width: '100%',
+                    maxWidth: { xs: 'auto', md: '500px' },
+                    color: 'white',
+                    p: 3,
+                  }}
+                  >
+                    <div dangerouslySetInnerHTML={{ __html: challenge.instruction }} />
+                  </Box>
+                </Box>
+              )}
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+      <Box sx={{ backgroundColor: 'rgba(250, 213, 73, 0.025)' }}>
+        <Container maxWidth="md">
+          <Box sx={{ display: 'flex', mt: 2 }}>
+            {prevChallenge && (
+              <NavigationButton label="Previous" challenge={prevChallenge} />
+            )}
+            <Box sx={{ flexGrow: 1 }} />
+            {nextChallenge && (
+              <NavigationButton label="Next" challenge={nextChallenge} forward />
+            )}
           </Box>
-        ) }
-      </Container>
-    </Box>
+          {challenge.description && (
+            <Box>
+              <div dangerouslySetInnerHTML={{ __html: challenge.content }} />
+            </Box>
+          )}
+          <Grid container sx={{ mt: 2 }} rowSpacing={2}>
+            {buttons.map((button) => (
+              <Grid item key={button.text} xs={6} sm={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Button variant="contained" sx={{ width: '150px' }} onClick={() => setSelectedMode(button.key)}>
+                  {button.text}
+                </Button>
+              </Grid>
+            ))}
+          </Grid>
+          {selectedMode === 'list' ? (
+            posts ? (
+              <>
+                <Box sx={{ my: 5 }}>
+                  {posts.map((post) => <ChallengePost key={post.id} post={post} sx={{ mb: 2 }} />)}
+                </Box>
+                { posts && posts.length < totalPosts && (
+                  <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+                    <Button onClick={() => setPostsPage(postsPage + 1)}>Load more</Button>
+                  </Box>
+                )}
+              </>
+            ) : (
+              <Box sx={{ pt: 8, display: 'flex', justifyContent: 'center' }}>
+                <CircularProgress />
+              </Box>
+            )
+          ) : (
+            <Box>
+              <FormHandlerContext.Provider value={{ submit: onSubmitMessage }}>
+                {pageRenderer.render()}
+              </FormHandlerContext.Provider>
+            </Box>
+          ) }
+        </Container>
+      </Box>
+    </>
   );
 }

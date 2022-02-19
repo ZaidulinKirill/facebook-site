@@ -165,6 +165,7 @@ export default function Navbar({ large }) {
                 textAlign: 'right',
                 lineHeight: 1.1,
                 transform: 'translateX(-100%)',
+                whiteSpace: 'pre',
               }}
               >
                 {'Let\'s\ncelebrate!'}
@@ -200,6 +201,7 @@ export default function Navbar({ large }) {
                 textAlign: 'right',
                 lineHeight: 1.1,
                 transform: 'translateX(-100%)',
+                whiteSpace: 'pre',
               }}
               >
                 {'We challenge you to\ncelebrate 50 years\nof TOMRA together!'}
