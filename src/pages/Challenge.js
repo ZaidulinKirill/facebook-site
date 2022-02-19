@@ -56,7 +56,6 @@ export default function ChallengePage() {
   const [totalPosts, setTotalPosts] = useState(0);
 
   const { id: challengeId } = useParams();
-  const { site: { language } } = useContext(SiteContext);
 
   const { challenges } = challengesStore.moduleVariables;
 
