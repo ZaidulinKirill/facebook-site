@@ -2,7 +2,6 @@ import { Box, CircularProgress } from '@mui/material';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import FacebookNavbar from '../constants/components/facebook/Navbar';
 import { TomraFooter } from '../constants/components/tomra/footer';
 import { PageContext, SiteContext, UserContext } from '../contexts';
 import { PageRenderer } from '../services';
