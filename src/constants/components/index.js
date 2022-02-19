@@ -32,8 +32,6 @@ import { PasswordProtection } from './passwordProtection';
 import { CookieConsent } from './cookieConsent';
 import { SiteUnderConstruction } from './siteUnderConstruction';
 import AudioPlayer from './audioPlayer';
-import FacebookMain from './facebook/Main';
-import FacebookNavbar from './facebook/Navbar';
 import { TomraBanner } from './tomra/banner';
 import { TomraFooter } from './tomra/footer';
 import { BackButton } from './backButton';
@@ -81,8 +79,6 @@ export const Components = {
   drawer: { Component: Drawer },
   media: { Component: Media },
   'back-button': { Component: BackButton },
-  'facebook-main': { Component: FacebookMain },
-  'facebook-navbar': { Component: FacebookNavbar },
   'tomra-banner': { Component: TomraBanner },
   'tomra-footer': { Component: TomraFooter },
   'tomra-text': { Component: TomraText },
