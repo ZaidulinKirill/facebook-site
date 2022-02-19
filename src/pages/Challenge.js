@@ -19,7 +19,7 @@ const POSTS_PER_PAGE = 3;
 
 export default function ChallengePage() {
   const page = useContext(PageContext);
-  const challengesStore = page.modules.find((x) => x.moduleType === 'facebook-challenges');
+  const challengesStore = page.modules.find((x) => x.moduleType === 'challenges');
   const postTextForm = page.modules.find((x) => x.moduleType === 'facebook-post-text-form');
   const postAudioForm = page.modules.find((x) => x.moduleType === 'facebook-post-audio-form');
   const postPhotoForm = page.modules.find((x) => x.moduleType === 'facebook-post-photo-form');
@@ -91,13 +91,10 @@ export default function ChallengePage() {
     setSelectedMode('list');
   };
 
-  const banner = page.modules.find((x) => x.moduleType === `banner-${challenge.id.toString()}`);
-
   const pageRenderer = selectedButton && new PageRenderer({ modules: selectedButton.modules, inline: true });
 
   return (
     <Box sx={{ backgroundColor: 'rgba(250, 213, 73, 0.025)' }}>
-      {banner && new PageRenderer({ modules: [banner], inline: true }).render()}
       <Container maxWidth="md">
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 7, mb: 4 }}>
           <Box

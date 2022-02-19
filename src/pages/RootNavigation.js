@@ -32,6 +32,7 @@ export default function RootNavigation({ page }) {
 
   const location = useLocation();
   const isNavbarEnabled = !['/login', '/signup', '/password'].includes(location?.pathname);
+  const islargeNavbarEnabled = ['/'].includes(location?.pathname);
 
   useEffect(() => {
     (async () => {
@@ -104,7 +105,7 @@ export default function RootNavigation({ page }) {
         <UserContext.Provider value={userState}>
           <Box sx={{ height: '100%', flex: '1 1 0', display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ flexGrow: 1 }}>
-              {userState && userState[0] && isNavbarEnabled && <Navbar large />}
+              {userState && userState[0] && isNavbarEnabled && <Navbar large={islargeNavbarEnabled} />}
               <Box id="main-content" sx={{ display: 'flex', flexDirection: 'column' }}>
                 {pageRenderer.render(Navigation)}
               </Box>
