@@ -2,7 +2,9 @@ import axios from 'axios';
 import React, {
   useContext, useEffect, useMemo, useState,
 } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import {
+  Route, Routes, useLocation, useNavigate,
+} from 'react-router-dom';
 import { Box, CircularProgress } from '@mui/material';
 import {
   PageContext, SignupContext, SiteContext, UserContext,
@@ -27,6 +29,9 @@ export default function RootNavigation({ page }) {
   const { site: { id: siteId, language } } = useContext(SiteContext);
 
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const isNavbarEnabled = !['/login', '/signup', '/password'].includes(location?.pathname);
 
   useEffect(() => {
     (async () => {
@@ -99,7 +104,7 @@ export default function RootNavigation({ page }) {
         <UserContext.Provider value={userState}>
           <Box sx={{ height: '100%', flex: '1 1 0', display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ flexGrow: 1 }}>
-              {userState && userState[0] && <Navbar large />}
+              {userState && userState[0] && isNavbarEnabled && <Navbar large />}
               <Box id="main-content" sx={{ display: 'flex', flexDirection: 'column' }}>
                 {pageRenderer.render(Navigation)}
               </Box>

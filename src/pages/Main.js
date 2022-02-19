@@ -10,7 +10,7 @@ import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { PageContext, SiteContext, UserContext } from '../contexts';
+import { PageContext, SiteContext } from '../contexts';
 import getLocalizedPath from '../utils/getLocalizedPath';
 import { PageRenderer } from '../services';
 
@@ -18,13 +18,12 @@ const StyledImage = styled('img')({});
 
 const Avatar = styled('img')(() => ({
   width: '40px',
-  // height: '80px',
 }));
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-  border: null, // `1px solid ${theme.palette.divider}`,
+))(() => ({
+  border: null,
   '&:not(:last-child)': {
     borderBottom: 0,
     borderTop: 0,
@@ -54,12 +53,11 @@ const AccordionSummary = styled((props) => (
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   backgroundColor: 'rgb(251, 219, 229)',
-  borderTop: 'nono', // '1px solid rgba(0, 0, 0, .125)',
+  borderTop: 'nono',
 }));
 
 export default function MainPage() {
   const page = useContext(PageContext);
-  const userState = useContext(UserContext);
   const challengesStore = page.modules.find((x) => x.moduleType === 'challenges');
   const leftText = page.modules.find((x) => x.moduleType === 'main-left-text');
   const rightText = page.modules.find((x) => x.moduleType === 'main-right-text');
@@ -132,7 +130,6 @@ export default function MainPage() {
               {rightText && new PageRenderer({ modules: [rightText], inline: true }).render()}
             </Grid>
           </Grid>
-
         </Container>
       </Box>
       <Box sx={{ pt: 7, pb: 10, backgroundColor: 'rgb(248, 163, 188)', position: 'relative', overflow: 'hidden' }}>
@@ -152,7 +149,7 @@ export default function MainPage() {
             alt="bg"
             sx={{
               height: '300%',
-              transform: 'rotate(-90deg) translate(-40%, -40%)', // { xs: 'translate(20%,30%)', md: 'translate(80%,30%)', lg: 'translate(100%,30%)' },
+              transform: 'rotate(-90deg) translate(-40%, -40%)',
             }}
           />
         </Box>
@@ -164,8 +161,6 @@ export default function MainPage() {
               fontWeight: '500',
               color: 'black',
               paddingX: 2,
-              // background: 'var(--primary-color)',
-              // mixBlendMode: 'multiply',
             }}
           >
             Challenges

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Box, Button, Container,
   Menu, MenuItem, styled,
@@ -21,6 +21,7 @@ export default function Navbar({ large }) {
   const navigate = useNavigate();
   const { site: { language } } = useContext(SiteContext);
   const [user] = useContext(UserContext);
+  const [isButtonAnimationEnabled, setIsButtonAnimationEnabled] = useState(true);
 
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -38,6 +39,17 @@ export default function Navbar({ large }) {
   const handleClick = () => {
     document.querySelector('#main-content').scrollIntoView({ block: 'start' });
   };
+
+  useEffect(() => {
+    const onScroll = () => {
+      setIsButtonAnimationEnabled(window.pageYOffset <= 50);
+    };
+
+    window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <Box sx={{ position: 'relative' }}>
@@ -172,7 +184,7 @@ export default function Navbar({ large }) {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ position: 'absolute', zIndex: 1, width: '100%', bottom: 0, display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ position: 'absolute', zIndex: 1, width: '100%', bottom: 10, display: 'flex', justifyContent: 'center' }}>
         <Box
           onClick={handleClick}
           sx={{
@@ -185,8 +197,8 @@ export default function Navbar({ large }) {
             cursor: 'pointer',
           }}
         >
-          <Box sx={{ position: 'absolute', width: '100%', height: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
-            <KeyboardArrowDownIcon sx={{ fontSize: '24px', mt: '20%' }} className="bounce" />
+          <Box sx={{ position: 'absolute', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <KeyboardArrowDownIcon sx={{ fontSize: '24px', mt: '0%' }} className={isButtonAnimationEnabled ? 'bounce' : ''} />
           </Box>
         </Box>
       </Box>
