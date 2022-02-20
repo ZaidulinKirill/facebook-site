@@ -1,9 +1,11 @@
 import React, { useContext, useRef, useState } from 'react';
 import axios from 'axios';
+import { Box } from '@mui/material';
 import {
   FormHandlerContext, PageContext, SignupContext, SiteContext,
 } from '../contexts';
 import { PageRenderer } from '../services';
+import { MainText } from './components/MainText';
 
 export default function SignupPage() {
   const page = useContext(PageContext);
@@ -14,8 +16,6 @@ export default function SignupPage() {
   const text = page.modules.find((x) => x.moduleType === 'facebook-signup-text');
   const successText = page.modules.find((x) => x.moduleType === 'facebook-signup-success');
   const form = page.modules.find((x) => x.moduleType === 'facebook-signup-form');
-  const translations = page.modules.find((x) => x.moduleType === 'translations');
-  // {translations.moduleVariables.Challenges}
 
   const submittedUser = useRef();
 
@@ -61,8 +61,11 @@ export default function SignupPage() {
   const pageRenderer = new PageRenderer({ modules, inline: true });
 
   return (
-    <FormHandlerContext.Provider value={{ submit: onSubmit }}>
-      {pageRenderer.render()}
-    </FormHandlerContext.Provider>
+    <Box>
+      <MainText />
+      <FormHandlerContext.Provider value={{ submit: onSubmit }}>
+        {pageRenderer.render()}
+      </FormHandlerContext.Provider>
+    </Box>
   );
 }

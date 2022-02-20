@@ -1,9 +1,12 @@
 /* eslint-disable react/no-danger */
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import { Dialog, DialogContent, DialogContentText } from '@mui/material';
+import {
+  Box, Dialog, DialogContent, DialogContentText,
+} from '@mui/material';
 import { FormHandlerContext, PageContext, SignupContext } from '../contexts';
 import { PageRenderer } from '../services';
+import { MainText } from './components/MainText';
 
 export default function PasswordPage() {
   const page = useContext(PageContext);
@@ -44,25 +47,28 @@ export default function PasswordPage() {
   };
 
   return (
-    <FormHandlerContext.Provider value={{ submit: onSubmit }}>
-      {isWrongPassword && wrongPasswordText && (
-        <Dialog
-          open={isWrongPassword}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          onClose={() => setIsWrongPassword(false)}
-        >
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              <div dangerouslySetInnerHTML={{
-                __html: wrongPasswordText.moduleVariables.text.replace('[EMAIL]', user?.email),
-              }}
-              />
-            </DialogContentText>
-          </DialogContent>
-        </Dialog>
-      )}
-      {pageRenderer.render()}
-    </FormHandlerContext.Provider>
+    <Box>
+      <MainText />
+      <FormHandlerContext.Provider value={{ submit: onSubmit }}>
+        {isWrongPassword && wrongPasswordText && (
+          <Dialog
+            open={isWrongPassword}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            onClose={() => setIsWrongPassword(false)}
+          >
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                <div dangerouslySetInnerHTML={{
+                  __html: wrongPasswordText.moduleVariables.text.replace('[EMAIL]', user?.email),
+                }}
+                />
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+        )}
+        {pageRenderer.render()}
+      </FormHandlerContext.Provider>
+    </Box>
   );
 }
