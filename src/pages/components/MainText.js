@@ -11,7 +11,6 @@ const StyledImage = styled('img')({});
 export function MainText() {
   const page = useContext(PageContext);
   const translations = page.modules.find((x) => x.moduleType === 'translations');
-  // {translations.moduleVariables.Challenges}
 
   const location = useLocation();
   const isRegistrationFlow = ['/login', '/signup', '/password'].includes(location?.pathname);
