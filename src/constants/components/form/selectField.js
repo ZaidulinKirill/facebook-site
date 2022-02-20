@@ -12,7 +12,15 @@ export const SelectField = ({ fullWidth = true, required, value, onChange, label
         value={value}
         label={label}
         onChange={onChange}
-        MenuProps={{ disableScrollLock: true }}
+        MenuProps={{
+          disableScrollLock: true,
+          PaperProps: {
+            style: {
+              maxHeight: 300,
+              width: 250,
+            },
+          },
+        }}
         {...props}
       >
         {items.map((item) => (<MenuItem value={item.value} key={item.id}>{item.text}</MenuItem>))}
