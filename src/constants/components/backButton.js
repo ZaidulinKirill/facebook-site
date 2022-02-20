@@ -41,19 +41,21 @@ export const BackButton = ({ color, label, alignment, marginTop, isVisible = tru
     return null;
   }
 
+  const isIcon = !label?.length;
+
   return (
     <ThemeProvider theme={newTheme}>
       <Box sx={[{ display: 'flex', alignItems: 'center', justifyContent: alignment, pt: marginTop, mr: { xs: 1, sm: 5 } }, sx]}>
         <Button
           label={label}
-          sx={{ display: { xs: 'none', sm: 'flex' } }}
+          sx={{ display: { xs: 'none', ...!isIcon && { sm: 'flex' } } }}
           type="button"
           onClick={() => navigate(-1)}
           startIcon={<ArrowBackIcon />}
           {...props}
         />
         <IconButton
-          sx={{ display: { xs: 'flex', sm: 'none' }, width: 'auto' }}
+          sx={{ display: { xs: 'flex', ...!isIcon && { sm: 'none' } }, width: 'auto' }}
           type="button"
           onClick={() => navigate(-1)}
           {...props}

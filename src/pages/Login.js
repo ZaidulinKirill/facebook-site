@@ -2,9 +2,7 @@ import React, { useContext } from 'react';
 import emailValidator from 'email-validator';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import {
-  Box, Container, Grid, styled,
-} from '@mui/material';
+import { Box } from '@mui/material';
 import {
   FormHandlerContext, PageContext, SignupContext, SiteContext,
 } from '../contexts';
@@ -12,13 +10,10 @@ import { PageRenderer } from '../services';
 import getLocalizedPath from '../utils/getLocalizedPath';
 import { MainText } from './components/MainText';
 
-const StyledImage = styled('img')({});
-
 export default function LoginPage() {
   const page = useContext(PageContext);
   const [, setUser] = useContext(SignupContext);
   const translations = page.modules.find((x) => x.moduleType === 'translations');
-  // {translations.moduleVariables.Challenges}
 
   const form = page.modules.find((x) => x.moduleType === 'facebook-login-form');
   const { site: { language } } = useContext(SiteContext);

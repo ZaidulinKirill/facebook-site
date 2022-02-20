@@ -35,11 +35,11 @@ export default function SignupPage() {
     setIsSubmitted(true);
   };
 
-  const withVariables = (item) => (item ? ({
+  const withVariables = (item, key = 'text') => (item ? ({
     ...item,
     moduleVariables: {
       ...item.moduleVariables,
-      text: item.moduleVariables.text
+      [key]: (item.moduleVariables[key] || '')
         .replace('[FIRSTNAME]', submittedUser.current?.name || '')
         .replace('[LASTNAME]', submittedUser.current?.lastName || '')
         .replace('[EMAIL]', user?.email),
@@ -47,7 +47,7 @@ export default function SignupPage() {
   }) : null);
 
   const modules = [
-    !isSubmitted ? form : withVariables(successText),
+    !isSubmitted ? withVariables(form, 'header') : withVariables(successText),
   ].filter((x) => !!x);
 
   const pageRenderer = new PageRenderer({ modules, inline: true });
