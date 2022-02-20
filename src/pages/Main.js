@@ -13,6 +13,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { PageContext, SiteContext } from '../contexts';
 import getLocalizedPath from '../utils/getLocalizedPath';
 import { PageRenderer } from '../services';
+import { MainText } from './components/MainText';
 
 const StyledImage = styled('img')({});
 
@@ -93,46 +94,7 @@ export default function MainPage() {
 
   return (
     <Box>
-      <Box
-        sx={{
-          display: 'flex',
-          background: 'rgb(254, 196, 9)',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        <Box sx={{
-          position: 'absolute',
-          right: 0,
-          bottom: 0,
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-        >
-          <StyledImage
-            src="/tomra_background_5_yellow.svg"
-            alt="bg"
-            sx={{
-              height: '200%',
-              transform: { xs: 'translate(20%,30%)', md: 'translate(80%,30%)', lg: 'translate(100%,30%)' },
-            }}
-          />
-        </Box>
-        <Container maxWidth="xl" sx={{ zIndex: 1, display: 'flex', flexWrap: 'wrap', pt: 12, pb: 13 }}>
-          <Grid container>
-            <Grid item xs={12} md={4}>
-              <Box sx={{ fontSize: '2.5rem', lineHeight: 1.1 }}>Ready to get this party started?</Box>
-              {leftText && new PageRenderer({ modules: [leftText], inline: true }).render()}
-            </Grid>
-            <Grid item xs={12} md={8} sx={{ pl: { md: 4 }, mt: '-1em' }}>
-              {rightText && new PageRenderer({ modules: [rightText], inline: true }).render()}
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
+      <MainText />
       <Box sx={{ pt: 7, pb: 10, backgroundColor: 'rgb(248, 163, 188)', position: 'relative', overflow: 'hidden' }}>
         <Box sx={{
           position: 'absolute',

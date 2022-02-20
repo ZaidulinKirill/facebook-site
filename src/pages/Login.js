@@ -3,28 +3,27 @@ import emailValidator from 'email-validator';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {
+  Box, Container, Grid, styled,
+} from '@mui/material';
+import {
   FormHandlerContext, PageContext, SignupContext, SiteContext,
 } from '../contexts';
 import { PageRenderer } from '../services';
 import getLocalizedPath from '../utils/getLocalizedPath';
+import { MainText } from './components/MainText';
+
+const StyledImage = styled('img')({});
 
 export default function LoginPage() {
   const page = useContext(PageContext);
   const [, setUser] = useContext(SignupContext);
-  const banner = page.modules.find((x) => x.moduleType === 'facebook-registration-banner');
-  const text = page.modules.find((x) => x.moduleType === 'facebook-login-text');
+
   const form = page.modules.find((x) => x.moduleType === 'facebook-login-form');
   const { site: { language } } = useContext(SiteContext);
 
   const navigate = useNavigate();
 
-  if (!banner) {
-    return;
-  }
-
   const modules = [
-    banner,
-    text,
     form,
   ];
 
@@ -46,8 +45,11 @@ export default function LoginPage() {
   };
 
   return (
-    <FormHandlerContext.Provider value={{ submit: onSubmit }}>
-      {pageRenderer.render()}
-    </FormHandlerContext.Provider>
+    <Box>
+      <MainText />
+      <FormHandlerContext.Provider value={{ submit: onSubmit }}>
+        {pageRenderer.render()}
+      </FormHandlerContext.Provider>
+    </Box>
   );
 }

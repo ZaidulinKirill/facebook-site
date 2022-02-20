@@ -20,7 +20,7 @@ export default function Navbar({ large }) {
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
   const { site: { language } } = useContext(SiteContext);
-  const [user] = useContext(UserContext);
+  const userState = useContext(UserContext);
   const [isButtonAnimationEnabled, setIsButtonAnimationEnabled] = useState(true);
 
   const openMenu = (event) => {
@@ -93,42 +93,46 @@ export default function Navbar({ large }) {
           />
         </Box>
         <Container maxWidth="xl" sx={{ display: 'flex', justifyContent: 'center', zIndex: 1 }}>
-          <Link to="/" style={{ alignItems: 'center' }}>
-            <StyledImage src="/logo.png" sx={{ display: { xs: 'none', sm: 'flex' }, width: { xs: '50px', sm: '80px' }, height: 'auto', justifySelf: 'flex-start' }} width={400} height={301} />
-          </Link>
-          <ThemeProvider primaryColor="rgb(217, 0, 58)" sx={{ ml: { xs: 0, sm: 'auto' }, display: 'flex', alignItems: 'center' }}>
-            <Button
-              id="account-button"
-              sx={{
-                display: 'flex',
-                mr: 3,
-                lineHeight: 1.2,
-                color: 'white',
-                boxShadow: 'none',
-                borderRadius: '50px',
-                padding: '13px 20px',
-                textTransform: 'capitalize',
-                fontSize: '16px',
-              }}
-              onClick={openMenu}
-              variant="contained"
-            >
-              <PersonIcon sx={{ mr: 1 }} />
-              <Box sx={{
-                maxWidth: { xs: '400px', sm: '400px' },
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                display: '-webkit-box',
-                '-webkit-line-clamp': '2',
-                '-webkit-box-orient': 'vertical',
-              }}
+          {userState[0] && (
+            <Link to="/" style={{ alignItems: 'center' }}>
+              <StyledImage src="/logo.png" sx={{ display: { xs: 'none', sm: 'flex' }, width: { xs: '50px', sm: '80px' }, height: 'auto', justifySelf: 'flex-start' }} width={400} height={301} />
+            </Link>
+          )}
+          {userState[0] && (
+            <ThemeProvider primaryColor="rgb(217, 0, 58)" sx={{ ml: { xs: 0, sm: 'auto' }, display: 'flex', alignItems: 'center' }}>
+              <Button
+                id="account-button"
+                sx={{
+                  display: 'flex',
+                  mr: 3,
+                  lineHeight: 1.2,
+                  color: 'white',
+                  boxShadow: 'none',
+                  borderRadius: '50px',
+                  padding: '13px 20px',
+                  textTransform: 'capitalize',
+                  fontSize: '16px',
+                }}
+                onClick={openMenu}
+                variant="contained"
               >
-                {`${user.name} ${user.lastName}`.trim()}
-              </Box>
-              {/* <UserAvatar user={user} sx={{ ml: { xs: 1, sm: 1.5 } }} /> */}
-            </Button>
-          </ThemeProvider>
-          <ThemeProvider primaryColor="#ffffff" sx={{ display: 'flex', alignItems: 'center' }}>
+                <PersonIcon sx={{ mr: 1 }} />
+                <Box sx={{
+                  maxWidth: { xs: '400px', sm: '400px' },
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  display: '-webkit-box',
+                  '-webkit-line-clamp': '2',
+                  '-webkit-box-orient': 'vertical',
+                }}
+                >
+                  {`${userState[0].name} ${userState[0].lastName}`.trim()}
+                </Box>
+                {/* <UserAvatar user={user} sx={{ ml: { xs: 1, sm: 1.5 } }} /> */}
+              </Button>
+            </ThemeProvider>
+          ) }
+          <ThemeProvider primaryColor="#ffffff" sx={{ display: 'flex', alignItems: 'center', ...!userState[0] && { ml: 'auto' } }}>
             <LanguageSelector sx={{ mr: { xs: 0, sm: 2 }, fontSize: 18 }} />
           </ThemeProvider>
           <Menu
