@@ -36,7 +36,7 @@ export default function AccountPage() {
       ...form,
       moduleVariables: {
         ...form.moduleVariables,
-        backgroundColor: null,
+        // backgroundColor: null,
         'Main form': form.moduleVariables['Main form']
           .filter((x) => x.type !== 'form-checkbox-field')
           .map((x) => (x.name === 'password' ? {
