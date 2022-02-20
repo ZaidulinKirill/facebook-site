@@ -15,8 +15,17 @@ export default function PasswordPage() {
   const form = page.modules.find((x) => x.moduleType === 'facebook-password-form');
   const wrongPasswordText = page.modules.find((x) => x.moduleType === 'facebook-password-wrong-password-text');
 
+  const withVariables = (item, key = 'text') => (item ? ({
+    ...item,
+    moduleVariables: {
+      ...item.moduleVariables,
+      [key]: (item.moduleVariables[key] || '')
+        .replace('[EMAIL]', user?.email),
+    },
+  }) : null);
+
   const modules = [
-    form,
+    withVariables(form, 'header'),
   ].filter((x) => !!x);
 
   const pageRenderer = new PageRenderer({ modules, inline: true });
