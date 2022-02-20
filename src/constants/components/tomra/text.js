@@ -1,7 +1,6 @@
 import { Box, Container, styled } from '@mui/material';
 import React from 'react';
 import { BackButton } from '../backButton';
-import LanguageSelector from '../languageSelector';
 
 const StyledImage = styled('img')({});
 const StyledSpan = styled('span')({});
@@ -17,15 +16,7 @@ export const TomraText = ({
   header,
   fontSize,
 }) => (
-  <Box
-    sx={{
-      display: 'flex',
-      background: 'rgb(250, 213, 73)',
-      paddingBottom: 6,
-      position: 'relative',
-      overflow: 'hidden',
-    }}
-  >
+  <Box sx={{ pt: 7, pb: 10, backgroundColor: 'rgb(248, 163, 188)', position: 'relative', overflow: 'hidden' }}>
     <Box sx={{
       position: 'absolute',
       right: 0,
@@ -35,14 +26,15 @@ export const TomraText = ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      pointerEvents: 'none',
     }}
     >
       <StyledImage
-        src="/tomra_banner_background_2.svg"
+        src="/tomra_background_0_pink.svg"
         alt="bg"
         sx={{
-          height: '600px',
-          transform: 'rotate(0deg) translate(-50%,0)',
+          height: '300%',
+          transform: 'rotate(-90deg) translate(-40%, -40%)',
         }}
       />
     </Box>
@@ -76,10 +68,6 @@ export const TomraText = ({
                 {header}
               </StyledSpan>
             </Box>
-            <LanguageSelector
-              color="inherit"
-              sx={{ fontSize: 18, fontWeight: 'bold', marginLeft: 'auto' }}
-            />
           </Box>
           <Box sx={{ mt: 0, fontSize, overflowY: 'hidden' }}>
             <Box
