@@ -124,7 +124,7 @@ export default function MainPage() {
         <Container maxWidth="xl" sx={{ zIndex: 1, display: 'flex', flexWrap: 'wrap', pt: 12, pb: 13 }}>
           <Grid container>
             <Grid item xs={12} md={4}>
-              <Box sx={{ fontSize: '2rem', lineHeight: 1.25 }}>Ready to get this party started?</Box>
+              <Box sx={{ fontSize: '2.5rem', lineHeight: 1.1 }}>Ready to get this party started?</Box>
               {leftText && new PageRenderer({ modules: [leftText], inline: true }).render()}
             </Grid>
             <Grid item xs={12} md={8} sx={{ pl: { md: 4 }, mt: '-1em' }}>
