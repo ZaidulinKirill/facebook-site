@@ -12,26 +12,10 @@ export default function PasswordPage() {
   const page = useContext(PageContext);
   const [user] = useContext(SignupContext);
   const [isWrongPassword, setIsWrongPassword] = useState(false);
-  const banner = page.modules.find((x) => x.moduleType === 'facebook-registration-banner');
-  const text = page.modules.find((x) => x.moduleType === 'facebook-password-text');
   const form = page.modules.find((x) => x.moduleType === 'facebook-password-form');
   const wrongPasswordText = page.modules.find((x) => x.moduleType === 'facebook-password-wrong-password-text');
 
-  if (!banner) {
-    return;
-  }
-
-  const withVariables = (item) => (item ? ({
-    ...item,
-    moduleVariables: {
-      ...item.moduleVariables,
-      text: item.moduleVariables.text.replace('[EMAIL]', user?.email),
-    },
-  }) : null);
-
   const modules = [
-    banner,
-    withVariables(text),
     form,
   ].filter((x) => !!x);
 

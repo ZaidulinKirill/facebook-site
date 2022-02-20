@@ -12,16 +12,10 @@ export default function SignupPage() {
   const { site: { language } } = useContext(SiteContext);
   const [user] = useContext(SignupContext);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const banner = page.modules.find((x) => x.moduleType === 'facebook-registration-banner');
-  const text = page.modules.find((x) => x.moduleType === 'facebook-signup-text');
   const successText = page.modules.find((x) => x.moduleType === 'facebook-signup-success');
   const form = page.modules.find((x) => x.moduleType === 'facebook-signup-form');
 
   const submittedUser = useRef();
-
-  if (!banner) {
-    return;
-  }
 
   const onSubmit = async ({ siteId, ...item }) => {
     await axios.post('/api/auth/signup', {
@@ -53,8 +47,6 @@ export default function SignupPage() {
   }) : null);
 
   const modules = [
-    banner,
-    !isSubmitted && withVariables(text),
     !isSubmitted ? form : withVariables(successText),
   ].filter((x) => !!x);
 
