@@ -37,7 +37,7 @@ export default function Navbar({ large }) {
   };
 
   const handleClick = () => {
-    document.querySelector('#main-content').scrollIntoView({ block: 'start' });
+    document.querySelector('#main-content').scrollIntoView({ block: 'start', behavior: 'smooth' });
   };
 
   useEffect(() => {

@@ -72,7 +72,6 @@ export class PageRenderer {
       ${this.fonts.map((font) => `@import url('${font.url}');`).join('\n')}
 
       html { 
-        scroll-behavior: smooth;
         height: 100%;
         font-size: 18px;
       }
@@ -82,7 +81,6 @@ export class PageRenderer {
       }
 
       body #root { 
-        scroll-behavior: smooth; 
         font-family: '${this.fontId}'; 
       }
 
