@@ -11,6 +11,10 @@ import getLocalizedPath from '../utils/getLocalizedPath';
 import { PageRenderer } from '../services';
 import ChallengePost from './components/ChallengePost';
 
+const Avatar = styled('img')(() => ({
+  width: '40px',
+}));
+
 const POSTS_PER_PAGE = 3;
 const StyledImage = styled('img')({});
 
@@ -148,7 +152,14 @@ export default function ChallengePage() {
         <Container maxWidth="lg" sx={{ zIndex: 1, display: 'flex', flexWrap: 'wrap', py: 8 }}>
           <Grid container>
             <Grid item xs={12} md={6} sx={{ pr: { xs: 0, md: 3 } }}>
-              {challenge.category && <Box sx={{ fontSize: '1.9rem', fontWeight: '500' }}>{challenge.category}</Box>}
+              {challenge.category && (
+                <Box sx={{ display: 'flex' }}>
+                  {challenge.avatarId
+                    ? <Avatar sx={{ width: { xs: '60px', sm: '50px' } }} src={`/api/uploads/w_200/${challenge.avatarId}`} />
+                    : <Avatar sx={{ width: { xs: '60px', sm: '50px' } }} src="/musical-note.png" /> }
+                  <Box sx={{ fontSize: '1.9rem', fontWeight: '500', ml: 2 }}>{challenge.category}</Box>
+                </Box>
+              )}
               <Box sx={{ display: 'flex', alignItems: 'flex-end', flexWrap: 'wrap' }}>
                 <Box sx={{ fontSize: '2.5rem', fontWeight: '500', width: { xs: '100%', md: 'auto' } }}>{challenge.name}</Box>
                 <Box sx={{ fontSize: '0.8rem', ml: { xs: 0, md: 6 }, mb: { xs: 0, md: 1.32 }, color: '#4d6376' }}>
