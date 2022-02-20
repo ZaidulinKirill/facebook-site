@@ -1,12 +1,10 @@
-import React, { useContext, useEffect } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import {
-  ContentPage, ErrorPage, NotFoundPage, PageLoading,
-} from './components';
+import { ErrorPage, NotFoundPage, PageLoading } from './components';
 import { SiteContext } from './contexts';
 import 'intersection-observer';
 import { RootNavigation } from './pages';
+import ScrollToTop from './pages/components/ScrollToTop';
 
 export default function App() {
   const { site, isSiteLoading, siteLoadingError } = useContext(SiteContext);
@@ -22,6 +20,7 @@ export default function App() {
   return (
     <div className="root-container">
       <Router>
+        <ScrollToTop />
         <div className="page-container">
           <Routes>
             <Route
