@@ -150,10 +150,10 @@ export default function ChallengePage() {
         <Container maxWidth="lg" sx={{ zIndex: 1, display: 'flex', flexWrap: 'wrap', py: 8 }}>
           <Grid container>
             <Grid item xs={12} md={6} sx={{ pr: { xs: 0, md: 3 } }}>
-              {challenge.category && <Box sx={{ fontSize: '1.4rem', fontWeight: '500' }}>{challenge.category}</Box>}
+              {challenge.category && <Box sx={{ fontSize: '1.9rem', fontWeight: '500' }}>{challenge.category}</Box>}
               <Box sx={{ display: 'flex', alignItems: 'flex-end', flexWrap: 'wrap' }}>
-                <Box sx={{ fontSize: '2.2rem', fontWeight: '500', width: { xs: '100%', md: 'auto' } }}>{challenge.name}</Box>
-                <Box sx={{ fontSize: '0.8rem', ml: { xs: 0, md: 6 }, mb: { xs: 0, md: 1.32 } }}>
+                <Box sx={{ fontSize: '2.5rem', fontWeight: '500', width: { xs: '100%', md: 'auto' } }}>{challenge.name}</Box>
+                <Box sx={{ fontSize: '0.8rem', ml: { xs: 0, md: 6 }, mb: { xs: 0, md: 1.32 }, color: '#4d6376' }}>
                   {totalPosts}
                   {' '}
                   participants
@@ -170,7 +170,7 @@ export default function ChallengePage() {
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', mt: { xs: 4, md: 0 } }}>
                   <Box sx={{
                     borderRadius: 1,
-                    backgroundColor: 'rgb(217, 0, 57)',
+                    backgroundColor: 'rgb(223, 19, 73)',
                     height: '100%',
                     width: '100%',
                     maxWidth: { xs: 'auto', md: '500px' },
