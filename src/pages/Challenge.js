@@ -155,7 +155,7 @@ export default function ChallengePage() {
               {challenge.category && (
                 <Box sx={{ display: 'flex' }}>
                   {challenge.avatarId
-                    ? <Avatar sx={{ width: { xs: '60px', sm: '50px' } }} src={`/api/uploads/w_200/${challenge.avatarId}`} />
+                    ? <Avatar sx={{ width: { xs: '60px', sm: '50px' } }} src={`/api/uploads/w_200/${challenge.avatarId}.png`} />
                     : <Avatar sx={{ width: { xs: '60px', sm: '50px' } }} src="/musical-note.png" /> }
                   <Box sx={{ fontSize: '1.9rem', fontWeight: '500', ml: 2 }}>{challenge.category}</Box>
                 </Box>

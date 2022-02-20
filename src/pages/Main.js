@@ -160,7 +160,7 @@ export default function MainPage() {
                         >
                           <ListItemAvatar sx={{ mt: 0, display: 'flex', justifyContent: 'center' }}>
                             {challenge.avatarId
-                              ? <Avatar sx={{ width: { xs: '60px', sm: '50px' } }} src={`/api/uploads/w_200/${challenge.avatarId}`} />
+                              ? <Avatar sx={{ width: { xs: '60px', sm: '50px' } }} src={`/api/uploads/w_200/${challenge.avatarId}.png`} />
                               : <Avatar sx={{ width: { xs: '60px', sm: '50px' } }} src="/musical-note.png" /> }
                           </ListItemAvatar>
                           <ListItemText sx={{ ml: { sm: 5 }, mt: { xs: 2, sm: 0 } }}>
