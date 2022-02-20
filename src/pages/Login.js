@@ -17,6 +17,8 @@ const StyledImage = styled('img')({});
 export default function LoginPage() {
   const page = useContext(PageContext);
   const [, setUser] = useContext(SignupContext);
+  const translations = page.modules.find((x) => x.moduleType === 'translations');
+  // {translations.moduleVariables.Challenges}
 
   const form = page.modules.find((x) => x.moduleType === 'facebook-login-form');
   const { site: { language } } = useContext(SiteContext);
@@ -31,7 +33,7 @@ export default function LoginPage() {
 
   const onSubmit = async ({ siteId, ...item }) => {
     if (!emailValidator.validate(item.email)) {
-      throw new Error('Wrong email format');
+      throw new Error(translations.moduleVariables['Wrong email format']);
     }
 
     const { data: { isExists } } = await axios.post('/api/auth/check-user', { email: item.email, siteId });

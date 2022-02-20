@@ -1,6 +1,8 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-danger */
-import React, { memo, useEffect, useState } from 'react';
+import React, {
+  memo, useContext, useEffect, useState,
+} from 'react';
 import {
   Box, Button, CircularProgress, IconButton, TextField,
 } from '@mui/material';
@@ -13,6 +15,7 @@ import ReactPlayer from 'react-player';
 import UserAvatar from '../../components/UserAvatar';
 import { LikeButton } from './LikeButton';
 import { LikesArea } from './LikesArea';
+import { PageContext } from '../../contexts';
 
 const getUserName = (user) => `${user.name || ''} ${user.lastName || ''}`.trim();
 
@@ -109,6 +112,9 @@ function PostContent({ post, sx }) {
 
 function SendMessageSection({ replyTo, onClear, post, onSent }) {
   const [message, setMessage] = useState('');
+  const page = useContext(PageContext);
+  const translations = page.modules.find((x) => x.moduleType === 'translations');
+  // {translations.moduleVariables.Challenges}
 
   async function sendMessage(e) {
     e.preventDefault();
@@ -136,7 +142,7 @@ function SendMessageSection({ replyTo, onClear, post, onSent }) {
       <Box sx={{ display: 'flex', alignItems: 'center' }} id={`message-field-${post.id}`}>
         <TextField
           sx={{ flexGrow: 1 }}
-          label="Post comment"
+          label={translations.moduleVariables['Post comment']}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           InputProps={{
@@ -162,6 +168,10 @@ function SendMessageSection({ replyTo, onClear, post, onSent }) {
 }
 
 function ChallengePostMessage({ message, sx, onReply }) {
+  const page = useContext(PageContext);
+  const translations = page.modules.find((x) => x.moduleType === 'translations');
+  // {translations.moduleVariables.Challenges}
+
   const [refreshLikesTrigger, setRefreshLikesTrigger] = useState(false);
 
   const userName = getUserName(message.user);
@@ -207,7 +217,7 @@ function ChallengePostMessage({ message, sx, onReply }) {
               sx={{ cursor: 'pointer', color: 'rgb(42, 88, 133)', '&:hover': { textDecoration: 'underline' } }}
               onClick={onReply}
             >
-              Reply
+              {translations.moduleVariables.Reply}
             </Box>
             <LikeButton sx={{ ml: 2 }} likeProps={{ messageId: message.id }} onCreated={() => setRefreshLikesTrigger(true)} />
             <LikesArea sx={{ ml: 'auto' }} where={{ messageId: message.id }} refresh={refreshLikesTrigger} onRefreshed={() => setRefreshLikesTrigger(false)} />
@@ -227,6 +237,9 @@ export default function ChallengePost({ post, sx }) {
   const [replyTo, setReplyTo] = useState(null);
   const [totalMessages, setTotalMessages] = useState(0);
   const [refreshLikesTrigger, setRefreshLikesTrigger] = useState(false);
+  const page = useContext(PageContext);
+  const translations = page.modules.find((x) => x.moduleType === 'translations');
+  // {translations.moduleVariables.Challenges}
 
   const userName = getUserName(post.user);
   const time = `${new Date(post.created_at).toLocaleDateString()} ${new Date(post.created_at).toLocaleTimeString()}`;
@@ -250,11 +263,6 @@ export default function ChallengePost({ post, sx }) {
       setMessages([...messages || [], ...items]);
     })();
   }, [messagesPage]);
-
-  function refetchMessages() {
-    setMessages(null);
-    setMessagesPage(-1);
-  }
 
   function onReply(message) {
     setReplyTo(message);
@@ -303,7 +311,7 @@ export default function ChallengePost({ post, sx }) {
       </Box>
       { messages && messages.length < totalMessages && (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button onClick={() => setMessagesPage(messagesPage + 1)}>Load more</Button>
+          <Button onClick={() => setMessagesPage(messagesPage + 1)}>{translations.moduleVariables['Load more']}</Button>
         </Box>
       )}
       <Box sx={{ mt: 3 }}>

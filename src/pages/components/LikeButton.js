@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Box, Menu, MenuItem } from '@mui/material';
 import axios from 'axios';
 import { Likes, LikesContent } from '../../constants/likes';
+import { PageContext } from '../../contexts';
 
 export function LikeButton({ sx, likeProps = {}, onCreated }) {
+  const page = useContext(PageContext);
+  const translations = page.modules.find((x) => x.moduleType === 'translations');
+  // {translations.moduleVariables.Challenges}
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const likes = Object.values(Likes).map((id) => ({
@@ -44,7 +49,7 @@ export function LikeButton({ sx, likeProps = {}, onCreated }) {
         }, sx]}
         onClick={openMenu}
       >
-        Like
+        {translations.moduleVariables.Like}
       </Box>
       <Menu
         anchorEl={anchorEl}

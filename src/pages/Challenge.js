@@ -2,12 +2,8 @@
 /* eslint-disable react/no-danger */
 import React, { useContext, useEffect, useState } from 'react';
 import {
-  Box, Button, CircularProgress, Container,
-  Grid, IconButton,
-  Typography, styled,
+  Box, Button, CircularProgress, Container, Grid, styled,
 } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormHandlerContext, PageContext, SiteContext } from '../contexts';
@@ -50,6 +46,8 @@ export default function ChallengePage() {
   const postAudioForm = page.modules.find((x) => x.moduleType === 'facebook-post-audio-form');
   const postPhotoForm = page.modules.find((x) => x.moduleType === 'facebook-post-photo-form');
   const postVideoForm = page.modules.find((x) => x.moduleType === 'facebook-post-video-form');
+  const translations = page.modules.find((x) => x.moduleType === 'translations');
+
   const [selectedMode, setSelectedMode] = useState('list');
   const [posts, setPosts] = useState(null);
   const [postsPage, setPostsPage] = useState(0);
@@ -95,10 +93,10 @@ export default function ChallengePage() {
   }, [postsPage]);
 
   const buttons = [
-    { text: 'Post text', key: 'text', modules: [postTextForm] },
-    { text: 'Post audio', key: 'audio', modules: [postAudioForm] },
-    { text: 'Post photo', key: 'photo', modules: [postPhotoForm] },
-    { text: 'Post video', key: 'video', modules: [postVideoForm] },
+    { text: translations.moduleVariables['Post text'], key: 'text', modules: [postTextForm] },
+    { text: translations.moduleVariables['Post audio'], key: 'audio', modules: [postAudioForm] },
+    { text: translations.moduleVariables['Post photo'], key: 'photo', modules: [postPhotoForm] },
+    { text: translations.moduleVariables['Post video'], key: 'video', modules: [postVideoForm] },
   ];
 
   const selectedButton = buttons.find((x) => x.key === selectedMode);
@@ -156,7 +154,7 @@ export default function ChallengePage() {
                 <Box sx={{ fontSize: '0.8rem', ml: { xs: 0, md: 6 }, mb: { xs: 0, md: 1.32 }, color: '#4d6376' }}>
                   {totalPosts}
                   {' '}
-                  participants
+                  {translations.moduleVariables.participants}
                 </Box>
               </Box>
               {challenge.content && (
@@ -214,7 +212,7 @@ export default function ChallengePage() {
                 </Box>
                 { posts && posts.length < totalPosts && (
                   <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
-                    <Button onClick={() => setPostsPage(postsPage + 1)}>Load more</Button>
+                    <Button onClick={() => setPostsPage(postsPage + 1)}>{translations.moduleVariables['Load more']}</Button>
                   </Box>
                 )}
               </>

@@ -8,7 +8,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
 import KeyboardArrowDownIcon from '@mui/icons-material/ArrowDownward';
-import { SiteContext, UserContext } from '../../contexts';
+import { PageContext, SiteContext, UserContext } from '../../contexts';
 import LanguageSelector from '../../constants/components/languageSelector';
 import { ThemeProvider } from '../../constants/components/themeProvider';
 import getLocalizedPath from '../../utils/getLocalizedPath';
@@ -16,6 +16,10 @@ import getLocalizedPath from '../../utils/getLocalizedPath';
 const StyledImage = styled('img')({});
 
 export default function Navbar({ large }) {
+  const page = useContext(PageContext);
+  const translations = page.modules.find((x) => x.moduleType === 'translations');
+  // {translations.moduleVariables.Challenges}
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -128,7 +132,6 @@ export default function Navbar({ large }) {
                 >
                   {`${userState[0].name} ${userState[0].lastName}`.trim()}
                 </Box>
-                {/* <UserAvatar user={user} sx={{ ml: { xs: 1, sm: 1.5 } }} /> */}
               </Button>
             </ThemeProvider>
           ) }
@@ -144,10 +147,10 @@ export default function Navbar({ large }) {
             onClose={handleClose}
           >
             <MenuItem onClick={() => navigate(getLocalizedPath(language, '/account'))}>
-              Account
+              {translations.moduleVariables.Account}
             </MenuItem>
             <MenuItem onClick={logout}>
-              Log out
+              {translations.moduleVariables['Log out']}
             </MenuItem>
           </Menu>
         </Container>
@@ -172,7 +175,7 @@ export default function Navbar({ large }) {
                 whiteSpace: 'pre',
               }}
               >
-                {'Let\'s\ncelebrate!'}
+                <div dangerouslySetInnerHTML={{ __html: translations.moduleVariables['Lets celebrate!'] }} />
               </Box>
               <StyledImage
                 src="/logo_large.png"
@@ -208,7 +211,7 @@ export default function Navbar({ large }) {
                 whiteSpace: 'pre',
               }}
               >
-                {'We challenge you to\ncelebrate 50 years\nof TOMRA together!'}
+                <div dangerouslySetInnerHTML={{ __html: translations.moduleVariables['We challenge you to celebrate'] }} />
               </Box>
               <StyledImage
                 src="/logo_large.png"
@@ -222,7 +225,6 @@ export default function Navbar({ large }) {
               />
             </Box>
           )}
-
         </Box>
       </Box>
       {large && (

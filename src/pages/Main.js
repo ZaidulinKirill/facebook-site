@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
   Box, CircularProgress, Container, Divider,
-  Grid, List, ListItemAvatar, ListItemButton,
+  List, ListItemAvatar, ListItemButton,
   ListItemText, Accordion as MuiAccordion, AccordionDetails as MuiAccordionDetails, AccordionSummary as MuiAccordionSummary,
   Typography, styled,
 } from '@mui/material';
@@ -12,7 +12,6 @@ import axios from 'axios';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { PageContext, SiteContext } from '../contexts';
 import getLocalizedPath from '../utils/getLocalizedPath';
-import { PageRenderer } from '../services';
 import { MainText } from './components/MainText';
 
 const StyledImage = styled('img')({});
@@ -60,8 +59,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 export default function MainPage() {
   const page = useContext(PageContext);
   const challengesStore = page.modules.find((x) => x.moduleType === 'challenges');
-  const leftText = page.modules.find((x) => x.moduleType === 'main-left-text');
-  const rightText = page.modules.find((x) => x.moduleType === 'main-right-text');
+  const translations = page.modules.find((x) => x.moduleType === 'translations');
   const [selectedSection, setSelectedSection] = useState(challengesStore.moduleVariables.sections[0].id);
   const [additionalInfo, setAdditionalInfo] = useState(null);
   const navigate = useNavigate();
@@ -127,7 +125,7 @@ export default function MainPage() {
               paddingX: 2,
             }}
           >
-            Challenges
+            {translations.moduleVariables.Challenges}
           </Box>
         </Box>
         <Container maxWidth="md">
@@ -171,7 +169,7 @@ export default function MainPage() {
                                 <Box sx={{ fontSize: '1.2rem' }}>{challenge.name}</Box>
                                 <Box sx={{ mt: 0.3 }}>{challenge.description}</Box>
                                 <Box sx={{ fontSize: '1.1rem', mt: 2, display: 'flex', alignItems: 'center', lineHeight: 1 }}>
-                                  Discover challenge
+                                  {translations.moduleVariables['Discover challenge']}
                                   <KeyboardArrowRightIcon sx={{ fontSize: '1.1rem', color: 'rgb(254, 196, 9)', ml: 0.5 }} />
                                 </Box>
                               </Box>
@@ -186,7 +184,7 @@ export default function MainPage() {
                               }}
                               >
                                 <Box sx={{ fontSize: '2.0rem' }}>{challenge.entries || 0}</Box>
-                                <Box sx={{ fontSize: '0.9rem', color: '#6e8599' }}>participants</Box>
+                                <Box sx={{ fontSize: '0.9rem', color: '#6e8599' }}>{translations.moduleVariables.participants}</Box>
                               </Box>
                             </Box>
                           </ListItemText>

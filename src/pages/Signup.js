@@ -14,6 +14,8 @@ export default function SignupPage() {
   const text = page.modules.find((x) => x.moduleType === 'facebook-signup-text');
   const successText = page.modules.find((x) => x.moduleType === 'facebook-signup-success');
   const form = page.modules.find((x) => x.moduleType === 'facebook-signup-form');
+  const translations = page.modules.find((x) => x.moduleType === 'translations');
+  // {translations.moduleVariables.Challenges}
 
   const submittedUser = useRef();
 
@@ -35,8 +37,8 @@ export default function SignupPage() {
       languageId: language.id,
     });
 
-    setIsSubmitted(true);
     submittedUser.current = item;
+    setIsSubmitted(true);
   };
 
   const withVariables = (item) => (item ? ({
@@ -52,8 +54,8 @@ export default function SignupPage() {
 
   const modules = [
     banner,
-    !isSubmitted ? withVariables(text) : withVariables(successText),
-    !isSubmitted && form,
+    !isSubmitted && withVariables(text),
+    !isSubmitted ? form : withVariables(successText),
   ].filter((x) => !!x);
 
   const pageRenderer = new PageRenderer({ modules, inline: true });
