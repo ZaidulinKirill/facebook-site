@@ -69,7 +69,7 @@ export const TomraText = ({
               </StyledSpan>
             </Box>
           </Box>
-          <Box sx={{ mt: 0, fontSize, overflowY: 'hidden' }}>
+          <Box sx={{ mt: 0, fontSize, overflowY: 'hidden', zIndex: 1 }}>
             <Box
               dangerouslySetInnerHTML={{ __html: text }}
               sx={{ display: 'block', textAlign: alignment }}
