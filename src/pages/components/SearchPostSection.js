@@ -34,7 +34,7 @@ export default function SearchPostSection({ onChange }) {
 
   return (
     <Grid container sx={{ display: 'flex' }}>
-      <Grid item xs={12} md={6} sx={{ order: { xs: 2, md: 1 } }}>
+      <Grid item xs={12} md={6} sx={{ order: { xs: 2, md: 1 }, pt: { xs: 3, md: 0 } }}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', mt: -1.3 }}>
           {filters.map((filter) => (
             <Box
