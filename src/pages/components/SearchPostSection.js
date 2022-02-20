@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Box, Grid, IconButton, InputAdornment,
   TextField,
@@ -6,8 +6,12 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
+import { PageContext } from '../../contexts';
 
 export default function SearchPostSection({ onChange }) {
+  const page = useContext(PageContext);
+  const translations = page.modules.find((x) => x.moduleType === 'translations');
+
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState([]);
 
@@ -65,7 +69,7 @@ export default function SearchPostSection({ onChange }) {
       <Grid item xs={12} md={6} sx={{ order: { xs: 1, md: 2 } }}>
         <form onSubmit={onSubmit}>
           <TextField
-            placeholder="Search for description, name or country"
+            placeholder={translations.moduleVariables['Search placeholder']}
             variant="outlined"
             size="small"
             value={search}
