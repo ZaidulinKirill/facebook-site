@@ -209,7 +209,7 @@ export default function ChallengePage() {
               <NavigationButton label="Next" challenge={nextChallenge} forward />
             )}
           </Box>
-          <Grid container sx={{ mt: 2, mb: 1 }} rowSpacing={2}>
+          <Grid container sx={{ mt: 2, mb: 4 }} rowSpacing={2}>
             {buttons.map((button) => (
               <Grid item key={button.text} xs={6} sm={3} sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Button variant="contained" sx={{ width: '150px' }} onClick={() => setSelectedMode(button.key)}>
