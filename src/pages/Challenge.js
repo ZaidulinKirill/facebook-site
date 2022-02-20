@@ -10,6 +10,7 @@ import { FormHandlerContext, PageContext, SiteContext } from '../contexts';
 import getLocalizedPath from '../utils/getLocalizedPath';
 import { PageRenderer } from '../services';
 import ChallengePost from './components/ChallengePost';
+import SearchPostSection from './components/SearchPostSection';
 
 const Avatar = styled('img')(() => ({
   width: '40px',
@@ -56,6 +57,7 @@ export default function ChallengePage() {
   const [posts, setPosts] = useState(null);
   const [postsPage, setPostsPage] = useState(0);
   const [totalPosts, setTotalPosts] = useState(0);
+  const [filters, setFilters] = useState([]);
 
   const { id: challengeId } = useParams();
 
@@ -74,7 +76,7 @@ export default function ChallengePage() {
     setPosts(null);
     setPostsPage(-1);
     setSelectedMode('list');
-  }, [challengeId]);
+  }, [challengeId, filters]);
 
   useEffect(() => {
     (async () => {
@@ -88,6 +90,7 @@ export default function ChallengePage() {
           challengeId: challenge.id.toString(),
           offset: postsPage * POSTS_PER_PAGE,
           limit: POSTS_PER_PAGE,
+          filters: filters.map((x) => x.value).join(','),
         },
       });
 
@@ -97,11 +100,11 @@ export default function ChallengePage() {
   }, [postsPage]);
 
   const buttons = [
-    { text: translations.moduleVariables['Post text'], key: 'text', modules: [postTextForm] },
-    { text: translations.moduleVariables['Post audio'], key: 'audio', modules: [postAudioForm] },
-    { text: translations.moduleVariables['Post photo'], key: 'photo', modules: [postPhotoForm] },
-    { text: translations.moduleVariables['Post video'], key: 'video', modules: [postVideoForm] },
-  ];
+    challenge.isPostTextEnabled && { text: translations.moduleVariables['Post text'], key: 'text', modules: [postTextForm] },
+    challenge.isPostAudioEnabled && { text: translations.moduleVariables['Post audio'], key: 'audio', modules: [postAudioForm] },
+    challenge.isPostPhotoEnabled && { text: translations.moduleVariables['Post photo'], key: 'photo', modules: [postPhotoForm] },
+    challenge.isPostVideoEnabled && { text: translations.moduleVariables['Post video'], key: 'video', modules: [postVideoForm] },
+  ].filter((x) => !!x);
 
   const selectedButton = buttons.find((x) => x.key === selectedMode);
 
@@ -206,7 +209,7 @@ export default function ChallengePage() {
               <NavigationButton label="Next" challenge={nextChallenge} forward />
             )}
           </Box>
-          <Grid container sx={{ mt: 2 }} rowSpacing={2}>
+          <Grid container sx={{ mt: 2, mb: 1 }} rowSpacing={2}>
             {buttons.map((button) => (
               <Grid item key={button.text} xs={6} sm={3} sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Button variant="contained" sx={{ width: '150px' }} onClick={() => setSelectedMode(button.key)}>
@@ -215,6 +218,7 @@ export default function ChallengePage() {
               </Grid>
             ))}
           </Grid>
+          <SearchPostSection onChange={setFilters} />
           {selectedMode === 'list' ? (
             posts ? (
               <>
