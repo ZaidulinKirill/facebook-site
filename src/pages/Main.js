@@ -180,7 +180,7 @@ export default function MainPage() {
                   <Typography sx={{ flexGrow: 1, pl: 1, fontSize: '1.2rem' }}>
                     {section.name}
                   </Typography>
-                  <Typography sx={{ color: 'text.secondary', fontSize: '0.9rem' }}>28 February</Typography>
+                  <Typography sx={{ color: 'text.secondary', fontSize: '0.9rem' }}>{section.date}</Typography>
                 </AccordionSummary>
                 <AccordionDetails sx={{ py: 0, px: 0 }}>
                   <List sx={{ py: 0, backgroundColor: 'rgb(9, 22, 41)', color: 'white', mx: 2, borderRadius: 1 }}>
@@ -204,8 +204,8 @@ export default function MainPage() {
                           <ListItemText sx={{ ml: { sm: 5 }, mt: { xs: 2, sm: 0 } }}>
                             <Box sx={{ display: 'flex' }}>
                               <Box sx={{ flex: 1 }}>
-                                <Box sx={{ fontSize: '1.2rem' }}>Music Maestro</Box>
-                                <Box sx={{ mt: 0.3 }}>Everyone has a favourite song to party to! We want to know yours.</Box>
+                                <Box sx={{ fontSize: '1.2rem' }}>{challenge.name}</Box>
+                                <Box sx={{ mt: 0.3 }}>{challenge.description}</Box>
                                 <Box sx={{ fontSize: '1.1rem', mt: 2, display: 'flex', alignItems: 'center', lineHeight: 1 }}>
                                   Discover challenge
                                   <KeyboardArrowRightIcon sx={{ fontSize: '1.1rem', color: 'rgb(254, 196, 9)', ml: 0.5 }} />

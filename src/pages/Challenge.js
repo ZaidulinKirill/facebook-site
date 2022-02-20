@@ -197,11 +197,6 @@ export default function ChallengePage() {
               <NavigationButton label="Next" challenge={nextChallenge} forward />
             )}
           </Box>
-          {challenge.description && (
-            <Box>
-              <div dangerouslySetInnerHTML={{ __html: challenge.content }} />
-            </Box>
-          )}
           <Grid container sx={{ mt: 2 }} rowSpacing={2}>
             {buttons.map((button) => (
               <Grid item key={button.text} xs={6} sm={3} sx={{ display: 'flex', justifyContent: 'center' }}>
