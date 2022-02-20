@@ -36,6 +36,8 @@ export default function Navbar({ large }) {
   };
 
   const logout = async () => {
+    handleClose();
+
     await axios.post('/api/auth/logout');
     window.location.reload();
   };
@@ -146,7 +148,7 @@ export default function Navbar({ large }) {
             aria-labelledby="account-button"
             onClose={handleClose}
           >
-            <MenuItem onClick={() => navigate(getLocalizedPath(language, '/account'))}>
+            <MenuItem onClick={() => { handleClose(); navigate(getLocalizedPath(language, '/account')); }}>
               {translations.moduleVariables.Account}
             </MenuItem>
             <MenuItem onClick={logout}>
