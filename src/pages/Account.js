@@ -11,6 +11,7 @@ export default function AccountPage() {
   const page = useContext(PageContext);
   const { site: { language } } = useContext(SiteContext);
   const [user] = useContext(UserContext);
+  const translations = page.modules.find((x) => x.moduleType === 'translations');
 
   const form = page.modules.find((x) => x.moduleType === 'facebook-signup-form');
 
@@ -39,11 +40,24 @@ export default function AccountPage() {
         // backgroundColor: null,
         'Main form': form.moduleVariables['Main form']
           .filter((x) => x.type !== 'form-checkbox-field')
-          .map((x) => (x.name === 'password' ? {
-            ...x,
-            required: false,
-            autoComplete: 'new-password',
-          } : x)),
+          .map((field) => {
+            if (field.name === 'password') {
+              return {
+                ...field,
+                required: false,
+                autoComplete: 'new-password',
+              };
+            }
+
+            if (field.type === 'form-submit-button') {
+              return {
+                ...field,
+                label: translations.moduleVariables.Save,
+              };
+            }
+
+            return field;
+          }),
       },
     },
   ];
