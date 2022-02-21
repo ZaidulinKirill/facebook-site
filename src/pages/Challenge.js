@@ -218,10 +218,10 @@ export default function ChallengePage() {
               </Grid>
             ))}
           </Grid>
-          <SearchPostSection onChange={setFilters} />
           {selectedMode === 'list' ? (
             posts ? (
-              <>
+              <Box sx={{ minHeight: '400px' }}>
+                <SearchPostSection onChange={setFilters} />
                 <Box sx={{ my: 5 }}>
                   {posts.map((post) => <ChallengePost key={post.id} post={post} sx={{ mb: 2 }} />)}
                 </Box>
@@ -230,7 +230,7 @@ export default function ChallengePage() {
                     <Button onClick={() => setPostsPage(postsPage + 1)}>{translations.moduleVariables['Load more']}</Button>
                   </Box>
                 )}
-              </>
+              </Box>
             ) : (
               <Box sx={{ pt: 8, display: 'flex', justifyContent: 'center' }}>
                 <CircularProgress />
