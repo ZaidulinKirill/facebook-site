@@ -31,6 +31,10 @@ export default function LoginPage() {
       throw new Error(translations.moduleVariables['Wrong email format']);
     }
 
+    if (!item.email.trim().endsWith('@tomra.com')) {
+      throw new Error(translations.moduleVariables['Wrong email domain']);
+    }
+
     const { data: { isExists } } = await axios.post('/api/auth/check-user', { email: item.email, siteId });
     setUser({ siteId, ...item });
 
