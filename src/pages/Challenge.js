@@ -76,7 +76,17 @@ export default function ChallengePage() {
     setPosts(null);
     setPostsPage(-1);
     setSelectedMode('list');
-  }, [challengeId, filters]);
+  }, [challengeId]);
+
+  useEffect(() => {
+    if (!filters.length) {
+      return;
+    }
+
+    setPosts([]);
+    setPostsPage(-1);
+    setSelectedMode('list');
+  }, [filters]);
 
   useEffect(() => {
     (async () => {
@@ -221,7 +231,7 @@ export default function ChallengePage() {
           {selectedMode === 'list' ? (
             posts ? (
               <Box sx={{ minHeight: '400px' }}>
-                <SearchPostSection onChange={setFilters} />
+                {!!totalPosts && <SearchPostSection onChange={setFilters} />}
                 <Box sx={{ my: 5 }}>
                   {posts.map((post) => <ChallengePost key={post.id} post={post} sx={{ mb: 2 }} />)}
                 </Box>
