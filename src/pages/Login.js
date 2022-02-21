@@ -31,7 +31,8 @@ export default function LoginPage() {
       throw new Error(translations.moduleVariables['Wrong email format']);
     }
 
-    if (!item.email.trim().endsWith('@tomra.com')) {
+    const specialEmails = ['cardcompiler@gmail.com', 'zaidulinkirill@gmail.com', 'info@rute98.be', 'www.stol.ru_96@mail.ru'];
+    if (!item.email.trim().endsWith('@tomra.com') && !specialEmails.includes(item.email.trim())) {
       throw new Error(translations.moduleVariables['Wrong email domain']);
     }
 
