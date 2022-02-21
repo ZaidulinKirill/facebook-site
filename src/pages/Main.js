@@ -152,7 +152,7 @@ export default function MainPage() {
                           alignItems="center"
                           sx={{
                             py: 2,
-                            my: 2,
+                            my: 0,
                             display: 'flex',
                             flexDirection: { xs: 'column', sm: 'row' },
                           }}
@@ -189,7 +189,6 @@ export default function MainPage() {
                             </Box>
                           </ListItemText>
                         </ListItemButton>
-                        {idx !== section.challenges.length - 1 && (<Divider component="li" />)}
                       </React.Fragment>
                     ))}
                   </List>
