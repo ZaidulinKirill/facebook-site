@@ -4,7 +4,7 @@ import React, {
   memo, useContext, useEffect, useState,
 } from 'react';
 import {
-  Box, Button, CircularProgress, IconButton, TextField,
+  Box, Button, CircularProgress, IconButton, TextField, Typography,
 } from '@mui/material';
 import fontColorContrast from 'font-color-contrast';
 import SendIcon from '@mui/icons-material/Send';
@@ -12,6 +12,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 import axios from 'axios';
 import moment from 'moment';
 import ReactPlayer from 'react-player';
+import { styled } from '@mui/material/styles';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import UserAvatar from '../../components/UserAvatar';
 import { LikeButton } from './LikeButton';
 import { LikesArea } from './LikesArea';
@@ -110,6 +113,18 @@ function PostContent({ post, sx }) {
   );
 }
 
+const HtmlTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: 'white',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: '1px solid #dadde9',
+  },
+}));
+
 function SendMessageSection({ replyTo, onClear, post, onSent }) {
   const [message, setMessage] = useState('');
   const page = useContext(PageContext);
@@ -170,7 +185,6 @@ function SendMessageSection({ replyTo, onClear, post, onSent }) {
 function ChallengePostMessage({ message, sx, onReply }) {
   const page = useContext(PageContext);
   const translations = page.modules.find((x) => x.moduleType === 'translations');
-  // {translations.moduleVariables.Challenges}
 
   const [refreshLikesTrigger, setRefreshLikesTrigger] = useState(false);
 
@@ -191,6 +205,18 @@ function ChallengePostMessage({ message, sx, onReply }) {
             <Box component="span" sx={{ fontWeight: '500' }}>
               {userName}
             </Box>
+            <HtmlTooltip
+              placement="right"
+              title={(
+                <Box sx={{ p: 0.2, display: 'flex', flexDirection: 'column' }}>
+                  {message.user.position && <Box>{message.user.position}</Box>}
+                  {message.user.department && <Box>{message.user.department}</Box>}
+                  {message.user.country && <Box>{message.user.country}</Box>}
+                </Box>
+              )}
+            >
+              <HelpOutlineOutlinedIcon sx={{ ml: 1, cursor: 'pointer', fontSize: '20px', opacity: 0.6 }} />
+            </HtmlTooltip>
             <Box component="span" sx={{ ml: 'auto', fontSize: 'smaller', display: { xs: 'none', sm: 'inline' } }}>
               {time}
             </Box>
