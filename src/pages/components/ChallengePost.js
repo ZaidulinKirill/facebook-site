@@ -315,7 +315,7 @@ export default function ChallengePost({ post, sx }) {
             {time}
           </Box>
         </Box>
-        <Box sx={{ ml: 'auto', display: 'flex', flexDirection: 'column', lineHeight: 1.1, opacity: 0.8 }}>
+        <Box sx={{ ml: 'auto', display: 'flex', flexDirection: 'column', lineHeight: 1.2, opacity: 0.7, textAlign: 'right' }}>
           {post.user.position && <Box>{post.user.position}</Box>}
           {post.user.department && <Box>{post.user.department}</Box>}
           {post.user.country && <Box>{post.user.country}</Box>}
