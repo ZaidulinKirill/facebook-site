@@ -239,7 +239,6 @@ export default function ChallengePost({ post, sx }) {
   const [refreshLikesTrigger, setRefreshLikesTrigger] = useState(false);
   const page = useContext(PageContext);
   const translations = page.modules.find((x) => x.moduleType === 'translations');
-  // {translations.moduleVariables.Challenges}
 
   const userName = getUserName(post.user);
   const time = `${new Date(post.created_at).toLocaleDateString()} ${new Date(post.created_at).toLocaleTimeString()}`;
@@ -289,6 +288,11 @@ export default function ChallengePost({ post, sx }) {
           <Box sx={{ fontSize: 'smaller' }}>
             {time}
           </Box>
+        </Box>
+        <Box sx={{ ml: 'auto', display: 'flex', flexDirection: 'column', lineHeight: 1.1, opacity: 0.8 }}>
+          {post.user.position && <Box>{post.user.position}</Box>}
+          {post.user.department && <Box>{post.user.department}</Box>}
+          {post.user.country && <Box>{post.user.country}</Box>}
         </Box>
       </Box>
       <MemoizedPostContent sx={{ mt: 1 }} post={post} />
