@@ -231,7 +231,7 @@ export default function ChallengePage() {
           {selectedMode === 'list' ? (
             posts ? (
               <Box sx={{ minHeight: '400px' }}>
-                {!!totalPosts && <SearchPostSection onChange={setFilters} />}
+                {(totalPosts > 0 || filters.length > 0) && <SearchPostSection onChange={setFilters} />}
                 <Box sx={{ my: 5 }}>
                   {posts.map((post) => <ChallengePost key={post.id} post={post} sx={{ mb: 2 }} />)}
                 </Box>
