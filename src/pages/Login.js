@@ -32,7 +32,7 @@ export default function LoginPage() {
     }
 
     const specialEmails = ['cardcompiler@gmail.com', 'zaidulinkirill@gmail.com', 'info@rute98.be', 'www.stol.ru_96@mail.ru'];
-    if (!item.email.trim().endsWith('@tomra.com') && !specialEmails.includes(item.email.trim())) {
+    if (!item.email.trim().endsWith('@tomra.com') && !item.email.trim().endsWith('@pinkpinata.be') && !specialEmails.includes(item.email.trim())) {
       throw new Error(translations.moduleVariables['Wrong email domain']);
     }
 
