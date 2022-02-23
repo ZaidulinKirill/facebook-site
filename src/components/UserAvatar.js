@@ -30,11 +30,17 @@ function stringAvatar(name) {
   };
 }
 
-export default function UserAvatar({ user, sx }) {
+const defaultStyle = { width: 48, height: 48, backgroundColor: 'white' };
+
+export default function UserAvatar({ user, sx, src }) {
+  if (src) {
+    return <Avatar src={src} sx={[defaultStyle, sx]} />;
+  }
+
   if (user.avatarId) {
-    return <Avatar src={`/api/uploads/w_100/${user.avatarId}`} sx={{ ...sx }} />;
+    return <Avatar src={`/api/uploads/w_100/${user.avatarId}`} sx={[defaultStyle, sx]} />;
   }
 
   const { sx: avatarSx, ...props } = stringAvatar(`${user.name} ${user.lastName} `.trim());
-  return <Avatar {...props} sx={{ ...sx, ...avatarSx }} />;
+  return <Avatar {...props} sx={[defaultStyle, { ...sx, ...avatarSx }]} />;
 }

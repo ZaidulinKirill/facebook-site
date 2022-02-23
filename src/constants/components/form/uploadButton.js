@@ -13,8 +13,10 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import isMobile from 'is-mobile';
+// import ReactCrop from 'react-image-crop';
 import { FormContext } from '../../../contexts';
 import { ValidatorElement } from './validator';
+import UserAvatar from '../../../components/UserAvatar';
 
 const isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
 
@@ -54,6 +56,7 @@ export const UploadButton = ({
 
     const { isSaving } = useContext(FormContext);
     const [resultUrl, setResultUrl] = useState(false);
+    // const [isCropDialogOpened, setIsCropDialogOpened] = useState(false);
     const [isWebcamDialogOpened, setIsWebcamDialogOpened] = useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -178,9 +181,15 @@ export const UploadButton = ({
                   )
               }
               {resultUrl && (
-                <Button onClick={downloadBlob} sx={{ ml: 1 }}>
-                  {downloadFileLabel}
-                </Button>
+                props.name === 'avatarId' ? (
+                  <Box sx={{ mx: 1 }}>
+                    <UserAvatar src={resultUrl} />
+                  </Box>
+                ) : (
+                  <Button onClick={downloadBlob} sx={{ ml: 1 }}>
+                    {downloadFileLabel}
+                  </Button>
+                )
               )}
               {resultUrl && (
                 <IconButton onClick={onReset} sx={{ ml: 0, p: 0.6 }}>
@@ -246,6 +255,21 @@ export const UploadButton = ({
             </Button>
           </DialogActions>
         </Dialog>
+        {/* <Dialog
+          open={isCropDialogOpened}
+        >
+          <Box>
+            <ReactCrop src={resultUrl} />
+          </Box>
+          <DialogActions>
+            <Button onClick={() => setIsWebcamDialogOpened(false)}>
+              Cancel
+            </Button>
+            <Button onClick={onStopRecordingPressed} variant="contained">
+              OK
+            </Button>
+          </DialogActions>
+        </Dialog> */}
       </ThemeProvider>
     );
   } catch (err) {

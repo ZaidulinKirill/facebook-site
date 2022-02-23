@@ -199,7 +199,7 @@ function ChallengePostMessage({ message, sx, onReply }) {
     }}
     >
       <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-        <UserAvatar user={message.user} sx={{ mr: 2, width: 48, height: 48 }} />
+        <UserAvatar user={message.user} sx={{ mr: 2 }} />
         <Box sx={{ fontSize: { xs: '0.85rem', sm: '0.9rem' }, flexGrow: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Box component="span" sx={{ fontWeight: '500' }}>
