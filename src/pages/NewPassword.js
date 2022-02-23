@@ -10,7 +10,7 @@ import { MainText } from './components/MainText';
 export default function NewPasswordPage() {
   const page = useContext(PageContext);
   const { site: { language } } = useContext(SiteContext);
-  const form = page.modules.find((x) => x.moduleType === 'password-recovery-form');
+  const form = page.modules.find((x) => x.moduleType === 'new-password-form');
   const [searchParams] = useSearchParams();
   const translations = page.modules.find((x) => x.moduleType === 'translations');
 
