@@ -81,7 +81,7 @@ export class PageRenderer {
       }
 
       body {
-        background: rgb(236, 177, 189);
+        
       }
 
       body #root { 

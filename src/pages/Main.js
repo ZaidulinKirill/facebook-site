@@ -91,7 +91,7 @@ export default function MainPage() {
   }));
 
   return (
-    <Box sx={{ background: 'white' }}>
+    <Box>
       <MainText />
       <Box sx={{ pt: 7, pb: 10, backgroundColor: 'rgb(248, 163, 188)', position: 'relative', overflow: 'hidden' }}>
         <Box sx={{
