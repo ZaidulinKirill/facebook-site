@@ -30,7 +30,7 @@ export const TomraText = ({
     }}
     >
       <StyledImage
-        src="/tomra_background_0_pink.svg"
+        src="/tomra_background_pink.svg"
         alt="bg"
         sx={{
           height: '1500%',
