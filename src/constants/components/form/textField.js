@@ -18,6 +18,10 @@ export const TextField = ({ fullWidth = true, required, ...props }) => {
       return [];
     }
 
+    if (!required && isPassword) {
+      return ['minStringLength:10', 'matchRegexp:[a-z]', 'matchRegexp:[A-Z]', 'matchRegexp:[^a-zA-Z]'];
+    }
+
     if (!isPassword || !isSignupPage) {
       return ['required'];
     }
@@ -26,8 +30,17 @@ export const TextField = ({ fullWidth = true, required, ...props }) => {
   }, [isPassword, required, isSignupPage]);
 
   const errorMessages = useMemo(() => {
-    if (!required) {
+    if (!required && !isPassword) {
       return [];
+    }
+
+    if (!required && isPassword) {
+      return [
+        translations.moduleVariables['[Error] Min password length'],
+        translations.moduleVariables['[Error] Password should contain upper and lower letters'],
+        translations.moduleVariables['[Error] Password should contain upper and lower letters'],
+        translations.moduleVariables['[Error] Password should contain special symbols'],
+      ];
     }
 
     if (!isPassword || !isSignupPage) {
