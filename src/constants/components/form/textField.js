@@ -14,7 +14,7 @@ export const TextField = ({ fullWidth = true, required, ...props }) => {
   const isSignupPage = ['/signup', '/account'].includes(location.pathname);
 
   const validators = useMemo(() => {
-    if (!required) {
+    if (!required && !isPassword) {
       return [];
     }
 
