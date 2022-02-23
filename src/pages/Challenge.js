@@ -34,7 +34,7 @@ function NavigationButton({ label, forward, challenge }) {
         }}
         onClick={() => navigate(getLocalizedPath(language, `/${challenge.id}`))}
       >
-        {!forward && <StyledImage sx={{ width: '28px', height: 'auto' }} src="/arrow_left.svg" alt="left" width={10} height={24} />}
+        {!forward && <StyledImage sx={{ width: '28px', height: 'auto', mt: '5px' }} src="/arrow_left.svg" alt="left" width={10} height={24} />}
         <Box sx={{
           fontSize: { xs: '1.5rem' },
           fontWeight: '400',
@@ -54,7 +54,7 @@ function NavigationButton({ label, forward, challenge }) {
           {label}
           <Box component="span" sx={{ fontSize: { xs: '1rem' } }}>{challenge.name}</Box>
         </Box>
-        {forward && <StyledImage sx={{ width: '28px', height: 'auto' }} src="/arrow_right.svg" alt="left" width={10} height={24} />}
+        {forward && <StyledImage sx={{ width: '28px', height: 'auto', mt: '5px' }} src="/arrow_right.svg" alt="left" width={10} height={24} />}
       </Button>
     </Box>
   );
