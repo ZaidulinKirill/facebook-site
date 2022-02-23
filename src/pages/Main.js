@@ -144,7 +144,7 @@ export default function MainPage() {
                   </Typography>
                   <Typography sx={{ color: 'text.secondary', fontSize: '0.9rem' }}>{section.date}</Typography>
                 </AccordionSummary>
-                <AccordionDetails sx={{ py: 0, px: 0 }}>
+                <AccordionDetails sx={{ py: 0, px: 0, pb: '12px' }}>
                   <List sx={{ py: 0, backgroundColor: 'rgb(9, 22, 41)', color: 'white', mx: 2, borderRadius: 1 }}>
                     {section.challenges.map((challenge, idx) => (
                       <React.Fragment key={challenge.id}>
