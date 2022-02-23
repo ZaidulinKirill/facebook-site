@@ -38,7 +38,7 @@ export default function UserAvatar({ user, sx, src }) {
   }
 
   if (user.avatarId) {
-    return <Avatar src={`/api/uploads/w_100/${user.avatarId}`} sx={[defaultStyle, sx]} />;
+    return <Avatar src={`/api/uploads/w_100/${user.avatarId}.png`} sx={[defaultStyle, sx]} />;
   }
 
   const { sx: avatarSx, ...props } = stringAvatar(`${user.name} ${user.lastName} `.trim());
