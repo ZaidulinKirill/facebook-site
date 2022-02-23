@@ -45,9 +45,9 @@ function NavigationButton({ label, forward, challenge }) {
           color: 'black',
           alignItems: forward ? 'flex-end' : 'flex-start',
           ...forward ? {
-            mr: 1,
+            mr: 1.35,
           } : {
-            ml: 1,
+            ml: 1.35,
           },
         }}
         >
