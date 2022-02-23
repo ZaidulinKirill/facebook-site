@@ -16,7 +16,7 @@ export const TomraText = ({
   header,
   fontSize,
 }) => (
-  <Box sx={{ backgroundColor: 'rgb(236, 177, 189)', position: 'relative', overflow: 'hidden' }}>
+  <Box sx={{ py: 7, backgroundColor: 'rgb(236, 177, 189)', position: 'relative', overflow: 'hidden' }}>
     <Box sx={{
       position: 'absolute',
       right: 0,
@@ -25,7 +25,7 @@ export const TomraText = ({
       height: '100%',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-end',
       pointerEvents: 'none',
     }}
     >
