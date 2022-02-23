@@ -6,6 +6,8 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { FormHandlerContext, PageContext, SiteContext } from '../contexts';
 import getLocalizedPath from '../utils/getLocalizedPath';
 import { PageRenderer } from '../services';
@@ -27,18 +29,33 @@ function NavigationButton({ label, forward, challenge }) {
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <Button
         sx={{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+        onClick={() => navigate(getLocalizedPath(language, `/${challenge.id}`))}
+      >
+        {!forward && <StyledImage sx={{ width: '28px', height: 'auto' }} src="/arrow_left.svg" alt="left" width={10} height={24} />}
+        <Box sx={{
           fontSize: { xs: '1.5rem' },
           fontWeight: '400',
           lineHeight: 1.6,
           textTransform: 'none',
           display: 'flex',
           flexDirection: 'column',
+          color: 'black',
           alignItems: forward ? 'flex-end' : 'flex-start',
+          ...forward ? {
+            mr: 1,
+          } : {
+            ml: 1,
+          },
         }}
-        onClick={() => navigate(getLocalizedPath(language, `/${challenge.id}`))}
-      >
-        {label}
-        <Box component="span" sx={{ fontSize: { xs: '1rem' } }}>{challenge.name}</Box>
+        >
+          {label}
+          <Box component="span" sx={{ fontSize: { xs: '1rem' } }}>{challenge.name}</Box>
+        </Box>
+        {forward && <StyledImage sx={{ width: '28px', height: 'auto' }} src="/arrow_right.svg" alt="left" width={10} height={24} />}
+        {/* <KeyboardArrowRight sx={{ fontSize: '4rem' }} /> */}
       </Button>
     </Box>
   );
@@ -209,16 +226,18 @@ export default function ChallengePage() {
         </Container>
       </Box>
       <Box sx={{ backgroundColor: 'rgba(250, 213, 73, 0.025)' }}>
-        <Container maxWidth="md">
+        <Container maxWidth="xl">
           <Box sx={{ display: 'flex', mt: 2 }}>
             {prevChallenge && (
-              <NavigationButton label="Previous" challenge={prevChallenge} />
+              <NavigationButton label={translations.moduleVariables.Previous || 'Previous '} challenge={prevChallenge} />
             )}
             <Box sx={{ flexGrow: 1 }} />
             {nextChallenge && (
-              <NavigationButton label="Next" challenge={nextChallenge} forward />
+              <NavigationButton label={translations.moduleVariables.Next || 'Next'} challenge={nextChallenge} forward />
             )}
           </Box>
+        </Container>
+        <Container maxWidth="md">
           <Grid container sx={{ mt: 2, mb: 4 }} rowSpacing={2}>
             {buttons.map((button) => (
               <Grid item key={button.text} xs={6} sm={3} sx={{ display: 'flex', justifyContent: 'center' }}>
