@@ -15,18 +15,23 @@ export default function NewPasswordPage() {
   const translations = page.modules.find((x) => x.moduleType === 'translations');
 
   const onSubmit = async ({ siteId, ...item }) => {
-    if (item.password !== item['confirm-password']) {
-      throw new Error(translations.moduleVariables['[Error] Passwords do not match'] || 'Passwords do not match');
+    try {
+      if (item.password !== item['confirm-password']) {
+        throw new Error(translations.moduleVariables['[Error] Passwords do not match'] || 'Passwords do not match');
+      }
+
+      await axios.post('/api/auth/password-recovery-confirm', {
+        tokenId: searchParams.get('t'),
+        password: item.password,
+        siteId,
+        languageId: language.id,
+      });
+
+      window.location.href = '/';
+    } catch (err) {
+      // eslint-disable-next-line no-alert
+      alert('Link expired');
     }
-
-    await axios.post('/api/auth/password-recovery-confirm', {
-      tokenId: searchParams.get('t'),
-      password: item.password,
-      siteId,
-      languageId: language.id,
-    });
-
-    window.location.href = '/';
   };
 
   const modules = [

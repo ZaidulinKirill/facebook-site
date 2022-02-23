@@ -1,7 +1,7 @@
 import React from 'react';
 import { ValidatorComponent } from 'react-material-ui-form-validator';
 import { Box } from '@mui/material';
-import { FormContext } from '../../../contexts';
+import { FormContext, PageContext } from '../../../contexts';
 
 export class ValidatorElement extends ValidatorComponent {
   renderValidatorComponent() {
@@ -15,13 +15,17 @@ export class ValidatorElement extends ValidatorComponent {
     }
 
     return (
-      <FormContext.Consumer>
-        {({ form }) => (
-          <Box sx={{ color: 'var(--error-color)', mt: 0.3 }}>
-            {form.fields.requiredFieldMessage }
-          </Box>
-        )}
-      </FormContext.Consumer>
+      <PageContext.Consumer>
+        {({ page }) => {
+          const translations = page.modules.find((x) => x.moduleType === 'translations');
+
+          return (
+            <Box sx={{ color: 'var(--error-color)', mt: 0.3 }}>
+              {translations.moduleVariables['[Error] Required']}
+            </Box>
+          );
+        }}
+      </PageContext.Consumer>
     );
   }
 }
