@@ -98,10 +98,10 @@ export default function Navbar({ large }) {
             }}
           />
         </Box>
-        <Container maxWidth="xl" sx={{ display: 'flex', justifyContent: 'center', zIndex: 1 }}>
+        <Container maxWidth="xl" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1 }}>
           {userState[0] && (
             <Link to="/" style={{ alignItems: 'center' }}>
-              <StyledImage src="/logo.png" sx={{ display: { xs: 'none', sm: 'flex' }, width: { xs: '50px', sm: '80px' }, height: 'auto', justifySelf: 'flex-start' }} width={400} height={301} />
+              <StyledImage src="/tomra_logo_white.png" sx={{ display: { xs: 'none', sm: 'flex' }, width: { xs: '50px', sm: '150px' }, height: 'auto', justifySelf: 'flex-start' }} width={400} height={301} />
             </Link>
           )}
           {userState[0] && (
