@@ -80,6 +80,10 @@ export class PageRenderer {
         height: 100%;
       }
 
+      body {
+        background: rgb(236, 177, 189);
+      }
+
       body #root { 
         font-family: '${this.fontId}'; 
       }
