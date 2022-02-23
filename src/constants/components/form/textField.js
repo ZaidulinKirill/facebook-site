@@ -19,7 +19,7 @@ export const TextField = ({ fullWidth = true, required, ...props }) => {
     }
 
     if (!required && isPassword) {
-      return ['minStringLength:10', 'matchRegexp:[a-z]', 'matchRegexp:[A-Z]', 'matchRegexp:[^a-zA-Z]'];
+      return [];
     }
 
     if (!isPassword || !isSignupPage) {
@@ -35,12 +35,7 @@ export const TextField = ({ fullWidth = true, required, ...props }) => {
     }
 
     if (!required && isPassword) {
-      return [
-        translations.moduleVariables['[Error] Min password length'],
-        translations.moduleVariables['[Error] Password should contain upper and lower letters'],
-        translations.moduleVariables['[Error] Password should contain upper and lower letters'],
-        translations.moduleVariables['[Error] Password should contain special symbols'],
-      ];
+      return [];
     }
 
     if (!isPassword || !isSignupPage) {
