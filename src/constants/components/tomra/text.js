@@ -38,7 +38,7 @@ export const TomraText = ({
         }}
       />
     </Box>
-    <Container maxWidth={size} sx={{ mt: marginTop, zIndex: 1 }}>
+    <Container maxWidth={size} sx={{ mt: '32px', zIndex: 1 }}>
       <Box id={id} sx={{ display: 'flex', justifyContent: alignment }}>
         <Box
           sx={{
