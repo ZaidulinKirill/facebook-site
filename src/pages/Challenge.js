@@ -205,7 +205,7 @@ export default function ChallengePage() {
             </Grid>
             <Grid item xs={12} md={6}>
               {challenge.instruction && (
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', mt: { xs: 4, md: 0 } }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center', mt: { xs: 4, md: 0 } }}>
                   <Box sx={{
                     borderRadius: 1,
                     backgroundColor: 'rgb(223, 19, 73)',
