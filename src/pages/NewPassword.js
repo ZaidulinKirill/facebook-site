@@ -15,7 +15,7 @@ export default function NewPasswordPage() {
   const translations = page.modules.find((x) => x.moduleType === 'translations');
 
   const onSubmit = async ({ siteId, ...item }) => {
-    if (item.password !== item.passwordConfirm) {
+    if (item.password !== item['confirm-password']) {
       throw new Error(translations.moduleVariables['[Error] Passwords do not match'] || 'Passwords do not match');
     }
 
