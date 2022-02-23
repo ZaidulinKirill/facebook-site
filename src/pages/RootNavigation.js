@@ -20,6 +20,8 @@ import MainPage from './Main';
 import ChallengePage from './Challenge';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import PasswordRecoveryPage from './PasswordRecovery';
+import NewPasswordPage from './NewPassword';
 
 export default function RootNavigation({ page }) {
   const userState = useState(null);
@@ -31,13 +33,13 @@ export default function RootNavigation({ page }) {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const isNavbarEnabled = true; //! ['/login', '/signup', '/password'].includes(location?.pathname);
+  const isNavbarEnabled = true;
   const islargeNavbarEnabled = ['/'].includes(location?.pathname);
 
   useEffect(() => {
     (async () => {
       const user = await axios.get(`/api/auth?userId=${siteId}`);
-      if (!user.data) {
+      if (!user.data && !['/new-password'].includes(location?.pathname)) {
         navigate(getLocalizedPath(language, '/login'));
       }
 
@@ -62,6 +64,16 @@ export default function RootNavigation({ page }) {
         caseSensitive={false}
         path="password"
         element={<PasswordPage />}
+      />
+      <Route
+        caseSensitive={false}
+        path="password-recovery"
+        element={<PasswordRecoveryPage />}
+      />
+      <Route
+        caseSensitive={false}
+        path="new-password"
+        element={<NewPasswordPage />}
       />
       <Route
         caseSensitive={false}
