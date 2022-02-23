@@ -225,7 +225,7 @@ export default function ChallengePage() {
         </Container>
       </Box>
       <Box sx={{ backgroundColor: 'rgba(250, 213, 73, 0.025)' }}>
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
           <Box sx={{ display: 'flex', mt: 2 }}>
             {prevChallenge && (
               <NavigationButton label={translations.moduleVariables.Previous || 'Previous '} challenge={prevChallenge} />
