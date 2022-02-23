@@ -71,7 +71,7 @@ export default function Navbar({ large }) {
           position: 'relative',
           overflow: 'hidden',
         } : {
-          height: { xs: 'auto', sm: '350px' },
+          height: { xs: 'auto', sm: '375px' },
           overflow: 'hidden',
           position: 'relative',
         },
@@ -196,7 +196,7 @@ export default function Navbar({ large }) {
               width: '300px',
               position: 'relative',
               ml: '50%',
-              mt: '70px',
+              mt: '50px',
             }}
             >
               <Box sx={{

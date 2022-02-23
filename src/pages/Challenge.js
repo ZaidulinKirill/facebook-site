@@ -55,7 +55,6 @@ function NavigationButton({ label, forward, challenge }) {
           <Box component="span" sx={{ fontSize: { xs: '1rem' } }}>{challenge.name}</Box>
         </Box>
         {forward && <StyledImage sx={{ width: '28px', height: 'auto' }} src="/arrow_right.svg" alt="left" width={10} height={24} />}
-        {/* <KeyboardArrowRight sx={{ fontSize: '4rem' }} /> */}
       </Button>
     </Box>
   );
