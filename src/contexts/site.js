@@ -9,6 +9,7 @@ export function SiteProvider({ children }) {
   const [isSiteLoading, setIsLoading] = useState(true);
   const [siteLoadingError, setSiteLoadingError] = useState(null);
   const [site, setSite] = useState(null);
+  const [isSitePlaceholderEnabled, setIsSitePlaceholderEnabled] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -26,6 +27,7 @@ export function SiteProvider({ children }) {
 
         const data = await response.json();
         setSite({ ...data, userId });
+        setIsSitePlaceholderEnabled(data.pages.find((x) => x.modules.find((x) => x.systemType === 'siteUnderConstruction')));
 
         fetch(`${REACT_APP_API_URL}/stats/client`, {
           method: 'POST',
@@ -45,7 +47,7 @@ export function SiteProvider({ children }) {
   }, []);
 
   return (
-    <SiteContext.Provider value={{ site, isSiteLoading, siteLoadingError }}>
+    <SiteContext.Provider value={{ site, isSiteLoading, siteLoadingError, isSitePlaceholderEnabled }}>
       {children}
     </SiteContext.Provider>
   );
