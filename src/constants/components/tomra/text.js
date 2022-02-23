@@ -16,7 +16,7 @@ export const TomraText = ({
   header,
   fontSize,
 }) => (
-  <Box sx={{ py: 7, backgroundColor: 'rgb(236, 177, 189)', position: 'relative', overflow: 'hidden' }}>
+  <Box sx={{ backgroundColor: 'rgb(236, 177, 189)', position: 'relative', overflow: 'hidden' }}>
     <Box sx={{
       position: 'absolute',
       right: 0,
@@ -33,7 +33,7 @@ export const TomraText = ({
         src="/tomra_background_pink.svg"
         alt="bg"
         sx={{
-          height: '1500%',
+          height: '1500px',
           transform: 'rotate(0deg) translate(0%, -20%)',
         }}
       />
