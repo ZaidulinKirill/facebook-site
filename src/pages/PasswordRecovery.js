@@ -2,12 +2,15 @@
 import React, { useContext, useRef, useState } from 'react';
 import axios from 'axios';
 import { Box } from '@mui/material';
-import { FormHandlerContext, PageContext, SiteContext } from '../contexts';
+import {
+  FormHandlerContext, PageContext, SignupContext, SiteContext,
+} from '../contexts';
 import { PageRenderer } from '../services';
 import { MainText } from './components/MainText';
 
 export default function PasswordRecoveryPage() {
   const page = useContext(PageContext);
+  const [user] = useContext(SignupContext);
   const { site: { language } } = useContext(SiteContext);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const form = page.modules.find((x) => x.moduleType === 'password-recovery-form');
@@ -43,7 +46,7 @@ export default function PasswordRecoveryPage() {
   return (
     <Box>
       <MainText />
-      <FormHandlerContext.Provider value={{ submit: onSubmit }}>
+      <FormHandlerContext.Provider value={{ defaultItem: { email: user.email }, submit: onSubmit }}>
         {pageRenderer.render()}
       </FormHandlerContext.Provider>
     </Box>

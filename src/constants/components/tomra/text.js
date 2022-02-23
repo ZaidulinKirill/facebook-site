@@ -48,7 +48,7 @@ export const TomraText = ({
             width: '100%',
           }}
         >
-          <Box sx={{ width: '100%', display: 'flex', flexWrap: 'wrap' }}>
+          <Box sx={{ width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginBottom: 4 }}>
             <BackButton
               isVisible={isBackButtonVisible}
               label={backButtonLabel}
@@ -56,15 +56,18 @@ export const TomraText = ({
             <Box
               sx={{
                 px: 0,
-                fontSize: {
-                  lg: '2.2rem',
-                  md: '1.8rem',
-                  xs: '1.3rem',
-                },
-                fontWeight: 'bold',
               }}
             >
-              <StyledSpan sx={{ display: 'block', textAlign: alignment }}>
+              <StyledSpan sx={{
+                display: 'block',
+                textAlign: alignment,
+                color: 'black',
+                zIndex: 1,
+                fontSize: '2rem',
+                paddingX: 2,
+                fontWeight: '500',
+              }}
+              >
                 {header}
               </StyledSpan>
             </Box>
