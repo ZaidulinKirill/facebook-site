@@ -100,7 +100,7 @@ export default function Navbar({ large }) {
         </Box>
         <Container maxWidth="xl" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1 }}>
           {userState[0] && (
-            <Link to="/" style={{ alignItems: 'center' }}>
+            <Link to={getLocalizedPath(language, '/')} style={{ alignItems: 'center' }}>
               <StyledImage src="/tomra_logo_color.png" sx={{ display: { xs: 'none', sm: 'flex' }, width: { xs: '50px', sm: '150px' }, height: 'auto', justifySelf: 'flex-start' }} width={400} height={301} />
             </Link>
           )}

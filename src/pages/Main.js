@@ -85,10 +85,15 @@ export default function MainPage() {
     );
   }
 
-  const sections = challengesStore.moduleVariables.sections.map((section) => ({
-    ...section,
-    challenges: challenges.filter((x) => x.section === section.key).map((x) => ({ ...x, entries: additionalInfo[x.id.toString()]?.count })),
-  }));
+  const sections = challengesStore.moduleVariables.sections
+    .filter((section) => !section.isDisabled)
+    .map((section) => ({
+      ...section,
+      challenges: challenges
+        .filter((x) => x.section === section.key)
+        .filter((x) => !x.isDisabled)
+        .map((x) => ({ ...x, entries: additionalInfo[x.id.toString()]?.count })),
+    }));
 
   return (
     <Box>
