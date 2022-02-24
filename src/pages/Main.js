@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger */
 import React, { useContext, useEffect, useState } from 'react';
 import {
-  Box, CircularProgress, Container, Divider,
+  Box, CircularProgress, Container,
   List, ListItemAvatar, ListItemButton,
   ListItemText, Accordion as MuiAccordion, AccordionDetails as MuiAccordionDetails, AccordionSummary as MuiAccordionSummary,
   Typography, styled,
@@ -151,7 +151,7 @@ export default function MainPage() {
                 </AccordionSummary>
                 <AccordionDetails sx={{ py: 0, px: 0, pb: '12px' }}>
                   <List sx={{ py: 0, backgroundColor: 'rgb(9, 22, 41)', color: 'white', mx: 2, borderRadius: 1 }}>
-                    {section.challenges.map((challenge, idx) => (
+                    {section.challenges.map((challenge) => (
                       <React.Fragment key={challenge.id}>
                         <ListItemButton
                           alignItems="center"
