@@ -26,7 +26,11 @@ export default function Footer() {
         <Link to="/" style={{ alignItems: 'center' }}>
           <StyledImage src="/tomra_logo_color.png" alt="bg" sx={{ width: { xs: '150px', sm: '200px' } }} />
         </Link>
-
+        <Box sx={{ ml: 'auto' }}>
+          Question or feedback?
+          {' '}
+          <a href="mailto:Alice.Medina@tomra.com">Contact us</a>
+        </Box>
       </Box>
     </Box>
   );
