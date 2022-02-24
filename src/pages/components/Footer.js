@@ -22,14 +22,14 @@ export default function Footer() {
       <Box sx={{ height: '7px', background: 'rgb(250, 213, 73)', width: '100%' }} />
       <Box sx={{ height: '7px', background: 'rgb(225, 110, 56)', width: '100%', mt: '4px' }} />
       <Box sx={{ height: '7px', background: 'rgb(236, 177, 189)', width: '100%', mt: '4px' }} />
-      <Box sx={{ flexGrow: 1, width: '100%', pl: '5%', display: 'flex', alignItems: 'center' }}>
+      <Box sx={{ flexGrow: 1, width: '100%', px: '5%', display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ alignItems: 'center' }}>
           <StyledImage src="/tomra_logo_color.png" alt="bg" sx={{ width: { xs: '150px', sm: '200px' } }} />
         </Link>
-        <Box sx={{ ml: 'auto' }}>
+        <Box sx={{ ml: 'auto', color: 'white' }}>
           Question or feedback?
           {' '}
-          <a href="mailto:Alice.Medina@tomra.com">Contact us</a>
+          <a href="mailto:Alice.Medina@tomra.com" style={{ color: 'white' }}>Contact us</a>
         </Box>
       </Box>
     </Box>
