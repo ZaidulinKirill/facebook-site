@@ -14,7 +14,7 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import isMobile from 'is-mobile';
 // import ReactCrop from 'react-image-crop';
-import { FormContext } from '../../../contexts';
+import { FormContext, UserContext } from '../../../contexts';
 import { ValidatorElement } from './validator';
 import UserAvatar from '../../../components/UserAvatar';
 
@@ -53,6 +53,8 @@ export const UploadButton = ({
     if (isIE11) {
       throw new Error('IE is not supported');
     }
+
+    const userInfo = useContext(UserContext);
 
     const { isSaving } = useContext(FormContext);
     const [resultUrl, setResultUrl] = useState(false);
@@ -180,10 +182,10 @@ export const UploadButton = ({
                     </label>
                   )
               }
-              {resultUrl && (
+              {(resultUrl || (props.name === 'avatarId' && userInfo && userInfo[0].avatarId)) && (
                 props.name === 'avatarId' ? (
                   <Box sx={{ mx: 1 }}>
-                    <UserAvatar src={resultUrl} />
+                    <UserAvatar src={resultUrl || (userInfo && userInfo[0].avatarId && `/api/uploads/w_100/${userInfo[0].avatarId}`)} />
                   </Box>
                 ) : (
                   <Button onClick={downloadBlob} sx={{ ml: 1 }}>
