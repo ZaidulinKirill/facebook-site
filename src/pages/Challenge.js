@@ -77,7 +77,9 @@ export default function ChallengePage() {
 
   const { id: challengeId } = useParams();
 
-  const { challenges } = challengesStore.moduleVariables;
+  const { challenges: allChallenges } = challengesStore.moduleVariables;
+
+  const challenges = allChallenges.filter((x) => !x.isDisabled);
 
   const challengeIdx = challenges.findIndex((x) => x.id.toString() === challengeId);
   const challenge = challenges[challengeIdx];
