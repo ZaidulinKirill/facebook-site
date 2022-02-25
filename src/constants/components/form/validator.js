@@ -1,7 +1,7 @@
 import React from 'react';
 import { ValidatorComponent } from 'react-material-ui-form-validator';
 import { Box } from '@mui/material';
-import { FormContext, PageContext } from '../../../contexts';
+import { PageContext } from '../../../contexts';
 
 export class ValidatorElement extends ValidatorComponent {
   renderValidatorComponent() {
@@ -16,7 +16,7 @@ export class ValidatorElement extends ValidatorComponent {
 
     return (
       <PageContext.Consumer>
-        {({ page }) => {
+        {(page) => {
           const translations = page.modules.find((x) => x.moduleType === 'translations');
 
           return (

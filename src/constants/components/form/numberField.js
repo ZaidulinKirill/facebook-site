@@ -5,7 +5,7 @@ import { PageContext } from '../../../contexts';
 
 export const NumberField = ({ fullWidth = true, required, ...props }) => (
   <PageContext.Consumer>
-    {({ page }) => {
+    {(page) => {
       const translations = page.modules.find((x) => x.moduleType === 'translations');
 
       return (

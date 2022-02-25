@@ -1,11 +1,11 @@
 import { Box } from '@mui/material';
 import React from 'react';
 import { TextValidator as BaseTextField } from 'react-material-ui-form-validator';
-import { FormContext, PageContext } from '../../../contexts';
+import { PageContext } from '../../../contexts';
 
 export const TextareaField = ({ requiredLabel, fullWidth = true, minRows = 3, required, ...props }) => (
   <PageContext.Consumer>
-    {({ page }) => {
+    {(page) => {
       const translations = page.modules.find((x) => x.moduleType === 'translations');
       return (
         <Box sx={{ width: '100%', '& >div': { width: '100%' } }}>
