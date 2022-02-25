@@ -13,6 +13,8 @@ export const TextField = ({ fullWidth = true, required, ...props }) => {
   const isPassword = props.name === 'password' || props.name === 'confirm-password';
   const isSignupPage = ['/signup', '/account', '/new-password'].includes(location.pathname);
 
+  console.log(isPassword, isSignupPage, location.pathname);
+
   const validators = useMemo(() => {
     if (!required && !isPassword) {
       return [];
