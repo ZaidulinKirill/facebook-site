@@ -6,8 +6,6 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { FormHandlerContext, PageContext, SiteContext } from '../contexts';
 import getLocalizedPath from '../utils/getLocalizedPath';
 import { PageRenderer } from '../services';
@@ -18,7 +16,7 @@ const Avatar = styled('img')(() => ({
   width: '40px',
 }));
 
-const POSTS_PER_PAGE = 3;
+const POSTS_PER_PAGE = 20;
 const StyledImage = styled('img')({});
 
 function NavigationButton({ label, forward, challenge }) {
