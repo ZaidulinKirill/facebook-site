@@ -12,6 +12,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import axios from 'axios';
 import moment from 'moment';
 import ReactPlayer from 'react-player';
+import ReactLazyPlayer from 'react-player/lazy';
 import { styled } from '@mui/material/styles';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
@@ -30,12 +31,21 @@ function PostContent({ post, sx }) {
         <Box
           sx={{ mt: 1 }}
         >
-          <ReactPlayer
-            url={`/api/uploads/${post.data.video}?range=true#t=0.5`}
-            controls
-            width="100%"
-            height="auto"
-          />
+          {post.data.videoUrl ? (
+            <ReactLazyPlayer
+              url={post.data.videoUrl}
+              controls
+              width="100%"
+              height="auto"
+            />
+          ) : (
+            <ReactPlayer
+              url={`/api/uploads/${post.data.video}?range=true#t=0.5`}
+              controls
+              width="100%"
+              height="auto"
+            />
+          )}
         </Box>
       </Box>
     );
