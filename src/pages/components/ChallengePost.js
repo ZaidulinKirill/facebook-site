@@ -31,7 +31,7 @@ function PostContent({ post, sx }) {
         <Box
           sx={{ mt: 1 }}
         >
-          {post.data.videoUrl ? (
+          {post.data.videoUrl && !post.data.video ? (
             <ReactLazyPlayer
               url={post.data.videoUrl}
               controls
