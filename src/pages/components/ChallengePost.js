@@ -32,12 +32,20 @@ function PostContent({ post, sx }) {
           sx={{ mt: 1 }}
         >
           {post.data.videoUrl && !post.data.video ? (
-            <ReactLazyPlayer
-              url={post.data.videoUrl}
-              controls
-              width="100%"
-              height="auto"
-            />
+            <Box sx={{
+              width: '100%',
+              position: 'relative',
+              paddingBottom: '56.25%',
+            }}
+            >
+              <ReactLazyPlayer
+                url={post.data.videoUrl}
+                controls
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                width="100%"
+                height="100%"
+              />
+            </Box>
           ) : (
             <ReactPlayer
               url={`/api/uploads/${post.data.video}?range=true#t=0.5`}
