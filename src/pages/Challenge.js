@@ -16,7 +16,7 @@ const Avatar = styled('img')(() => ({
   width: '40px',
 }));
 
-const POSTS_PER_PAGE = 3;
+const POSTS_PER_PAGE = 20;
 const StyledImage = styled('img')({});
 
 function NavigationButton({ label, forward, challenge }) {
