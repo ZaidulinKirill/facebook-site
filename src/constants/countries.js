@@ -65,6 +65,11 @@ export const Countries = [
     text: 'Italy',
   },
   {
+    id: 1644563159418,
+    value: 'Japan',
+    text: 'Japan',
+  },
+  {
     id: 1644563166152,
     value: 'Latvia',
     text: 'Latvia',
