@@ -60,7 +60,9 @@ export default function MainPage() {
   const page = useContext(PageContext);
   const challengesStore = page.modules.find((x) => x.moduleType === 'challenges');
   const translations = page.modules.find((x) => x.moduleType === 'translations');
-  const [selectedSection, setSelectedSection] = useState(challengesStore.moduleVariables.sections[0].id);
+  const allSections = challengesStore.moduleVariables.sections;
+  const defaultSection = allSections.find((x) => x.isDefault);
+  const [selectedSection, setSelectedSection] = useState((defaultSection || allSections[0]).id);
   const [additionalInfo, setAdditionalInfo] = useState(null);
   const navigate = useNavigate();
   const { site: { language } } = useContext(SiteContext);
@@ -85,7 +87,7 @@ export default function MainPage() {
     );
   }
 
-  const sections = challengesStore.moduleVariables.sections
+  const sections = allSections
     .filter((section) => !section.isDisabled)
     .map((section) => ({
       ...section,
