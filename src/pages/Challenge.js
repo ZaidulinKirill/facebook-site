@@ -178,7 +178,7 @@ export default function ChallengePage() {
             }}
           />
         </Box>
-        <Container maxWidth="lg" sx={{ zIndex: 1, display: 'flex', flexWrap: 'wrap', py: 8, height: { md: '400px' } }}>
+        <Container maxWidth="lg" sx={{ zIndex: 1, display: 'flex', flexWrap: 'wrap', py: 8, height: { md: '470px' } }}>
           <Grid container>
             <Grid item xs={12} md={6} sx={{ pr: { xs: 0, md: 3 } }}>
               {challenge.category && (
