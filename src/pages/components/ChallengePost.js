@@ -63,7 +63,7 @@ function PostContent({ post, sx }) {
     return (
       <Box sx={{ display: 'flex', flexDirection: 'column', ...sx }}>
         {post.data.description}
-        <Box sx={{ mt: 1, height: 0, overflow: 'hidden', paddingTop: '50%', position: 'relative' }}>
+        <Box sx={{ mt: 1, height: 0, overflow: 'hidden', paddingTop: '70%', position: 'relative' }}>
           <a href={`/api/uploads/${post.data.photo}`} target="_blank" rel="noreferrer">
             <Box
               component="img"
