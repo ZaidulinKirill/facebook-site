@@ -30,6 +30,11 @@ export const Countries = [
     text: 'China',
   },
   {
+    id: 1644563086119,
+    value: 'Croatia',
+    text: 'Croatia',
+  },
+  {
     id: 1644563093742,
     value: 'Denmark',
     text: 'Denmark',
