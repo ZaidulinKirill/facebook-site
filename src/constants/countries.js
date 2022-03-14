@@ -75,6 +75,11 @@ export const Countries = [
     text: 'Japan',
   },
   {
+    id: 1644563166151,
+    value: 'Korea',
+    text: 'Korea',
+  },
+  {
     id: 1644563166152,
     value: 'Latvia',
     text: 'Latvia',
@@ -110,6 +115,11 @@ export const Countries = [
     text: 'Romania',
   },
   {
+    id: 1644563207422,
+    value: 'Singapore',
+    text: 'Singapore',
+  },
+  {
     id: 1644563207423,
     value: 'Slovakia',
     text: 'Slovakia',
@@ -128,6 +138,11 @@ export const Countries = [
     id: 1644563237761,
     value: 'Sweden',
     text: 'Sweden',
+  },
+  {
+    id: 1644563243894,
+    value: 'Taiwan',
+    text: 'Taiwan',
   },
   {
     id: 1644563243895,
