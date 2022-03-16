@@ -2,15 +2,19 @@
 /* eslint-disable react/no-danger */
 import React, { useContext, useEffect, useState } from 'react';
 import {
-  Box, Button, CircularProgress, Container, Grid, styled,
+  Box, Button, CircularProgress, Container, Dialog, DialogTitle, Grid, IconButton,
+  styled,
 } from '@mui/material';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import CloseIcon from '@mui/icons-material/Close';
 import { FormHandlerContext, PageContext, SiteContext } from '../contexts';
 import getLocalizedPath from '../utils/getLocalizedPath';
 import { PageRenderer } from '../services';
 import ChallengePost from './components/ChallengePost';
 import SearchPostSection from './components/SearchPostSection';
+import { Video } from '../constants/components/video';
 
 const Avatar = styled('img')(() => ({
   width: '40px',
@@ -72,6 +76,7 @@ export default function ChallengePage() {
   const [postsPage, setPostsPage] = useState(0);
   const [totalPosts, setTotalPosts] = useState(0);
   const [filters, setFilters] = useState([]);
+  const [videoPreviewUrl, setVideoPreviewUrl] = useState();
 
   const { id: challengeId } = useParams();
 
@@ -178,7 +183,7 @@ export default function ChallengePage() {
             }}
           />
         </Box>
-        <Container maxWidth="lg" sx={{ zIndex: 1, display: 'flex', flexWrap: 'wrap', py: 8, height: { md: '470px' } }}>
+        <Container maxWidth="lg" sx={{ zIndex: 1, display: 'flex', flexWrap: 'wrap', py: 8, minHeight: { md: '470px' } }}>
           <Grid container>
             <Grid item xs={12} md={6} sx={{ pr: { xs: 0, md: 3 } }}>
               {challenge.category && (
@@ -200,6 +205,45 @@ export default function ChallengePage() {
               {challenge.content && (
                 <Box sx={{ mt: 1 }}>
                   <div dangerouslySetInnerHTML={{ __html: challenge.content }} />
+                </Box>
+              )}
+              {(challenge.video && challenge.videoThumbnailId) && (
+                <Box sx={{ mt: 1, width: '130px', borderRadius: 1.2, overflow: 'hidden', display: 'flex', position: 'relative' }}>
+                  <StyledImage
+                    src={`/api/uploads/w_500,c_limit/${challenge.videoThumbnailId}`}
+                    sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                  <Box
+                    onClick={() => setVideoPreviewUrl(challenge.video)}
+                    sx={{
+                      position: 'absolute',
+                      left: 0,
+                      top: 0,
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                      '&:hover .thumbnail': {
+                        opacity: 1,
+                      },
+                    }}
+                  >
+                    <Box
+                      className="thumbnail"
+                      sx={{
+                        borderRadius: '100%',
+                        backgroundColor: 'black',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        opacity: 0.7,
+                      }}
+                    >
+                      <PlayArrowIcon htmlColor="white" sx={{ fontSize: '44px' }} />
+                    </Box>
+                  </Box>
                 </Box>
               )}
             </Grid>
@@ -273,6 +317,28 @@ export default function ChallengePage() {
           ) }
         </Container>
       </Box>
+      {videoPreviewUrl && (
+        <Dialog
+          open={!!videoPreviewUrl}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          maxWidth="md"
+          fullWidth
+          PaperProps={{
+            sx: {
+              overflow: 'hidden',
+            },
+          }}
+        >
+          <DialogTitle sx={{ display: 'flex', alignItems: 'center', paddingY: 1 }}>
+            Video
+            <IconButton sx={{ ml: 'auto' }} onClick={() => setVideoPreviewUrl(null)}>
+              <CloseIcon />
+            </IconButton>
+          </DialogTitle>
+          <Video url={videoPreviewUrl} sx={{ marginBottom: '-1px' }} />
+        </Dialog>
+      )}
     </>
   );
 }
