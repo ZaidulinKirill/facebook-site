@@ -336,7 +336,7 @@ export default function ChallengePage() {
               <CloseIcon />
             </IconButton>
           </DialogTitle>
-          <Video url={videoPreviewUrl} sx={{ marginBottom: '-1px' }} />
+          <Video url={videoPreviewUrl} sx={{ marginBottom: '-1px' }} autoPlay />
         </Dialog>
       )}
     </>
