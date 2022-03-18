@@ -47,12 +47,19 @@ function PostContent({ post, sx }) {
               />
             </Box>
           ) : (
-            <ReactPlayer
-              url={`/api/uploads/${post.data.video}?range=true#t=0.5`}
-              controls
-              width="100%"
-              height="auto"
-            />
+            <Box sx={{
+              width: '100%',
+              position: 'relative',
+              paddingBottom: '56.25%',
+            }}
+            >
+              <ReactPlayer
+                url={`/api/uploads/${post.data.video}?range=true#t=0.5`}
+                controls
+                width="100%"
+                height="100%"
+              />
+            </Box>
           )}
         </Box>
       </Box>
