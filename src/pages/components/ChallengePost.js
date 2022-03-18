@@ -55,6 +55,7 @@ function PostContent({ post, sx }) {
             >
               <ReactPlayer
                 url={`/api/uploads/${post.data.video}?range=true#t=0.5`}
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
                 controls
                 width="100%"
                 height="100%"
